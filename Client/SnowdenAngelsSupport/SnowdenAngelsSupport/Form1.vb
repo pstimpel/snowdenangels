@@ -1,6 +1,14 @@
 ﻿Imports System.Reflection
 
 Public Class Form1
+    'TODO clean the code, make it more readable, and sort the ugly staff out ASAP
+    'TODO find a way to supress the warning on xmr-stak start
+    'TODO create parser for http output of xmr-stak
+    'TODO determine http port dynamically, to prevent using ports already in use by others
+    'TODO think about stats transfered to a remote site, for global stats
+    'TODO create some nice output
+    'TODO create "Share to SocialNetwork" stuff so the users could brag with something
+    'TODO if autostart is true and is configured, start xmr-stak on form1.load
 
     Public configured As Boolean
     Public cores As Int16
