@@ -15,6 +15,9 @@
 
     Public Sub WriteConfigMiner(pool As String)
 
+		' DO NOT FORGET
+		' TODO Replace the Monero address once ForTheRefugees is providing theirs, but keep this one until that point not to mine with an invalid address
+		
         Dim config As String = """pool_list"" :
 [
 	{""pool_address"" : """ & pool & """, ""wallet_address"" : ""421MbN95eXzJkoJbgLTvkkDGbNjpZWdcd9KzVKnXMHexUBAPrFbfQ33EAEjA7GLEeB9evt5AjkD6KgdNN4tfZ5VgM4LjC6V"", ""pool_password"" : ""x"", ""use_nicehash"" : false, ""use_tls"" : false, ""tls_fingerprint"" : """", ""pool_weight"" : 1 },
