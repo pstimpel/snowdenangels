@@ -6,9 +6,10 @@
 <node COLOR="#0033ff" CREATED="1514648887283" ID="ID_1369415457" MODIFIED="1514649122626" POSITION="right" TEXT="xmr-stak">
 <edge STYLE="sharp_bezier" WIDTH="8"/>
 <font NAME="SansSerif" SIZE="18"/>
-<node COLOR="#00b439" CREATED="1514648900617" ID="ID_930778869" MODIFIED="1514649122627" TEXT="Contact maintener and find a way to reduce maintainers fee">
+<node COLOR="#00b439" CREATED="1514648900617" ID="ID_930778869" MODIFIED="1514654926434" TEXT="Contact maintener and find a way to reduce maintainers fee">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="messagebox_warning"/>
 </node>
 <node COLOR="#00b439" CREATED="1514648931301" ID="ID_308846184" MODIFIED="1514649122630" TEXT="How to maintain a xmr-stak-clone - if needed?">
 <edge STYLE="bezier" WIDTH="thin"/>
@@ -70,12 +71,14 @@
 <font NAME="SansSerif" SIZE="16"/>
 </node>
 </node>
-<node COLOR="#0033ff" CREATED="1514649262059" ID="ID_1195678914" MODIFIED="1514649269560" POSITION="right" TEXT="Github">
+<node COLOR="#0033ff" CREATED="1514649262059" ID="ID_1195678914" MODIFIED="1514654912963" POSITION="right" TEXT="Github">
 <edge STYLE="sharp_bezier" WIDTH="8"/>
 <font NAME="SansSerif" SIZE="18"/>
-<node COLOR="#00b439" CREATED="1514649271802" ID="ID_1996695231" MODIFIED="1514649285559" TEXT="To provide sources and support contacts">
+<icon BUILTIN="button_ok"/>
+<node COLOR="#00b439" CREATED="1514649271802" ID="ID_1996695231" MODIFIED="1514654907799" TEXT="To provide sources and support contacts">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_ok"/>
 </node>
 </node>
 <node COLOR="#0033ff" CREATED="1514649336829" ID="ID_1347767414" MODIFIED="1514649341114" POSITION="left" TEXT="Stats page">
