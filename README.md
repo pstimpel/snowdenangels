@@ -23,3 +23,4 @@ This is what I would like to start...now!
 
 In case you would like to support this, please reach out to me, and find me at Twitter, https://twitter.com/PjotrS72
 
+This project relies in parts on xmr-stak, a mining software written by fireice-uk, https://github.com/fireice-uk/xmr-stak
