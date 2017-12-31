@@ -4,8 +4,6 @@
 
     Public Function KeyExists(key As String) As Boolean
 
-        KeyExists = False
-
         Try
 
             If My.Computer.Registry.GetValue(regPath, key, Nothing) Is Nothing Then

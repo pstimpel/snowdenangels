@@ -33,6 +33,11 @@ Partial Class Form1
         Me.lbl_pool_name = New System.Windows.Forms.Label()
         Me.cmb_pool = New System.Windows.Forms.ComboBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.lbl_autostart_name = New System.Windows.Forms.Label()
+        Me.chk_autostart_true = New System.Windows.Forms.CheckBox()
+        Me.btn_apply_settings = New System.Windows.Forms.Button()
+        Me.lbl_apply_settings_hint = New System.Windows.Forms.Label()
+        Me.nf = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.SuspendLayout()
         '
         'lbl_status_name
@@ -55,7 +60,7 @@ Partial Class Form1
         '
         'btn_miner_start
         '
-        Me.btn_miner_start.Location = New System.Drawing.Point(417, 8)
+        Me.btn_miner_start.Location = New System.Drawing.Point(235, 188)
         Me.btn_miner_start.Name = "btn_miner_start"
         Me.btn_miner_start.Size = New System.Drawing.Size(129, 23)
         Me.btn_miner_start.TabIndex = 2
@@ -64,7 +69,7 @@ Partial Class Form1
         '
         'btn_miner_stop
         '
-        Me.btn_miner_stop.Location = New System.Drawing.Point(552, 8)
+        Me.btn_miner_stop.Location = New System.Drawing.Point(370, 188)
         Me.btn_miner_stop.Name = "btn_miner_stop"
         Me.btn_miner_stop.Size = New System.Drawing.Size(129, 23)
         Me.btn_miner_stop.TabIndex = 3
@@ -105,11 +110,59 @@ Partial Class Form1
         Me.cmb_pool.Size = New System.Drawing.Size(170, 21)
         Me.cmb_pool.TabIndex = 7
         '
+        'Timer1
+        '
+        '
+        'lbl_autostart_name
+        '
+        Me.lbl_autostart_name.AutoSize = True
+        Me.lbl_autostart_name.Location = New System.Drawing.Point(13, 121)
+        Me.lbl_autostart_name.Name = "lbl_autostart_name"
+        Me.lbl_autostart_name.Size = New System.Drawing.Size(156, 13)
+        Me.lbl_autostart_name.TabIndex = 8
+        Me.lbl_autostart_name.Text = "Autostart Mining on system start"
+        '
+        'chk_autostart_true
+        '
+        Me.chk_autostart_true.AutoSize = True
+        Me.chk_autostart_true.Location = New System.Drawing.Point(235, 120)
+        Me.chk_autostart_true.Name = "chk_autostart_true"
+        Me.chk_autostart_true.Size = New System.Drawing.Size(15, 14)
+        Me.chk_autostart_true.TabIndex = 9
+        Me.chk_autostart_true.UseVisualStyleBackColor = True
+        '
+        'btn_apply_settings
+        '
+        Me.btn_apply_settings.Location = New System.Drawing.Point(235, 150)
+        Me.btn_apply_settings.Name = "btn_apply_settings"
+        Me.btn_apply_settings.Size = New System.Drawing.Size(127, 23)
+        Me.btn_apply_settings.TabIndex = 10
+        Me.btn_apply_settings.Text = "Apply Settings"
+        Me.btn_apply_settings.UseVisualStyleBackColor = True
+        '
+        'lbl_apply_settings_hint
+        '
+        Me.lbl_apply_settings_hint.AutoSize = True
+        Me.lbl_apply_settings_hint.Location = New System.Drawing.Point(368, 155)
+        Me.lbl_apply_settings_hint.Name = "lbl_apply_settings_hint"
+        Me.lbl_apply_settings_hint.Size = New System.Drawing.Size(256, 13)
+        Me.lbl_apply_settings_hint.TabIndex = 12
+        Me.lbl_apply_settings_hint.Text = "If Autostart is active, this will start the Funding as well"
+        '
+        'nf
+        '
+        Me.nf.Text = "Snowden Angels Support"
+        Me.nf.Visible = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(948, 577)
+        Me.Controls.Add(Me.lbl_apply_settings_hint)
+        Me.Controls.Add(Me.btn_apply_settings)
+        Me.Controls.Add(Me.chk_autostart_true)
+        Me.Controls.Add(Me.lbl_autostart_name)
         Me.Controls.Add(Me.cmb_pool)
         Me.Controls.Add(Me.lbl_pool_name)
         Me.Controls.Add(Me.cmb_cores)
@@ -135,4 +188,9 @@ Partial Class Form1
     Friend WithEvents lbl_pool_name As Label
     Friend WithEvents cmb_pool As ComboBox
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents lbl_autostart_name As Label
+    Friend WithEvents chk_autostart_true As CheckBox
+    Friend WithEvents btn_apply_settings As Button
+    Friend WithEvents lbl_apply_settings_hint As Label
+    Friend WithEvents nf As NotifyIcon
 End Class

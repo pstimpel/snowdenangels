@@ -1,14 +1,14 @@
-﻿Imports System.Reflection
+﻿Imports System.ComponentModel
+Imports System.Reflection
 
 Public Class Form1
-    'TODO clean the code, make it more readable, and sort the ugly staff out ASAP
     'TODO find a way to supress the warning on xmr-stak start
     'TODO create parser for http output of xmr-stak
     'TODO determine http port dynamically, to prevent using ports already in use by others
     'TODO think about stats transfered to a remote site, for global stats
     'TODO create some nice output
     'TODO create "Share to SocialNetwork" stuff so the users could brag with something
-    'TODO if autostart is true and is configured, start xmr-stak on form1.load
+    'TODO create basic actions for the NotifyIcon 
 
     Public configured As Boolean
     Public cores As Int16
@@ -17,15 +17,23 @@ Public Class Form1
 
     Private Sub TimerExecute()
 
-        If IsRunningMiner() = False Then
+        If Processes.IsRunningMiner() = False Then
 
             Me.btn_miner_start.Enabled = True
             Me.btn_miner_stop.Enabled = False
+
+            Me.lbl_status_response.Text = "Funding stopped"
+            Me.lbl_status_response.BackColor = Color.Red
+            Me.lbl_status_response.ForeColor = Color.White
 
         Else
 
             Me.btn_miner_start.Enabled = False
             Me.btn_miner_stop.Enabled = True
+
+            Me.lbl_status_response.Text = "Funding started"
+            Me.lbl_status_response.BackColor = Color.LightGreen
+            Me.lbl_status_response.ForeColor = Color.Black
 
         End If
 
@@ -35,19 +43,19 @@ Public Class Form1
     Private Sub TimerEventProcessor(ByVal myObject As Object,
                                          ByVal myEventArgs As EventArgs) _
                                      Handles Timer1.Tick
-        TimerExecute()
+        Me.TimerExecute()
 
     End Sub
 
     Private Function ReadConfig() As Boolean
 
-        autostart = False
-        pool = "monerohash.com"
-        cores = 1
-        configured = False
+        Me.autostart = False
+        Me.pool = "monerohash.com"
+        Me.cores = 1
+        Me.configured = False
 
         Dim configCount As Integer = 0
-        Dim configCountGoal As Integer = 3
+        Dim configCountGoal As Integer = 4
 
         If Registry.KeyExists("autostart") Then
 
@@ -57,7 +65,7 @@ Public Class Form1
 
                 If s_autostart.Equals("on") Then
 
-                    autostart = True
+                    Me.autostart = True
 
                 End If
 
@@ -73,7 +81,7 @@ Public Class Form1
 
             If s_pool.Length > 0 Then
 
-                pool = s_pool
+                Me.pool = s_pool
 
                 configCount = configCount + 1
 
@@ -87,7 +95,7 @@ Public Class Form1
 
             If s_cores.Length > 0 Then
 
-                cores = Convert.ToInt16(s_cores)
+                Me.cores = Convert.ToInt16(s_cores)
 
                 configCount = configCount + 1
 
@@ -97,11 +105,11 @@ Public Class Form1
 
         If configCount = configCountGoal Then
 
-            configured = True
+            Me.configured = True
 
         End If
 
-        Return configured
+        Return Me.configured
 
     End Function
 
@@ -113,7 +121,7 @@ Public Class Form1
 
         ' now, get the presets if there are any
 
-        If ReadConfig() = True Then
+        If Me.ReadConfig() = True Then
 
         Else
 
@@ -143,72 +151,174 @@ Public Class Form1
 
         Next i
 
-        TimerExecute()
+        If autostart = True Then
+
+            Me.chk_autostart_true.CheckState = CheckState.Checked
+
+            Me.StartFunding()
+
+        End If
+
+        Me.TimerExecute()
+
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 10000
+        Me.Timer1.Start()
+
+        nf.Icon = Me.Icon
 
 
 
     End Sub
 
-    Private Sub StartFunding()
+    Private Function WriteSettings() As Boolean
 
         If Me.cmb_pool.Text.Length > 0 And Me.cmb_cores.Text.Length > 0 Then
 
-            Registry.SetValue("autostart", "off")
+            If Me.chk_autostart_true.CheckState = CheckState.Checked Then
+
+                Registry.SetValue("autostart", "on")
+
+            Else
+
+                Registry.SetValue("autostart", "off")
+
+            End If
 
             Registry.SetValue("pool", Me.cmb_pool.Text.ToString)
 
             Registry.SetValue("cores", Me.cmb_cores.Text.ToString)
 
-            configured = True
-
-
+            Me.configured = True
 
             MinerConfig.WriteConfigMiner(MinerConfig.TranslatePoolNameToURL(Me.cmb_pool.Text.ToString))
             MinerConfig.WriteConfigCpu(Convert.ToInt16(Me.cmb_cores.Text.ToString))
 
-            Dim p As New ProcessStartInfo
 
-            ' Specify the location of the binary
-            p.FileName = Application.StartupPath & "\xmr-stak.exe"
-
-            ' Use a hidden window
-            p.WindowStyle = ProcessWindowStyle.Hidden
-
-            ' Start the process
-            Process.Start(p)
+            Return True
 
         End If
+
+        Return False
+
+    End Function
+
+    Private Sub StartFunding()
+
+        Try
+
+            If Me.cmb_pool.Text.Length > 0 And Me.cmb_cores.Text.Length > 0 Then
+
+                Me.WriteSettings()
+
+                If Processes.IsRunningMiner = False Then
+
+                    Dim p As New ProcessStartInfo
+
+                    ' Specify the location of the binary
+                    p.FileName = Application.StartupPath & "\xmr-stak.exe"
+
+                    ' Use a hidden window
+                    p.WindowStyle = ProcessWindowStyle.Hidden
+
+                    ' Start the process
+                    Process.Start(p)
+
+                End If
+
+
+            End If
+
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 
     Private Sub btn_miner_start_Click(sender As Object, e As EventArgs) Handles btn_miner_start.Click
 
-        StartFunding()
+        Me.StartFunding()
 
-        Timer1.Enabled = True
-        Timer1.Interval = 10000
-        Timer1.Start()
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 10000
+        Me.Timer1.Start()
 
-        TimerExecute()
+        Me.TimerExecute()
 
     End Sub
 
     Private Sub btn_miner_stop_Click(sender As Object, e As EventArgs) Handles btn_miner_stop.Click
 
-        For Each prog As Process In Process.GetProcesses
-            Debug.Print(prog.ProcessName)
-            If prog.ProcessName = "xmr-stak.exe" Or prog.ProcessName = "xmr-stak" Then
-                prog.Kill()
+        Processes.KillMiner()
 
-                Timer1.Stop()
-                Timer1.Enabled = False
+        Threading.Thread.Sleep(3000)
 
-                Threading.Thread.Sleep(3000)
+                Me.TimerExecute()
 
-                TimerExecute()
+
+    End Sub
+
+    Private Sub btn_apply_settings_Click(sender As Object, e As EventArgs) Handles btn_apply_settings.Click
+
+        If Me.chk_autostart_true.CheckState = CheckState.Checked Then
+
+            Me.StartFunding()
+
+        Else
+
+            Me.WriteSettings()
+
+
+        End If
+
+
+
+    End Sub
+
+    Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+
+        Dim nfresult As MsgBoxResult = MsgBox("Should we minimize to the system tray instead of closing the application?", vbYesNoCancel)
+
+        If nfresult = MsgBoxResult.Yes Then
+
+            Me.WindowState = FormWindowState.Minimized
+
+            Me.Visible = False
+
+            e.Cancel() = True
+
+        ElseIf nfresult = MsgBoxResult.Cancel Then
+
+            e.Cancel() = True
+
+        End If
+
+
+        If Processes.IsRunningMiner = True Then
+
+            Dim result As MsgBoxResult = MsgBox("The Funding is still active, closing as well?", MsgBoxStyle.YesNoCancel, "Funding still active")
+
+            If result = MsgBoxResult.Yes Then
+
+                Processes.KillMiner()
+
+            ElseIf result = MsgBoxResult.No Then
+                'ok, close this
+
+            ElseIf result = MsgBoxResult.Cancel Then
+
+                e.Cancel() = True
 
             End If
-        Next
+        End If
+
+    End Sub
+
+    Private Sub nf_Click(sender As Object, e As EventArgs) Handles nf.Click
+
+        Me.Visible = True
+
+        Me.WindowState = FormWindowState.Normal
 
     End Sub
 End Class

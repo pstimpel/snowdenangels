@@ -42,17 +42,28 @@
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
 </node>
-<node COLOR="#00b439" CREATED="1514648982114" ID="ID_94253989" MODIFIED="1514649980338" TEXT="# of cpu cores to use">
+<node COLOR="#00b439" CREATED="1514648982114" ID="ID_94253989" MODIFIED="1514675439099" TEXT="# of cpu cores to use">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_ok"/>
 </node>
 <node COLOR="#00b439" CREATED="1514648994353" ID="ID_397664726" MODIFIED="1514649989786" TEXT="Give advice which pool to use, to not put all supporters to one pool">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
 </node>
-<node COLOR="#00b439" CREATED="1514649024267" ID="ID_48455026" MODIFIED="1514650001835" TEXT="Autostart yes/no">
+<node COLOR="#00b439" CREATED="1514649024267" ID="ID_48455026" MODIFIED="1514681161573" TEXT="Autostart yes/no">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_ok"/>
+</node>
+<node COLOR="#00b439" CREATED="1514681130612" ID="ID_1336476072" MODIFIED="1514681152686" TEXT="Do something useful with the system tray icon">
+<edge STYLE="bezier" WIDTH="thin"/>
+<font NAME="SansSerif" SIZE="16"/>
+</node>
+<node COLOR="#00b439" CREATED="1514681180023" ID="ID_1633142936" MODIFIED="1514681209309" TEXT="OnExit, ask for minimizing to system tray, and if a running xmr-stak should get killed as well">
+<edge STYLE="bezier" WIDTH="thin"/>
+<font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_ok"/>
 </node>
 </node>
 <node COLOR="#0033ff" CREATED="1514649156418" ID="ID_1073592987" MODIFIED="1514649165522" POSITION="left" TEXT="official support site">
