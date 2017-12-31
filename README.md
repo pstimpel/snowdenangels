@@ -1,7 +1,7 @@
-# Snowden-Angels
+# Snowden's Guardian Angels
 An attempt to raise some funds and awareness at the same time
 
-The Snowden Angels are a bunch of guys, supporting Edward Snowden when he was hiding from authorities in Hong Kong, right after The Gurdian published the first few pieces of this phenomenal story. The NSA affair started rolling, and the world changed as it has never been before...
+The Snowden's Guardian Angels are a bunch of guys, supporting Edward Snowden when he was hiding from authorities in Hong Kong, right after The Gurdian published the first few pieces of this phenomenal story. The NSA affair started rolling, and the world changed as it has never been before...
 
 These guys, refugees themselves, had nothing - but gave everything they could to provide Snowden some shelter until he left Hong Kong later in 2013.
 
@@ -17,7 +17,7 @@ https://media.ccc.de/v/34c3-9297-the_snowden_refugees_under_surveillance_in_hong
 
 The idea is to provide ForTheRefugees with some funds, and awareness. 
 
-How about having a community of computer users, each of them providing a little bit of the cpu power of his/her PC? Imagine, each of these users would provide only 10 Hashes per second, and would help mining Monero. This would sum up to a huge Hash-power, if only enoungh users are joining. Right now, 130,000 Hashes/second result in around 1 Monero per day. One Monero is about 300 USD at the moment...so 300 USD per day to help the Snowden Angels, and many enthusiastic users willing to share about their participation in Snowden-Angels-Support...
+How about having a community of computer users, each of them providing a little bit of the cpu power of his/her PC? Imagine, each of these users would provide only 10 Hashes per second, and would help mining Monero. This would sum up to a huge Hash-power, if only enoungh users are joining. Right now, 130,000 Hashes/second result in around 1 Monero per day. One Monero is about 300 USD at the moment...so 300 USD per day to help Snowden's Guardian Angels, and many enthusiastic users willing to share about their participation in Snowden's Guardian Angels-Support...
 
 This is what I would like to start...now!
 
