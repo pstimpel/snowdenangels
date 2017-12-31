@@ -69,9 +69,10 @@
 <node COLOR="#0033ff" CREATED="1514649156418" ID="ID_1073592987" MODIFIED="1514649165522" POSITION="left" TEXT="official support site">
 <edge STYLE="sharp_bezier" WIDTH="8"/>
 <font NAME="SansSerif" SIZE="18"/>
-<node COLOR="#00b439" CREATED="1514649167441" ID="ID_319360227" MODIFIED="1514649197627" TEXT="Needs a public usable XMR address, without the need of an payment id (no exchange address)">
+<node COLOR="#00b439" CREATED="1514649167441" ID="ID_319360227" MODIFIED="1514745334141" TEXT="Needs a public usable XMR address, without the need of an payment id (no exchange address)">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="messagebox_warning"/>
 </node>
 <node COLOR="#00b439" CREATED="1514649204304" ID="ID_123659340" MODIFIED="1514649222433" TEXT="Should explain the project, goals, and people behind">
 <edge STYLE="bezier" WIDTH="thin"/>

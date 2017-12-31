@@ -6,8 +6,8 @@ Public Class Form1
     'TODO find a way to supress the warning on xmr-stak start
     'TODO think about stats transfered to a remote site, for global stats
     'TODO create "Share to SocialNetwork" stuff so the users could brag with something
-    'TODO create basic actions for the NotifyIcon 
     'TODO how to handle updates
+    'TODO create some basic error handling, error broadcasting
 
     Public configured As Boolean
     Public cores As Int16
@@ -19,10 +19,16 @@ Public Class Form1
 
     Public minerPools(4) As Minerpool
 
+    Public minerRuns As Boolean = False
+
+    Public nfContextmenu As New ContextMenuStrip
+
 
     Private Sub TimerExecute()
 
         If Processes.IsRunningMiner() = False Then
+
+            minerRuns = False
 
             Me.btn_miner_start.Enabled = True
             Me.btn_miner_stop.Enabled = False
@@ -33,7 +39,12 @@ Public Class Form1
 
             Me.lnk_minerport.Enabled = False
 
+            Me.txtOutput.Text = ""
+
+
         Else
+
+            minerRuns = True
 
             Me.btn_miner_start.Enabled = False
             Me.btn_miner_stop.Enabled = True
@@ -43,6 +54,9 @@ Public Class Form1
             Me.lbl_status_response.ForeColor = Color.Black
 
             Me.lnk_minerport.Enabled = True
+
+
+
 
             Dim output As String = ""
 
@@ -194,7 +208,7 @@ Public Class Form1
 
         ' init the form
 
-        Me.Text = Me.Text.ToString & " V" & Assembly.GetExecutingAssembly().GetName().Version.ToString
+        Me.Text = "Snowden's Guardian Angels Support" & " V" & Assembly.GetExecutingAssembly().GetName().Version.ToString
 
         ' now, get the presets if there are any
 
@@ -269,11 +283,17 @@ Public Class Form1
 
         MinerConfig.KillLogFile()
 
-        If autostart = True Then
+        If Me.autostart = True Then
 
             Me.chk_autostart_true.CheckState = CheckState.Checked
 
             Me.StartFunding()
+
+        End If
+
+        If Me.startminimized = True Then
+
+            Me.chk_startminimized.CheckState = CheckState.Checked
 
         End If
 
@@ -283,7 +303,42 @@ Public Class Form1
         Me.Timer1.Interval = 10000
         Me.Timer1.Start()
 
+
+        Dim menuitem1 As New ToolStripMenuItem With {
+            .Text = "Sto&p Funding",
+            .Name = "stopfunding"
+        }
+        AddHandler menuitem1.Click, AddressOf Me.MenuItem1_Click
+        nfContextmenu.Items.Add(menuitem1)
+
+        Dim menuitem2 As New ToolStripMenuItem With {
+            .Text = "S&tart Funding",
+            .Name = "startfunding"
+        }
+        AddHandler menuitem2.Click, AddressOf Me.MenuItem2_Click
+        nfContextmenu.Items.Add(menuitem2)
+
+        Dim menuitem3 As New ToolStripMenuItem With {
+            .Text = "Show &Application window",
+            .Name = "showapplication"
+        }
+        AddHandler menuitem3.Click, AddressOf Me.MenuItem3_Click
+        nfContextmenu.Items.Add(menuitem3)
+
+        Dim menuitem4 As New ToolStripMenuItem With {
+            .Text = "E&xit",
+            .Name = "exit"
+        }
+        AddHandler menuitem4.Click, AddressOf Me.MenuItem4_Click
+        nfContextmenu.Items.Add(menuitem4)
+
+
+
         nf.Icon = Me.Icon
+
+        nf.Text = "Snowden's Guardian Angels Support"
+
+        nf.ContextMenuStrip = nfContextmenu
 
         If Me.startminimized = True Then
 
@@ -404,6 +459,13 @@ Public Class Form1
 
             Me.StartFunding()
 
+            Me.Timer1.Enabled = True
+            Me.Timer1.Interval = 10000
+            Me.Timer1.Start()
+
+            Me.TimerExecute()
+
+
         Else
 
             Me.WriteSettings()
@@ -441,6 +503,8 @@ Public Class Form1
             e.Cancel() = True
 
             hideIcon = False
+
+            Exit Sub
 
         End If
 
@@ -505,4 +569,77 @@ Public Class Form1
         End If
 
     End Sub
+
+    Private Sub MenuItem1_Click()
+
+        If minerRuns = True Then
+
+            Processes.KillMiner()
+
+            Threading.Thread.Sleep(3000)
+
+            Me.TimerExecute()
+
+        End If
+
+    End Sub
+    Private Sub MenuItem2_Click()
+
+        If minerRuns = False Then
+            Me.StartFunding()
+
+            Me.Timer1.Enabled = True
+            Me.Timer1.Interval = 10000
+            Me.Timer1.Start()
+
+            Me.TimerExecute()
+
+        End If
+
+    End Sub
+    Private Sub MenuItem3_Click()
+
+        Me.ShowInTaskbar = True
+
+        Me.Visible = True
+
+        Me.WindowState = FormWindowState.Normal
+
+        Me.BringToFront()
+
+    End Sub
+    Private Sub MenuItem4_Click()
+
+        If Processes.IsRunningMiner = True Then
+
+            Dim result As MsgBoxResult = MsgBox("The Funding is still active, closing as well?", MsgBoxStyle.YesNoCancel, "Funding still active")
+
+            If result = MsgBoxResult.Yes Then
+
+                Processes.KillMiner()
+
+                End
+
+            ElseIf result = MsgBoxResult.No Then
+                'ok, close this
+
+                End
+
+            ElseIf result = MsgBoxResult.Cancel Then
+
+            End If
+        Else
+
+            Dim result As MsgBoxResult = MsgBox("Do you really want to close this?", MsgBoxStyle.YesNo, "Snowden's Guardian Angels Support")
+
+            If result = MsgBoxResult.Yes Then
+
+                End
+
+            End If
+
+        End If
+
+    End Sub
+
 End Class

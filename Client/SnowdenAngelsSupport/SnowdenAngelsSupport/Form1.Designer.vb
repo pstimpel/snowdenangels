@@ -69,7 +69,7 @@ Partial Class Form1
         '
         'btn_miner_start
         '
-        Me.btn_miner_start.Location = New System.Drawing.Point(235, 297)
+        Me.btn_miner_start.Location = New System.Drawing.Point(235, 275)
         Me.btn_miner_start.Name = "btn_miner_start"
         Me.btn_miner_start.Size = New System.Drawing.Size(129, 23)
         Me.btn_miner_start.TabIndex = 2
@@ -78,7 +78,7 @@ Partial Class Form1
         '
         'btn_miner_stop
         '
-        Me.btn_miner_stop.Location = New System.Drawing.Point(370, 297)
+        Me.btn_miner_stop.Location = New System.Drawing.Point(370, 275)
         Me.btn_miner_stop.Name = "btn_miner_stop"
         Me.btn_miner_stop.Size = New System.Drawing.Size(129, 23)
         Me.btn_miner_stop.TabIndex = 3
@@ -142,7 +142,7 @@ Partial Class Form1
         '
         'btn_apply_settings
         '
-        Me.btn_apply_settings.Location = New System.Drawing.Point(235, 259)
+        Me.btn_apply_settings.Location = New System.Drawing.Point(235, 237)
         Me.btn_apply_settings.Name = "btn_apply_settings"
         Me.btn_apply_settings.Size = New System.Drawing.Size(129, 23)
         Me.btn_apply_settings.TabIndex = 10
@@ -152,7 +152,7 @@ Partial Class Form1
         'lbl_apply_settings_hint
         '
         Me.lbl_apply_settings_hint.AutoSize = True
-        Me.lbl_apply_settings_hint.Location = New System.Drawing.Point(368, 264)
+        Me.lbl_apply_settings_hint.Location = New System.Drawing.Point(368, 242)
         Me.lbl_apply_settings_hint.Name = "lbl_apply_settings_hint"
         Me.lbl_apply_settings_hint.Size = New System.Drawing.Size(256, 13)
         Me.lbl_apply_settings_hint.TabIndex = 12
@@ -237,7 +237,7 @@ Partial Class Form1
         'chk_startminimized
         '
         Me.chk_startminimized.AutoSize = True
-        Me.chk_startminimized.Location = New System.Drawing.Point(235, 205)
+        Me.chk_startminimized.Location = New System.Drawing.Point(235, 209)
         Me.chk_startminimized.Name = "chk_startminimized"
         Me.chk_startminimized.Size = New System.Drawing.Size(15, 14)
         Me.chk_startminimized.TabIndex = 21
