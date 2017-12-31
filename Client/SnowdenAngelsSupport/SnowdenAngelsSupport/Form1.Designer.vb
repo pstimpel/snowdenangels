@@ -47,6 +47,8 @@ Partial Class Form1
         Me.txtOutput = New System.Windows.Forms.TextBox()
         Me.lbl_startminimized_name = New System.Windows.Forms.Label()
         Me.chk_startminimized = New System.Windows.Forms.CheckBox()
+        Me.txt_userkey_status = New System.Windows.Forms.TextBox()
+        Me.lbl_userkey_name = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lbl_status_name
@@ -217,7 +219,7 @@ Partial Class Form1
         '
         'txtOutput
         '
-        Me.txtOutput.Location = New System.Drawing.Point(16, 334)
+        Me.txtOutput.Location = New System.Drawing.Point(16, 314)
         Me.txtOutput.Multiline = True
         Me.txtOutput.Name = "txtOutput"
         Me.txtOutput.ReadOnly = True
@@ -243,11 +245,30 @@ Partial Class Form1
         Me.chk_startminimized.TabIndex = 21
         Me.chk_startminimized.UseVisualStyleBackColor = True
         '
+        'txt_userkey_status
+        '
+        Me.txt_userkey_status.Location = New System.Drawing.Point(235, 551)
+        Me.txt_userkey_status.Name = "txt_userkey_status"
+        Me.txt_userkey_status.ReadOnly = True
+        Me.txt_userkey_status.Size = New System.Drawing.Size(614, 20)
+        Me.txt_userkey_status.TabIndex = 22
+        '
+        'lbl_userkey_name
+        '
+        Me.lbl_userkey_name.AutoSize = True
+        Me.lbl_userkey_name.Location = New System.Drawing.Point(13, 554)
+        Me.lbl_userkey_name.Name = "lbl_userkey_name"
+        Me.lbl_userkey_name.Size = New System.Drawing.Size(46, 13)
+        Me.lbl_userkey_name.TabIndex = 23
+        Me.lbl_userkey_name.Text = "Userkey"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(863, 577)
+        Me.Controls.Add(Me.lbl_userkey_name)
+        Me.Controls.Add(Me.txt_userkey_status)
         Me.Controls.Add(Me.chk_startminimized)
         Me.Controls.Add(Me.lbl_startminimized_name)
         Me.Controls.Add(Me.txtOutput)
@@ -302,4 +323,6 @@ Partial Class Form1
     Friend WithEvents txtOutput As TextBox
     Friend WithEvents lbl_startminimized_name As Label
     Friend WithEvents chk_startminimized As CheckBox
+    Friend WithEvents txt_userkey_status As TextBox
+    Friend WithEvents lbl_userkey_name As Label
 End Class

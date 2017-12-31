@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
 Imports System.Reflection
+Imports System.Security.Cryptography
 
 Public Class Form1
     'TODO find a way to supress the warning on xmr-stak start
@@ -16,6 +17,7 @@ Public Class Form1
     Public xmrpath As String
     Public xmrtcpport As Int32
     Public startminimized As Boolean
+    Public userkey As String
 
     Public minerPools(4) As Minerpool
 
@@ -84,12 +86,40 @@ Public Class Form1
     Private Function ReadConfig() As Boolean
 
         Me.autostart = False
-        Me.pool = "monerohash.com"
+        Me.pool = "Monerohash.com"
         Me.cores = 1
         Me.configured = False
+        Me.startminimized = False
+
 
         Dim configCount As Integer = 0
         Dim configCountGoal As Integer = 5
+
+
+        Me.userkey = ""
+
+        If Registry.KeyExists("userkey") Then
+
+            Dim s_userkey As String = Registry.GetValue("userkey")
+
+            If s_userkey.Length > 0 Then
+
+                Me.userkey = s_userkey
+
+            End If
+
+        End If
+
+        If Me.userkey.Length = 0 Then
+
+            Randomize()
+            Dim rand As Integer = Math.Round(Rnd(1) * 1000000000, 0)
+            Dim generatedKey As String = Crypto.GenerateSHA256String((rand).ToString & " - " & Me.xmrpath & (rand * 2).ToString).ToLower
+            Registry.SetValue("userkey", generatedKey)
+            Me.userkey = generatedKey
+
+        End If
+
 
         If Registry.KeyExists("autostart") Then
 
@@ -296,6 +326,8 @@ Public Class Form1
             Me.chk_startminimized.CheckState = CheckState.Checked
 
         End If
+
+        Me.txt_userkey_status.Text = Me.userkey
 
         Me.TimerExecute()
 
