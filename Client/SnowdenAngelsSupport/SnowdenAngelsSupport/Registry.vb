@@ -18,6 +18,10 @@
 
         Catch ex As Exception
 
+            Dim ErrorHandler As New ErrorHandling With {
+                .ErrorMessage = ex
+            }
+
             Return False
 
         End Try
@@ -31,6 +35,11 @@
             Return My.Computer.Registry.GetValue(regPath, key, Nothing)
 
         Catch ex As Exception
+
+            Dim ErrorHandler As New ErrorHandling With {
+                .ErrorMessage = ex
+            }
+
 
             Return ""
 
@@ -54,6 +63,10 @@
 
         Catch ex As Exception
 
+            Dim ErrorHandler As New ErrorHandling With {
+                .ErrorMessage = ex
+            }
+
             Return False
 
         End Try
@@ -75,7 +88,9 @@
 
         Catch ex As Exception
 
-            'MsgBox(ex.Message)
+            Dim ErrorHandler As New ErrorHandling With {
+                .ErrorMessage = ex
+            }
 
             Return False
 

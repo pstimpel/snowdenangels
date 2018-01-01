@@ -49,12 +49,16 @@ Partial Class Form1
         Me.chk_startminimized = New System.Windows.Forms.CheckBox()
         Me.txt_userkey_status = New System.Windows.Forms.TextBox()
         Me.lbl_userkey_name = New System.Windows.Forms.Label()
+        Me.lbl_allowErrorTransfer_name = New System.Windows.Forms.Label()
+        Me.chk_allowErrorTransfer = New System.Windows.Forms.CheckBox()
+        Me.lbl_allowStatsTransfer_name = New System.Windows.Forms.Label()
+        Me.chk_allowStatsTransfer = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'lbl_status_name
         '
         Me.lbl_status_name.AutoSize = True
-        Me.lbl_status_name.Location = New System.Drawing.Point(13, 13)
+        Me.lbl_status_name.Location = New System.Drawing.Point(8, 8)
         Me.lbl_status_name.Name = "lbl_status_name"
         Me.lbl_status_name.Size = New System.Drawing.Size(116, 13)
         Me.lbl_status_name.TabIndex = 0
@@ -63,7 +67,7 @@ Partial Class Form1
         'lbl_status_response
         '
         Me.lbl_status_response.AutoSize = True
-        Me.lbl_status_response.Location = New System.Drawing.Point(232, 13)
+        Me.lbl_status_response.Location = New System.Drawing.Point(232, 8)
         Me.lbl_status_response.Name = "lbl_status_response"
         Me.lbl_status_response.Size = New System.Drawing.Size(53, 13)
         Me.lbl_status_response.TabIndex = 1
@@ -71,7 +75,7 @@ Partial Class Form1
         '
         'btn_miner_start
         '
-        Me.btn_miner_start.Location = New System.Drawing.Point(235, 275)
+        Me.btn_miner_start.Location = New System.Drawing.Point(232, 248)
         Me.btn_miner_start.Name = "btn_miner_start"
         Me.btn_miner_start.Size = New System.Drawing.Size(129, 23)
         Me.btn_miner_start.TabIndex = 2
@@ -80,7 +84,7 @@ Partial Class Form1
         '
         'btn_miner_stop
         '
-        Me.btn_miner_stop.Location = New System.Drawing.Point(370, 275)
+        Me.btn_miner_stop.Location = New System.Drawing.Point(368, 248)
         Me.btn_miner_stop.Name = "btn_miner_stop"
         Me.btn_miner_stop.Size = New System.Drawing.Size(129, 23)
         Me.btn_miner_stop.TabIndex = 3
@@ -90,7 +94,7 @@ Partial Class Form1
         'lbl_cores_name
         '
         Me.lbl_cores_name.AutoSize = True
-        Me.lbl_cores_name.Location = New System.Drawing.Point(13, 105)
+        Me.lbl_cores_name.Location = New System.Drawing.Point(8, 80)
         Me.lbl_cores_name.Name = "lbl_cores_name"
         Me.lbl_cores_name.Size = New System.Drawing.Size(143, 13)
         Me.lbl_cores_name.TabIndex = 4
@@ -99,7 +103,7 @@ Partial Class Form1
         'cmb_cores
         '
         Me.cmb_cores.FormattingEnabled = True
-        Me.cmb_cores.Location = New System.Drawing.Point(235, 101)
+        Me.cmb_cores.Location = New System.Drawing.Point(232, 72)
         Me.cmb_cores.Name = "cmb_cores"
         Me.cmb_cores.Size = New System.Drawing.Size(170, 21)
         Me.cmb_cores.TabIndex = 5
@@ -107,7 +111,7 @@ Partial Class Form1
         'lbl_pool_name
         '
         Me.lbl_pool_name.AutoSize = True
-        Me.lbl_pool_name.Location = New System.Drawing.Point(13, 142)
+        Me.lbl_pool_name.Location = New System.Drawing.Point(8, 104)
         Me.lbl_pool_name.Name = "lbl_pool_name"
         Me.lbl_pool_name.Size = New System.Drawing.Size(93, 13)
         Me.lbl_pool_name.TabIndex = 6
@@ -116,7 +120,7 @@ Partial Class Form1
         'cmb_pool
         '
         Me.cmb_pool.FormattingEnabled = True
-        Me.cmb_pool.Location = New System.Drawing.Point(235, 139)
+        Me.cmb_pool.Location = New System.Drawing.Point(232, 96)
         Me.cmb_pool.Name = "cmb_pool"
         Me.cmb_pool.Size = New System.Drawing.Size(170, 21)
         Me.cmb_pool.TabIndex = 7
@@ -127,7 +131,7 @@ Partial Class Form1
         'lbl_autostart_name
         '
         Me.lbl_autostart_name.AutoSize = True
-        Me.lbl_autostart_name.Location = New System.Drawing.Point(13, 177)
+        Me.lbl_autostart_name.Location = New System.Drawing.Point(8, 128)
         Me.lbl_autostart_name.Name = "lbl_autostart_name"
         Me.lbl_autostart_name.Size = New System.Drawing.Size(156, 13)
         Me.lbl_autostart_name.TabIndex = 8
@@ -136,7 +140,7 @@ Partial Class Form1
         'chk_autostart_true
         '
         Me.chk_autostart_true.AutoSize = True
-        Me.chk_autostart_true.Location = New System.Drawing.Point(235, 176)
+        Me.chk_autostart_true.Location = New System.Drawing.Point(232, 128)
         Me.chk_autostart_true.Name = "chk_autostart_true"
         Me.chk_autostart_true.Size = New System.Drawing.Size(15, 14)
         Me.chk_autostart_true.TabIndex = 9
@@ -144,7 +148,7 @@ Partial Class Form1
         '
         'btn_apply_settings
         '
-        Me.btn_apply_settings.Location = New System.Drawing.Point(235, 237)
+        Me.btn_apply_settings.Location = New System.Drawing.Point(232, 224)
         Me.btn_apply_settings.Name = "btn_apply_settings"
         Me.btn_apply_settings.Size = New System.Drawing.Size(129, 23)
         Me.btn_apply_settings.TabIndex = 10
@@ -154,7 +158,7 @@ Partial Class Form1
         'lbl_apply_settings_hint
         '
         Me.lbl_apply_settings_hint.AutoSize = True
-        Me.lbl_apply_settings_hint.Location = New System.Drawing.Point(368, 242)
+        Me.lbl_apply_settings_hint.Location = New System.Drawing.Point(368, 232)
         Me.lbl_apply_settings_hint.Name = "lbl_apply_settings_hint"
         Me.lbl_apply_settings_hint.Size = New System.Drawing.Size(256, 13)
         Me.lbl_apply_settings_hint.TabIndex = 12
@@ -168,7 +172,7 @@ Partial Class Form1
         'lbl_xmrpath_name
         '
         Me.lbl_xmrpath_name.AutoSize = True
-        Me.lbl_xmrpath_name.Location = New System.Drawing.Point(13, 41)
+        Me.lbl_xmrpath_name.Location = New System.Drawing.Point(8, 32)
         Me.lbl_xmrpath_name.Name = "lbl_xmrpath_name"
         Me.lbl_xmrpath_name.Size = New System.Drawing.Size(70, 13)
         Me.lbl_xmrpath_name.TabIndex = 13
@@ -177,7 +181,7 @@ Partial Class Form1
         'lbl_xmrpath_status
         '
         Me.lbl_xmrpath_status.AutoSize = True
-        Me.lbl_xmrpath_status.Location = New System.Drawing.Point(232, 41)
+        Me.lbl_xmrpath_status.Location = New System.Drawing.Point(232, 32)
         Me.lbl_xmrpath_status.Name = "lbl_xmrpath_status"
         Me.lbl_xmrpath_status.Size = New System.Drawing.Size(53, 13)
         Me.lbl_xmrpath_status.TabIndex = 14
@@ -186,15 +190,16 @@ Partial Class Form1
         'lbl_cores_number_total
         '
         Me.lbl_cores_number_total.AutoSize = True
-        Me.lbl_cores_number_total.Location = New System.Drawing.Point(412, 104)
+        Me.lbl_cores_number_total.Location = New System.Drawing.Point(408, 80)
         Me.lbl_cores_number_total.Name = "lbl_cores_number_total"
-        Me.lbl_cores_number_total.Size = New System.Drawing.Size(0, 13)
+        Me.lbl_cores_number_total.Size = New System.Drawing.Size(51, 13)
         Me.lbl_cores_number_total.TabIndex = 15
+        Me.lbl_cores_number_total.Text = "unknown"
         '
         'lbl_xmrtcpport_name
         '
         Me.lbl_xmrtcpport_name.AutoSize = True
-        Me.lbl_xmrtcpport_name.Location = New System.Drawing.Point(13, 71)
+        Me.lbl_xmrtcpport_name.Location = New System.Drawing.Point(8, 56)
         Me.lbl_xmrtcpport_name.Name = "lbl_xmrtcpport_name"
         Me.lbl_xmrtcpport_name.Size = New System.Drawing.Size(78, 13)
         Me.lbl_xmrtcpport_name.TabIndex = 16
@@ -203,7 +208,7 @@ Partial Class Form1
         'lbl_xmrtcpport_status
         '
         Me.lbl_xmrtcpport_status.AutoSize = True
-        Me.lbl_xmrtcpport_status.Location = New System.Drawing.Point(232, 71)
+        Me.lbl_xmrtcpport_status.Location = New System.Drawing.Point(232, 56)
         Me.lbl_xmrtcpport_status.Name = "lbl_xmrtcpport_status"
         Me.lbl_xmrtcpport_status.Size = New System.Drawing.Size(53, 13)
         Me.lbl_xmrtcpport_status.TabIndex = 17
@@ -212,25 +217,27 @@ Partial Class Form1
         'lnk_minerport
         '
         Me.lnk_minerport.AutoSize = True
-        Me.lnk_minerport.Location = New System.Drawing.Point(370, 70)
+        Me.lnk_minerport.Location = New System.Drawing.Point(304, 56)
         Me.lnk_minerport.Name = "lnk_minerport"
-        Me.lnk_minerport.Size = New System.Drawing.Size(0, 13)
+        Me.lnk_minerport.Size = New System.Drawing.Size(51, 13)
         Me.lnk_minerport.TabIndex = 18
+        Me.lnk_minerport.TabStop = True
+        Me.lnk_minerport.Text = "unknown"
         '
         'txtOutput
         '
-        Me.txtOutput.Location = New System.Drawing.Point(16, 314)
+        Me.txtOutput.Location = New System.Drawing.Point(8, 280)
         Me.txtOutput.Multiline = True
         Me.txtOutput.Name = "txtOutput"
         Me.txtOutput.ReadOnly = True
         Me.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtOutput.Size = New System.Drawing.Size(833, 231)
+        Me.txtOutput.Size = New System.Drawing.Size(840, 158)
         Me.txtOutput.TabIndex = 19
         '
         'lbl_startminimized_name
         '
         Me.lbl_startminimized_name.AutoSize = True
-        Me.lbl_startminimized_name.Location = New System.Drawing.Point(13, 209)
+        Me.lbl_startminimized_name.Location = New System.Drawing.Point(8, 152)
         Me.lbl_startminimized_name.Name = "lbl_startminimized_name"
         Me.lbl_startminimized_name.Size = New System.Drawing.Size(131, 13)
         Me.lbl_startminimized_name.TabIndex = 20
@@ -239,7 +246,7 @@ Partial Class Form1
         'chk_startminimized
         '
         Me.chk_startminimized.AutoSize = True
-        Me.chk_startminimized.Location = New System.Drawing.Point(235, 209)
+        Me.chk_startminimized.Location = New System.Drawing.Point(232, 152)
         Me.chk_startminimized.Name = "chk_startminimized"
         Me.chk_startminimized.Size = New System.Drawing.Size(15, 14)
         Me.chk_startminimized.TabIndex = 21
@@ -247,26 +254,67 @@ Partial Class Form1
         '
         'txt_userkey_status
         '
-        Me.txt_userkey_status.Location = New System.Drawing.Point(235, 551)
+        Me.txt_userkey_status.Location = New System.Drawing.Point(232, 440)
         Me.txt_userkey_status.Name = "txt_userkey_status"
         Me.txt_userkey_status.ReadOnly = True
-        Me.txt_userkey_status.Size = New System.Drawing.Size(614, 20)
+        Me.txt_userkey_status.Size = New System.Drawing.Size(616, 20)
         Me.txt_userkey_status.TabIndex = 22
         '
         'lbl_userkey_name
         '
         Me.lbl_userkey_name.AutoSize = True
-        Me.lbl_userkey_name.Location = New System.Drawing.Point(13, 554)
+        Me.lbl_userkey_name.Location = New System.Drawing.Point(8, 448)
         Me.lbl_userkey_name.Name = "lbl_userkey_name"
         Me.lbl_userkey_name.Size = New System.Drawing.Size(46, 13)
         Me.lbl_userkey_name.TabIndex = 23
         Me.lbl_userkey_name.Text = "Userkey"
         '
+        'lbl_allowErrorTransfer_name
+        '
+        Me.lbl_allowErrorTransfer_name.AutoSize = True
+        Me.lbl_allowErrorTransfer_name.Location = New System.Drawing.Point(8, 176)
+        Me.lbl_allowErrorTransfer_name.Name = "lbl_allowErrorTransfer_name"
+        Me.lbl_allowErrorTransfer_name.Size = New System.Drawing.Size(213, 13)
+        Me.lbl_allowErrorTransfer_name.TabIndex = 24
+        Me.lbl_allowErrorTransfer_name.Text = "Allow transfer of anonymous error messages"
+        '
+        'chk_allowErrorTransfer
+        '
+        Me.chk_allowErrorTransfer.AutoSize = True
+        Me.chk_allowErrorTransfer.Location = New System.Drawing.Point(232, 176)
+        Me.chk_allowErrorTransfer.Name = "chk_allowErrorTransfer"
+        Me.chk_allowErrorTransfer.Size = New System.Drawing.Size(15, 14)
+        Me.chk_allowErrorTransfer.TabIndex = 25
+        Me.chk_allowErrorTransfer.UseVisualStyleBackColor = True
+        '
+        'lbl_allowStatsTransfer_name
+        '
+        Me.lbl_allowStatsTransfer_name.AutoSize = True
+        Me.lbl_allowStatsTransfer_name.Location = New System.Drawing.Point(8, 200)
+        Me.lbl_allowStatsTransfer_name.Name = "lbl_allowStatsTransfer_name"
+        Me.lbl_allowStatsTransfer_name.Size = New System.Drawing.Size(166, 13)
+        Me.lbl_allowStatsTransfer_name.TabIndex = 26
+        Me.lbl_allowStatsTransfer_name.Text = "Allow transfer of Funding statistics"
+        '
+        'chk_allowStatsTransfer
+        '
+        Me.chk_allowStatsTransfer.AutoSize = True
+        Me.chk_allowStatsTransfer.Location = New System.Drawing.Point(232, 200)
+        Me.chk_allowStatsTransfer.Name = "chk_allowStatsTransfer"
+        Me.chk_allowStatsTransfer.Size = New System.Drawing.Size(15, 14)
+        Me.chk_allowStatsTransfer.TabIndex = 27
+        Me.chk_allowStatsTransfer.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(863, 577)
+        Me.ClientSize = New System.Drawing.Size(857, 466)
+        Me.Controls.Add(Me.cmb_cores)
+        Me.Controls.Add(Me.chk_allowStatsTransfer)
+        Me.Controls.Add(Me.lbl_allowStatsTransfer_name)
+        Me.Controls.Add(Me.chk_allowErrorTransfer)
+        Me.Controls.Add(Me.lbl_allowErrorTransfer_name)
         Me.Controls.Add(Me.lbl_userkey_name)
         Me.Controls.Add(Me.txt_userkey_status)
         Me.Controls.Add(Me.chk_startminimized)
@@ -284,7 +332,6 @@ Partial Class Form1
         Me.Controls.Add(Me.lbl_autostart_name)
         Me.Controls.Add(Me.cmb_pool)
         Me.Controls.Add(Me.lbl_pool_name)
-        Me.Controls.Add(Me.cmb_cores)
         Me.Controls.Add(Me.lbl_cores_name)
         Me.Controls.Add(Me.btn_miner_stop)
         Me.Controls.Add(Me.btn_miner_start)
@@ -325,4 +372,8 @@ Partial Class Form1
     Friend WithEvents chk_startminimized As CheckBox
     Friend WithEvents txt_userkey_status As TextBox
     Friend WithEvents lbl_userkey_name As Label
+    Friend WithEvents lbl_allowErrorTransfer_name As Label
+    Friend WithEvents chk_allowErrorTransfer As CheckBox
+    Friend WithEvents lbl_allowStatsTransfer_name As Label
+    Friend WithEvents chk_allowStatsTransfer As CheckBox
 End Class

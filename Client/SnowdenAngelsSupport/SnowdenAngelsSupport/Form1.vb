@@ -8,7 +8,6 @@ Public Class Form1
     'TODO think about stats transfered to a remote site, for global stats
     'TODO create "Share to SocialNetwork" stuff so the users could brag with something
     'TODO how to handle updates
-    'TODO create some basic error handling, error broadcasting/collecting
 
     Public configured As Boolean
     Public cores As Int16
@@ -18,10 +17,21 @@ Public Class Form1
     Public xmrtcpport As Int32
     Public startminimized As Boolean
     Public userkey As String
+    Public allowStatsTransfer As Boolean
+    Public allowErrorTransfer As Boolean
 
     Public minerPools(4) As Minerpool
 
     Public minerRuns As Boolean = False
+
+#If DEBUG Then
+    Public errorcollector As String = "http://127.0.0.1/sgasupport/errorhandler.php"
+
+#Else
+    Public errorcollector As String = "https://redzoneaction.org/sgasupport/errorhandler.php"
+
+#End If
+
 
     Public nfContextmenu As New ContextMenuStrip
 
@@ -74,6 +84,8 @@ Public Class Form1
 
         End If
 
+        ErrorHandling.TransferErrors()
+
 
     End Sub
 
@@ -90,10 +102,11 @@ Public Class Form1
         Me.cores = 1
         Me.configured = False
         Me.startminimized = False
-
+        Me.allowErrorTransfer = True
+        Me.allowStatsTransfer = True
 
         Dim configCount As Integer = 0
-        Dim configCountGoal As Integer = 5
+        Dim configCountGoal As Integer = 7
 
 
         Me.userkey = ""
@@ -117,6 +130,42 @@ Public Class Form1
             Dim generatedKey As String = Crypto.GenerateSHA256String((rand).ToString & " - " & Me.xmrpath & (rand * 2).ToString).ToLower
             Registry.SetValue("userkey", generatedKey)
             Me.userkey = generatedKey
+
+        End If
+
+        If Registry.KeyExists("allowstatstransfer") Then
+
+            Dim s_allowstatstransfer As String = Registry.GetValue("allowstatstransfer")
+
+            If s_allowstatstransfer.Length > 0 Then
+
+                If s_allowstatstransfer.Equals("on") Then
+
+                    Me.allowStatsTransfer = True
+
+                End If
+
+                configCount = configCount + 1
+
+            End If
+
+        End If
+
+        If Registry.KeyExists("allowerrortransfer") Then
+
+            Dim s_allowerrortransfer As String = Registry.GetValue("allowerrortransfer")
+
+            If s_allowerrortransfer.Length > 0 Then
+
+                If s_allowerrortransfer.Equals("on") Then
+
+                    Me.allowErrorTransfer = True
+
+                End If
+
+                configCount = configCount + 1
+
+            End If
 
         End If
 
@@ -321,6 +370,18 @@ Public Class Form1
 
         End If
 
+        If Me.allowStatsTransfer = True Then
+
+            Me.chk_allowStatsTransfer.CheckState = CheckState.Checked
+
+        End If
+
+        If Me.allowErrorTransfer = True Then
+
+            Me.chk_allowErrorTransfer.CheckState = CheckState.Checked
+
+        End If
+
         If Me.startminimized = True Then
 
             Me.chk_startminimized.CheckState = CheckState.Checked
@@ -388,6 +449,26 @@ Public Class Form1
 
         If Me.cmb_pool.Text.Length > 0 And Me.cmb_cores.Text.Length > 0 Then
 
+            If Me.chk_allowErrorTransfer.CheckState = CheckState.Checked Then
+
+                Registry.SetValue("allowerrortransfer", "on")
+
+            Else
+
+                Registry.SetValue("allowerrortransfer", "off")
+
+            End If
+
+            If Me.chk_allowStatsTransfer.CheckState = CheckState.Checked Then
+
+                Registry.SetValue("allowstatstransfer", "on")
+
+            Else
+
+                Registry.SetValue("allowstatstransfer", "off")
+
+            End If
+
             If Me.chk_autostart_true.CheckState = CheckState.Checked Then
 
                 Registry.SetValue("autostart", "on")
@@ -453,9 +534,15 @@ Public Class Form1
 
             End If
 
+        Catch abort As System.ComponentModel.Win32Exception
+
+            MsgBox("abort by user")
+
         Catch ex As Exception
 
-            MsgBox(ex.Message)
+            Dim ErrorHandler As New ErrorHandling With {
+                            .ErrorMessage = ex
+            }
 
         End Try
 
@@ -569,6 +656,7 @@ Public Class Form1
             nf = Nothing
 
         End If
+
     End Sub
 
     Private Sub Nf_Click(sender As Object, e As EventArgs) Handles nf.Click

@@ -15,6 +15,11 @@ Module MinerConfig
 
         Catch ex As Exception
 
+            Dim ErrorHandler As New ErrorHandling With {
+                .ErrorMessage = ex
+            }
+
+
         End Try
 
     End Sub
@@ -73,6 +78,10 @@ Module MinerConfig
 
         Catch ex As Exception
 
+            Dim ErrorHandler As New ErrorHandling With {
+                .ErrorMessage = ex
+            }
+
             Return False
 
         End Try
@@ -101,6 +110,10 @@ Module MinerConfig
 
         Catch ex As Exception
 
+            Dim ErrorHandler As New ErrorHandling With {
+                .ErrorMessage = ex
+            }
+
             Return False
 
         End Try
@@ -125,10 +138,11 @@ Module MinerConfig
 
     Public Sub WriteConfigMiner(pool As String, xmrtcpport As Int32)
 
-        ' DO NOT FORGET
-        ' TODO Replace the Monero address once ForTheRefugees is providing theirs, but keep this one until that point not to mine with an invalid address
+        Try
+            ' DO NOT FORGET
+            ' TODO Replace the Monero address once ForTheRefugees is providing theirs, but keep this one until that point not to mine with an invalid address
 
-        Dim config As String = """pool_list"" :
+            Dim config As String = """pool_list"" :
 [
 	{""pool_address"" : """ & pool & """, ""wallet_address"" : ""421MbN95eXzJkoJbgLTvkkDGbNjpZWdcd9KzVKnXMHexUBAPrFbfQ33EAEjA7GLEeB9evt5AjkD6KgdNN4tfZ5VgM4LjC6V"", ""pool_password"" : ""x"", ""use_nicehash"" : false, ""use_tls"" : false, ""tls_fingerprint"" : """", ""pool_weight"" : 1 },
 ],
@@ -151,31 +165,50 @@ Module MinerConfig
 ""prefer_ipv4"" : true,
 
 "
-        Dim file As System.IO.StreamWriter
-        file = My.Computer.FileSystem.OpenTextFileWriter(Form1.xmrpath & "\config.txt", False)
-        file.Write(config)
-        file.Close()
+            Dim file As System.IO.StreamWriter
+            file = My.Computer.FileSystem.OpenTextFileWriter(Form1.xmrpath & "\config.txt", False)
+            file.Write(config)
+            file.Close()
+
+        Catch ex As Exception
+
+            Dim ErrorHandler As New ErrorHandling With {
+                .ErrorMessage = ex
+            }
+
+        End Try
+
 
     End Sub
 
     Public Sub WriteConfigCpu(cores As Int16)
-        Dim config As String = """cpu_threads_conf"" :
+
+        Try
+
+            Dim config As String = """cpu_threads_conf"" :
 [
 "
-        Dim i As Integer
-        For i = 1 To (cores * 2) Step 2
-            config = config & "   { ""low_power_mode"" : false, ""no_prefetch"" : true, ""affine_to_cpu"" : " & (i - 1).ToString & " },
+            Dim i As Integer
+            For i = 1 To (cores * 2) Step 2
+                config = config & "   { ""low_power_mode"" : false, ""no_prefetch"" : true, ""affine_to_cpu"" : " & (i - 1).ToString & " },
 "
-        Next i
+            Next i
 
-        Dim configfoot As String = "
+            Dim configfoot As String = "
 ],
 "
-        Dim file As System.IO.StreamWriter
-        file = My.Computer.FileSystem.OpenTextFileWriter(Form1.xmrpath & "\cpu.txt", False)
-        file.Write(config & configfoot)
-        file.Close()
+            Dim file As System.IO.StreamWriter
+            file = My.Computer.FileSystem.OpenTextFileWriter(Form1.xmrpath & "\cpu.txt", False)
+            file.Write(config & configfoot)
+            file.Close()
 
+        Catch ex As Exception
+
+            Dim ErrorHandler As New ErrorHandling With {
+                .ErrorMessage = ex
+            }
+
+        End Try
 
     End Sub
 

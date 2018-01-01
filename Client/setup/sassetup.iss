@@ -131,10 +131,16 @@ end;
 
 function InitializeSetup(): Boolean;
 begin
+    if not IsWin64 then
+      begin                     
+        SuppressibleMsgBox('This application requires 64bit Windows, yours is 32bit! Sorry!', mbError, MB_OK, MB_OK);
+        result := False;
+        exit;
+      end;
     if not IsDotNetDetected('v4.6', 0) then begin
-        MsgBox('MyApp requires Microsoft .NET Framework 4.6.'#13#13
+        MsgBox('This application requires Microsoft .NET Framework 4.6!'#13#13
             'Please use Windows Update to install this version,'#13
-            'and then re-run the MyApp setup program.', mbInformation, MB_OK);
+            'and then re-run the setup program.', mbInformation, MB_OK);
         result := false;
     end else
         result := true;    
