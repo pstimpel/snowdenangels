@@ -56,11 +56,17 @@
 <font NAME="SansSerif" SIZE="16"/>
 <icon BUILTIN="button_ok"/>
 </node>
-<node COLOR="#00b439" CREATED="1514681130612" ID="ID_1336476072" MODIFIED="1514681152686" TEXT="Do something useful with the system tray icon">
+<node COLOR="#00b439" CREATED="1514681130612" ID="ID_1336476072" MODIFIED="1514840009019" TEXT="Do something useful with the system tray icon">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_ok"/>
 </node>
 <node COLOR="#00b439" CREATED="1514681180023" ID="ID_1633142936" MODIFIED="1514681209309" TEXT="OnExit, ask for minimizing to system tray, and if a running xmr-stak should get killed as well">
+<edge STYLE="bezier" WIDTH="thin"/>
+<font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_ok"/>
+</node>
+<node COLOR="#00b439" CREATED="1514840026465" ID="ID_269043242" MODIFIED="1514840047528" TEXT="Collect error messages for improvement, but ask the user to participate">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
 <icon BUILTIN="button_ok"/>

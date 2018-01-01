@@ -5,7 +5,6 @@ Imports System.Security.Cryptography
 
 Public Class Form1
     'TODO find a way to supress the warning on xmr-stak start
-    'TODO think about stats transfered to a remote site, for global stats
     'TODO create "Share to SocialNetwork" stuff so the users could brag with something
     'TODO how to handle updates
 
@@ -19,16 +18,23 @@ Public Class Form1
     Public userkey As String
     Public allowStatsTransfer As Boolean
     Public allowErrorTransfer As Boolean
-
+    Public computerkey As String
     Public minerPools(4) As Minerpool
-
+    Public statsFirstRun As Boolean = True
     Public minerRuns As Boolean = False
+    Public currentHashrate As Int32 = 0
+
+    Public G_StatsCollection As StatsCollection
+
+    Private timercounter As Int16 = 0
 
 #If DEBUG Then
     Public errorcollector As String = "http://127.0.0.1/sgasupport/errorhandler.php"
+    Public statscollector As String = "http://127.0.0.1/sgasupport/statshandler.php"
 
 #Else
     Public errorcollector As String = "https://redzoneaction.org/sgasupport/errorhandler.php"
+    Public statscollector As String = "https://redzoneaction.org/sgasupport/statshandler.php"
 
 #End If
 
@@ -53,6 +59,7 @@ Public Class Form1
 
             Me.txtOutput.Text = ""
 
+            statsFirstRun = True
 
         Else
 
@@ -82,10 +89,54 @@ Public Class Form1
 
             Me.txtOutput.Text = output
 
+            If statsFirstRun = True Then
+
+                Me.G_StatsCollection.b_sessionstart = True
+                Me.G_StatsCollection.d_lastupdate = Now
+                Me.G_StatsCollection.i_hashessummary = 0
+                Me.G_StatsCollection.d_sessionstart = Now
+                Me.G_StatsCollection.s_userkey = Me.userkey
+                Me.G_StatsCollection.s_computerkey = Me.computerkey
+
+                Dim statspush As New Stats With {
+                    .ThisStatsCollection = Me.G_StatsCollection
+                }
+
+                statsFirstRun = False
+
+            Else
+
+                Me.G_StatsCollection.b_sessionstart = False
+                Me.G_StatsCollection.i_hashessummary = Me.G_StatsCollection.i_hashessummary + (currentHashrate * (DateDiff(DateInterval.Second, Me.G_StatsCollection.d_lastupdate, Now)))
+                Me.G_StatsCollection.d_lastupdate = Now
+
+                If timercounter = 5 Then
+
+                    Dim statspush As New Stats With {
+                    .ThisStatsCollection = Me.G_StatsCollection
+                    }
+
+                End If
+
+            End If
+
+
+
         End If
 
-        ErrorHandling.TransferErrors()
+        If timercounter = 5 Then
 
+            ErrorHandling.TransferErrors()
+
+        End If
+
+        timercounter = timercounter + 1
+
+        If timercounter = 6 Then
+
+            timercounter = 0
+
+        End If
 
     End Sub
 
@@ -130,6 +181,30 @@ Public Class Form1
             Dim generatedKey As String = Crypto.GenerateSHA256String((rand).ToString & " - " & Me.xmrpath & (rand * 2).ToString).ToLower
             Registry.SetValue("userkey", generatedKey)
             Me.userkey = generatedKey
+
+        End If
+
+        Me.computerkey = ""
+
+        If Registry.KeyExists("computerkey") Then
+
+            Dim s_computerkey As String = Registry.GetValue("computerkey")
+
+            If s_computerkey.Length > 0 Then
+
+                Me.computerkey = s_computerkey
+
+            End If
+
+        End If
+
+        If Me.computerkey.Length = 0 Then
+
+            Randomize()
+            Dim rand As Integer = Math.Round(Rnd(1) * 1000000000, 0)
+            Dim generatedKeyM As String = Crypto.GenerateSHA256String((rand).ToString & " - " & Environment.MachineName & (rand * 2).ToString).ToLower
+            Registry.SetValue("computerkey", generatedKeyM)
+            Me.computerkey = generatedKeyM
 
         End If
 
@@ -280,6 +355,8 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        G_StatsCollection = New StatsCollection
 
         Dim i As Int16 = 0
 
