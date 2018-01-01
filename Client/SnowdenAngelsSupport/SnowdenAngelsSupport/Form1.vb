@@ -6,7 +6,6 @@ Imports System.Security.Cryptography
 Public Class Form1
     'TODO find a way to supress the warning on xmr-stak start
     'TODO create "Share to SocialNetwork" stuff so the users could brag with something
-    'TODO how to handle updates
 
     Public configured As Boolean
     Public cores As Int16
@@ -510,15 +509,34 @@ Public Class Form1
 
         nf.ContextMenuStrip = nfContextmenu
 
-        If Me.startminimized = True Then
 
-            Me.WindowState = FormWindowState.Minimized
+        If Updates.QueryUpdate = True Then
 
-            Me.ShowInTaskbar = False
+            Me.lnk_update.Visible = True
+            Me.lnk_update.Links.Add(0, ("https://github.com/pstimpel/snowdenangels/blob/master/release/").Length, "https://github.com/pstimpel/snowdenangels/blob/master/release/")
+            Me.lnk_update.Enabled = True
 
-            Me.Visible = False
+        Else
+
+            Me.lnk_update.Visible = False
+            Me.lnk_update.Enabled = False
+
+            If Me.startminimized = True Then
+
+                Me.WindowState = FormWindowState.Minimized
+
+                Me.ShowInTaskbar = False
+
+                Me.Visible = False
+
+            End If
+
 
         End If
+
+
+
+
 
     End Sub
 
@@ -734,6 +752,8 @@ Public Class Form1
 
         End If
 
+
+
     End Sub
 
     Private Sub Nf_Click(sender As Object, e As EventArgs) Handles nf.Click
@@ -744,6 +764,12 @@ Public Class Form1
 
         Me.ShowInTaskbar = True
 
+
+    End Sub
+
+    Private Sub Lnk_update_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnk_update.LinkClicked
+
+        System.Diagnostics.Process.Start(e.Link.LinkData.ToString())
 
     End Sub
 

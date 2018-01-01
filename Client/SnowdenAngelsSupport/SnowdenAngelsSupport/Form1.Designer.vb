@@ -53,6 +53,7 @@ Partial Class Form1
         Me.chk_allowErrorTransfer = New System.Windows.Forms.CheckBox()
         Me.lbl_allowStatsTransfer_name = New System.Windows.Forms.Label()
         Me.chk_allowStatsTransfer = New System.Windows.Forms.CheckBox()
+        Me.lnk_update = New System.Windows.Forms.LinkLabel()
         Me.SuspendLayout()
         '
         'lbl_status_name
@@ -305,11 +306,22 @@ Partial Class Form1
         Me.chk_allowStatsTransfer.TabIndex = 27
         Me.chk_allowStatsTransfer.UseVisualStyleBackColor = True
         '
+        'lnk_update
+        '
+        Me.lnk_update.AutoSize = True
+        Me.lnk_update.Location = New System.Drawing.Point(648, 8)
+        Me.lnk_update.Name = "lnk_update"
+        Me.lnk_update.Size = New System.Drawing.Size(142, 13)
+        Me.lnk_update.TabIndex = 28
+        Me.lnk_update.TabStop = True
+        Me.lnk_update.Text = "Update available, click here!"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(857, 466)
+        Me.Controls.Add(Me.lnk_update)
         Me.Controls.Add(Me.cmb_cores)
         Me.Controls.Add(Me.chk_allowStatsTransfer)
         Me.Controls.Add(Me.lbl_allowStatsTransfer_name)
@@ -376,4 +388,5 @@ Partial Class Form1
     Friend WithEvents chk_allowErrorTransfer As CheckBox
     Friend WithEvents lbl_allowStatsTransfer_name As Label
     Friend WithEvents chk_allowStatsTransfer As CheckBox
+    Friend WithEvents lnk_update As LinkLabel
 End Class

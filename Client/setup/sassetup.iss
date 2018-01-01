@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Snowden's Guardian Angels Support"
-#define MyAppVersion "1.0"
+#define MyAppVersion "0.9.0.0"
 #define MyAppPublisher "https://github.com/pstimpel/snowdenangels"
 #define MyAppURL "https://github.com/pstimpel/snowdenangels"
 #define MyAppExeName "SnowdenAngelsSupport.exe"
@@ -23,7 +23,7 @@ DefaultDirName={pf}\SnowdenAngelsSupport
 DefaultGroupName={#MyAppName}
 LicenseFile=..\..\LICENSE
 OutputDir=..\..\release
-OutputBaseFilename=sassetup
+OutputBaseFilename=sassetup-{#MyAppVersion}
 SetupIconFile=SnowdenAngelsSupport.ico
 Compression=lzma
 SolidCompression=yes

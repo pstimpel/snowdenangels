@@ -124,6 +124,7 @@
     <Compile Include="Registry.vb" />
     <Compile Include="Stats.vb" />
     <Compile Include="StatsCollection.vb" />
+    <Compile Include="Updates.vb" />
     <Compile Include="XMRStakParser.vb" />
   </ItemGroup>
   <ItemGroup>
