@@ -21,3 +21,5 @@ To update your installation, just download the latest setup-package, and run it 
 # Is it safe to ignore the security warnings during installation?
 
 We cannot answer this for you, and we are as foreign from your point of view as anybody else. However, all included components were checked with the latest AV scanners, and from our point of view they are no risk for you or your computer. Since this whole thing is about create fundings for Snowden's Guardian Angels, we saved the money to purchase expensive certificates just to sign our little piece of software. Sorry, if this invconvinient for you!
+
+**Attention: right now there is no Monero address available from 4TheRefugees. This is the reason one of my addresses is in place during the beta. As soon as I am receiving an official Monero address from 4TheRefugees, I will change this.**
