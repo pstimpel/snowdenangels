@@ -24,3 +24,10 @@ This is what I would like to start...now!
 In case you would like to support this, please reach out to me, and find me at Twitter, https://twitter.com/PjotrS72
 
 This project relies in parts on xmr-stak, a mining software written by fireice-uk, https://github.com/fireice-uk/xmr-stak
+
+Current status: **alpha**
+
+Most important things to do:
+* handling updates clean and smooth
+* find a way to supress warnings on starting the miner
+* put together some stats site, for both project stats and personal stats
