@@ -25,9 +25,9 @@ In case you would like to support this, please reach out to me, and find me at T
 
 This project relies in parts on xmr-stak, a mining software written by fireice-uk, https://github.com/fireice-uk/xmr-stak, GNU General Public License v3.0
 
-Current status: **alpha**
+Current status: **early beta**
 
 Most important things to do:
-* handling updates clean and smooth
 * find a way to supress warnings on starting the miner
-* put together some stats site, for both project stats and personal stats
+
+**Attention: right now there is no Monero address available from 4TheRefugees. This is the reason one of my addresses is in place during the beta. As soon as I am receiving an official Monero address from 4TheRefugees, I will change this.**
