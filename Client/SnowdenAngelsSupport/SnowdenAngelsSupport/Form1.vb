@@ -8,7 +8,7 @@ Public Class Form1
     'TODO think about stats transfered to a remote site, for global stats
     'TODO create "Share to SocialNetwork" stuff so the users could brag with something
     'TODO how to handle updates
-    'TODO create some basic error handling, error broadcasting
+    'TODO create some basic error handling, error broadcasting/collecting
 
     Public configured As Boolean
     Public cores As Int16
