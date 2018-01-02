@@ -6,6 +6,7 @@ Imports System.Security.Cryptography
 Public Class Form1
     'TODO find a way to supress the warning on xmr-stak start
     'TODO create "Share to SocialNetwork" stuff so the users could brag with something
+    'TODO Allow copy of existing userkeys, if a user has more than one computer and wants to cllect the stats under one username
 
     Public configured As Boolean
     Public cores As Int16

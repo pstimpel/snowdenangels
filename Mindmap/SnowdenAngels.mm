@@ -66,6 +66,10 @@
 <font NAME="SansSerif" SIZE="16"/>
 <icon BUILTIN="button_ok"/>
 </node>
+<node COLOR="#00b439" CREATED="1514910591558" ID="ID_1953435373" MODIFIED="1514910607748" TEXT="Allow transfer of userkex">
+<edge STYLE="bezier" WIDTH="thin"/>
+<font NAME="SansSerif" SIZE="16"/>
+</node>
 </node>
 <node COLOR="#0033ff" CREATED="1514649156418" ID="ID_1073592987" MODIFIED="1514649165522" POSITION="left" TEXT="official support site">
 <edge STYLE="sharp_bezier" WIDTH="8"/>
@@ -97,25 +101,28 @@
 <node COLOR="#0033ff" CREATED="1514649336829" ID="ID_1347767414" MODIFIED="1514649341114" POSITION="left" TEXT="Stats page">
 <edge STYLE="sharp_bezier" WIDTH="8"/>
 <font NAME="SansSerif" SIZE="18"/>
-<node COLOR="#00b439" CREATED="1514649342869" ID="ID_90090936" MODIFIED="1514649348417" TEXT="How many supporters">
+<node COLOR="#00b439" CREATED="1514649342869" ID="ID_90090936" MODIFIED="1514910552032" TEXT="How many supporters">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_ok"/>
 </node>
 <node COLOR="#00b439" CREATED="1514649351127" ID="ID_74473220" MODIFIED="1514649361642" TEXT="How much Hashrate at the moment">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
 </node>
-<node COLOR="#00b439" CREATED="1514649364743" ID="ID_135043432" MODIFIED="1514649378020" TEXT="How much hashrate total">
+<node COLOR="#00b439" CREATED="1514649364743" ID="ID_135043432" MODIFIED="1514910743892" TEXT="How many hashes total">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_ok"/>
 </node>
 <node COLOR="#00b439" CREATED="1514649383110" ID="ID_1491073529" MODIFIED="1514649395460" TEXT="How many Moneros total">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
 </node>
-<node COLOR="#00b439" CREATED="1514649399724" ID="ID_153266142" MODIFIED="1514649418206" TEXT="Maybe a list of supporters, needs username inside stats">
+<node COLOR="#00b439" CREATED="1514649399724" ID="ID_153266142" MODIFIED="1514910567433" TEXT="Maybe a list of supporters, needs username inside stats">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_cancel"/>
 </node>
 </node>
 </node>
