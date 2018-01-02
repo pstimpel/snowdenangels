@@ -16,16 +16,10 @@
 <font NAME="SansSerif" SIZE="16"/>
 </node>
 </node>
-<node COLOR="#0033ff" CREATED="1514648956157" ID="ID_1511640378" MODIFIED="1514649122632" POSITION="left" TEXT="Create a bullet-proof setup">
+<node COLOR="#0033ff" CREATED="1514648956157" ID="ID_1511640378" MODIFIED="1514853225146" POSITION="left" TEXT="Create a bullet-proof setup">
 <edge STYLE="sharp_bezier" WIDTH="8"/>
 <font NAME="SansSerif" SIZE="18"/>
-<node COLOR="#00b439" CREATED="1514648972981" ID="ID_1623956030" MODIFIED="1514649122633" TEXT="Ask for parameters">
-<edge STYLE="bezier" WIDTH="thin"/>
-<font NAME="SansSerif" SIZE="16"/>
-<node COLOR="#990000" CREATED="1514649024267" ID="ID_1521208262" MODIFIED="1514649122635" TEXT="Autostart yes/no">
-<font NAME="SansSerif" SIZE="14"/>
-</node>
-</node>
+<icon BUILTIN="button_ok"/>
 </node>
 <node COLOR="#0033ff" CREATED="1514649051008" ID="ID_143444321" MODIFIED="1514649122637" POSITION="right" TEXT="Desktop Client">
 <edge STYLE="sharp_bezier" WIDTH="8"/>
@@ -38,9 +32,10 @@
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
 </node>
-<node COLOR="#00b439" CREATED="1514649089120" ID="ID_1754962058" MODIFIED="1514649122640" TEXT="Should handle updates of both xmr-stak and the client">
+<node COLOR="#00b439" CREATED="1514649089120" ID="ID_1754962058" MODIFIED="1514853185739" TEXT="Should handle updates of both xmr-stak and the client">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_ok"/>
 </node>
 <node COLOR="#00b439" CREATED="1514648982114" ID="ID_94253989" MODIFIED="1514675439099" TEXT="# of cpu cores to use">
 <edge STYLE="bezier" WIDTH="thin"/>
