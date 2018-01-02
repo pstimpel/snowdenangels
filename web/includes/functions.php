@@ -96,13 +96,145 @@ function insertError($postdata) {
     return false;
 }
 
+function getSummaries() {
+
+    $countscache=false;
+    if($_SERVER["HTTP_HOST"] != "127.0.0.1") {
+
+        $memcache = new Memcached;
+        $memcache->addServers(array(array("127.0.0.1", 11211)));
+        $countscache = $memcache->get("SGAScounters");
+
+    }
+    if($countscache===false) {
+        $hashRatePerSecondSummaryTotal = getHashratePerSecondSummary(false);
+        $hashRatePerSecondSummaryLast = getHashratePerSecondSummary(true);
+
+        $hashRateSummaryTotal=getHashrateSummary(false);
+        $hashRateSummaryLast=getHashrateSummary(true);
+
+        $uniqueComputersTotal=getUniqueComputersCount(false);
+        $uniqueComputersLast=getUniqueComputersCount(true);
+
+        $uniqueUsersTotal = getUniqueUsersCount(false);
+        $uniqueUsersLast = getUniqueUsersCount(true);
+
+        $countscache=array(
+            "hashRatePerSecondSummaryTotal"=>$hashRatePerSecondSummaryTotal,
+            "hashRatePerSecondSummaryLast"=>$hashRatePerSecondSummaryLast,
+            "hashRateSummaryTotal"=>$hashRateSummaryTotal,
+            "hashRateSummaryLast"=>$hashRateSummaryLast,
+            "uniqueComputersTotal"=>$uniqueComputersTotal,
+            "uniqueComputersLast"=>$uniqueComputersLast,
+            "uniqueUsersTotal"=>$uniqueUsersTotal,
+            "uniqueUsersLast"=>$uniqueUsersLast
+        );
+        if($_SERVER["HTTP_HOST"] != "127.0.0.1") {
+            $memcache->set("SGAScounters", $countscache, 60);
+        }
+    }
+
+    return $countscache;
+
+}
+
+function displayMain() {
+    global $smarty;
+
+    $smarty->assign("summaries",getSummaries());
+
+}
+
+function getHashratePerSecondSummary($last24hours = false) {
+    global $db;
+    $sql = "select sum(stats_persession_hashes / (1+((DATE_PART('day', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp) * 24 + 
+                DATE_PART('hour', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp)) * 60 +
+                DATE_PART('minute', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp)) * 60 +
+                DATE_PART('second', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp))) as hashspersecsum 
+from stats_persession where stats_persession_sessionend<>stats_persession_sessionstart";
+    if($last24hours==true) {
+        $sql = $sql . " and stats_persession_sessionend > now() - INTERVAL '1 days'";
+    }
+
+    $result3 = pg_query($db,$sql);
+    $num3 = pg_numrows($result3);
+
+    if($num3>0) {
+        for ($i3 = 0; $i3 < $num3; $i3++)
+        {
+            $r = pg_fetch_array($result3);
+            return round($r['hashspersecsum'],0);
+        }
+    }
+    return 0;
+}
+
+function getHashrateSummary($last24hours = false) {
+    global $db;
+    $sql = "select sum(stats_persession_hashes) as summary  from stats_persession ";
+    if($last24hours==true) {
+        $sql = $sql . " where stats_persession_sessionend > now() - INTERVAL '1 days'";
+    }
+
+    $result3 = pg_query($db,$sql);
+
+    $num3 = pg_numrows($result3);
+
+    if($num3>0) {
+        for ($i3 = 0; $i3 < $num3; $i3++)
+        {
+            $r = pg_fetch_array($result3);
+            return $r['summary'];
+        }
+    }
+    return 0;
+}
+
+function getUniqueComputersCount($activeonly = false) {
+    global $db;
+    $sql = "select count(distinct stats_persession_computerkey) as counter  from stats_persession ";
+    if($activeonly==true) {
+        $sql = $sql . " where stats_persession_sessionend > now() - INTERVAL '1 days'";
+    }
+    $result3 = pg_query($db,$sql);
+    $num3 = pg_numrows($result3);
+
+    if($num3>0) {
+        for ($i3 = 0; $i3 < $num3; $i3++)
+        {
+            $r = pg_fetch_array($result3);
+            return $r['counter'];
+        }
+    }
+    return 0;
+}
+
+function getUniqueUsersCount($activeonly = false) {
+    global $db;
+    $sql = "select count(distinct stats_persession_userkey) as counter  from stats_persession ";
+    if($activeonly==true) {
+        $sql = $sql . " where stats_persession_sessionend > now() - INTERVAL '1 days'";
+    }
+    $result3 = pg_query($db,$sql);
+    $num3 = pg_numrows($result3);
+
+    if($num3>0) {
+        for ($i3 = 0; $i3 < $num3; $i3++)
+        {
+            $r = pg_fetch_array($result3);
+            return $r['counter'];
+        }
+    }
+    return 0;
+}
+
 function getErrorsFromDatabase() {
-    return;
+
     global $db;
     $sql = "select * from errors";
     $result3 = pg_query($db,$sql);
     $num3 = pg_numrows($result3);
-    $point=array();
+
     if($num3>0) {
         for ($i3 = 0; $i3 < $num3; $i3++)
         {

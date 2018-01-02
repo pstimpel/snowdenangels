@@ -1,5 +1,5 @@
 <?php
-
+$nosmarty=true;
 require 'includes/init.php';
 
 if (isset($_POST['data']) && strlen($_POST['data']) > 0) {

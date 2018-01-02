@@ -1,4 +1,5 @@
 <?php
+$nosmarty=true;
 require 'includes/init.php';
 
 
