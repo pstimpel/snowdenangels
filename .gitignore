@@ -6,3 +6,5 @@ bin
 /release/sassetup.exe
 .idea
 /Client/SnowdenAngelsSupport/SnowdenAngelsSupport.v11.suo
+/web/smarty/cache
+/web/smarty/templates_c
