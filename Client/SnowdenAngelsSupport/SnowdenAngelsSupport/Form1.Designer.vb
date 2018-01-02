@@ -54,6 +54,8 @@ Partial Class Form1
         Me.lbl_allowStatsTransfer_name = New System.Windows.Forms.Label()
         Me.chk_allowStatsTransfer = New System.Windows.Forms.CheckBox()
         Me.lnk_update = New System.Windows.Forms.LinkLabel()
+        Me.lbl_currenthashrate_name = New System.Windows.Forms.Label()
+        Me.lbl_hashrate_status = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lbl_status_name
@@ -316,11 +318,33 @@ Partial Class Form1
         Me.lnk_update.TabStop = True
         Me.lnk_update.Text = "Update available, click here!"
         '
+        'lbl_currenthashrate_name
+        '
+        Me.lbl_currenthashrate_name.AutoSize = True
+        Me.lbl_currenthashrate_name.Location = New System.Drawing.Point(648, 120)
+        Me.lbl_currenthashrate_name.Name = "lbl_currenthashrate_name"
+        Me.lbl_currenthashrate_name.Size = New System.Drawing.Size(91, 13)
+        Me.lbl_currenthashrate_name.TabIndex = 29
+        Me.lbl_currenthashrate_name.Text = "Hashes / Second"
+        '
+        'lbl_hashrate_status
+        '
+        Me.lbl_hashrate_status.AutoSize = True
+        Me.lbl_hashrate_status.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_hashrate_status.Location = New System.Drawing.Point(648, 144)
+        Me.lbl_hashrate_status.Name = "lbl_hashrate_status"
+        Me.lbl_hashrate_status.Size = New System.Drawing.Size(91, 25)
+        Me.lbl_hashrate_status.TabIndex = 30
+        Me.lbl_hashrate_status.Text = "unknown"
+        Me.lbl_hashrate_status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(857, 466)
+        Me.Controls.Add(Me.lbl_hashrate_status)
+        Me.Controls.Add(Me.lbl_currenthashrate_name)
         Me.Controls.Add(Me.lnk_update)
         Me.Controls.Add(Me.cmb_cores)
         Me.Controls.Add(Me.chk_allowStatsTransfer)
@@ -389,4 +413,6 @@ Partial Class Form1
     Friend WithEvents lbl_allowStatsTransfer_name As Label
     Friend WithEvents chk_allowStatsTransfer As CheckBox
     Friend WithEvents lnk_update As LinkLabel
+    Friend WithEvents lbl_currenthashrate_name As Label
+    Friend WithEvents lbl_hashrate_status As Label
 End Class

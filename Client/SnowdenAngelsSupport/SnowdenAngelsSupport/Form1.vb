@@ -88,6 +88,12 @@ Public Class Form1
 
             Me.txtOutput.Text = output
 
+            If Me.currentHashrate > 0 Then
+
+                Me.lbl_hashrate_status.Text = Me.currentHashrate.ToString
+
+            End If
+
             If statsFirstRun = True Then
 
                 Me.G_StatsCollection.b_sessionstart = True
