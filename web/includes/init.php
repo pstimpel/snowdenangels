@@ -5,6 +5,17 @@ error_reporting(E_ERROR | E_WARNING);
 date_default_timezone_set('UTC');
 session_start();
 
+if($_SERVER["HTTP_HOST"] != "127.0.0.1") {
+
+    if($_SERVER['SERVER_PORT'] != "443"){
+        $redirect = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        header('HTTP/1.1 301 Moved Permanently');
+        header('Location: ' . $redirect);
+        exit();
+    }
+
+}
+
 if($nosmarty != true) {
     require('smarty/Smarty.class.php');
 
