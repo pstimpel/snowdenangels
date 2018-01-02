@@ -9,6 +9,9 @@ The software will open connections to the following webpages:
 * one of the miningpools you select to work with, ports 3333 or 4444 are OK
 * to "localhost", 127.0.0.1, to collect stats from the mining software itself
 
+# Download
+
+https://redzoneaction.org/sgasupport/downloads/
 
 # Installation
 
