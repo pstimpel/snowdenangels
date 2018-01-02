@@ -143,6 +143,9 @@ function displayMain() {
 
     $smarty->assign("summaries",getSummaries());
 
+    $smarty->assign("chartdataFull",prepareChart(false));
+    $smarty->assign("chartdata30d",prepareChart(true));
+
 }
 
 function getHashratePerSecondSummary($last24hours = false) {
@@ -245,4 +248,57 @@ function getErrorsFromDatabase() {
         echo "no rows";
     }
     
+}
+
+function cron() {
+    if (php_sapi_name() != 'cli') {
+        echo "abort";
+        exit;
+    }
+
+    global $db;
+
+    $uniqueComputersTotal=getUniqueComputersCount(false);
+    $uniqueComputersLast=getUniqueComputersCount(true);
+
+    $uniqueUsersTotal = getUniqueUsersCount(false);
+    $uniqueUsersLast = getUniqueUsersCount(true);
+
+    $result = pg_prepare($db, "query",
+        'insert into stats_daily (stats_daily_totalusers, stats_daily_activeusers, stats_daily_totalcomputers, stats_daily_activecomputers,
+                  stats_daily_ts) values($1,$2,$3,$4,now())');
+
+    $result = pg_execute($db, "query", array($uniqueUsersTotal, $uniqueUsersLast, $uniqueComputersTotal, $uniqueComputersLast));
+
+    exit;
+}
+
+function prepareChart($last30days=false) {
+
+    global $db;
+    $sql = "select * from stats_daily ";
+    if($last30days==true) {
+        $sql = $sql . " where stats_daily_ts > now() - INTERVAL '30 days'";
+    }
+    $sql = $sql . " order by stats_daily_ts";
+
+    $result3 = pg_query($db,$sql);
+    $num3 = pg_numrows($result3);
+    $chartdata=array();
+    if($num3>0) {
+        for ($i3 = 0; $i3 < $num3; $i3++)
+        {
+            $r = pg_fetch_array($result3);
+            array_push($chartdata,array(
+                "stats_daily_totalusers"=>$r['stats_daily_totalusers'],
+                "stats_daily_activeusers"=>$r['stats_daily_activeusers'],
+                "stats_daily_totalcomputers"=>$r['stats_daily_totalcomputers'],
+                "stats_daily_activecomputers"=>$r['stats_daily_activecomputers'],
+                "stats_daily_ts"=>date("Y-m-d",strtotime($r['stats_daily_ts']))
+            ));
+        }
+    }
+
+    return $chartdata;
+
 }

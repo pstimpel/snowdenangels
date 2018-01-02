@@ -98,5 +98,27 @@ CREATE INDEX idx_stats_persession_userkey
     ON public.stats_persession USING btree
     (stats_persession_userkey COLLATE pg_catalog."default")
     TABLESPACE pg_default;
-	
+
+
+	-- Table: public.stats_daily
+
+-- DROP TABLE public.stats_daily;
+
+CREATE TABLE public.stats_daily
+(
+  stats_daily_id integer NOT NULL DEFAULT nextval('stats_daily_stats_daily_id_seq'::regclass),
+  stats_daily_totalusers integer NOT NULL,
+  stats_daily_activeusers integer NOT NULL,
+  stats_daily_totalcomputers integer NOT NULL,
+  stats_daily_ts timestamp without time zone NOT NULL,
+  stats_daily_activecomputers integer NOT NULL,
+  CONSTRAINT pkey_stats_daily_stats_daily_id PRIMARY KEY (stats_daily_id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.stats_daily
+  OWNER TO dbsgasupport;
+
+
 	

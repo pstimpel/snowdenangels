@@ -10,6 +10,22 @@ if(isset($_GET['page'])) {
     $page="";
 }
 
+if(isset($_GET['action'])) {
+    $action=$_GET['action'];
+} else {
+    $action="";
+}
+
+switch($action) {
+
+    case "cron":
+        cron();
+        break;
+    default:
+
+}
+
+
 switch($_GET['page']) {
 
     case "me":
