@@ -73,7 +73,6 @@ function insertStats($postdata) {
 }
 
 function insertError($postdata) {
-    return;
     global $db;
     
     $json = json_decode($postdata, true);
@@ -98,6 +97,7 @@ function insertError($postdata) {
 }
 
 function getErrorsFromDatabase() {
+    return;
     global $db;
     $sql = "select * from errors";
     $result3 = pg_query($db,$sql);
