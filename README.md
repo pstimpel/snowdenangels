@@ -21,7 +21,8 @@ How about having a community of computer users, each of them providing a little 
 
 This is what I would like to start...now!
 
-In case you would like to support this, please reach out to me, and find me at Twitter, https://twitter.com/PjotrS72
+In case you would like to support this, please reach out to me, and find me at Twitter, https://twitter.com/PjotrS72.
+You can find me by email as well: pstimpel@googlemail.com, PGP available on key-servers.
 
 This project relies in parts on xmr-stak, a mining software written by fireice-uk, https://github.com/fireice-uk/xmr-stak, GNU General Public License v3.0
 
