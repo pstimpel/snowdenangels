@@ -1,1 +1,1 @@
-version=sassetup-0.9.1.0.exe
+version=sassetup-0.9.2.0.exe
