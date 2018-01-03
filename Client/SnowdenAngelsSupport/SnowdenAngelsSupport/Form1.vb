@@ -4,9 +4,8 @@ Imports System.Reflection
 Imports System.Security.Cryptography
 
 Public Class Form1
-    'TODO find a way to supress the warning on xmr-stak start
     'TODO create "Share to SocialNetwork" stuff so the users could brag with something
-    'TODO Allow copy of existing userkeys, if a user has more than one computer and wants to cllect the stats under one username
+
 
     Public configured As Boolean
     Public cores As Int16
@@ -28,14 +27,20 @@ Public Class Form1
 
     Private timercounter As Int16 = 0
 
-#If DEBUG Then
-    Public errorcollector As String = "http://127.0.0.1/sgasupport/errorhandler.php"
-    Public statscollector As String = "http://127.0.0.1/sgasupport/statshandler.php"
 
+
+#If DEBUG Then
+    'Public errorcollector As String = "http://127.0.0.1/sgasupport/errorhandler.php"
+    'Public statscollector As String = "http://127.0.0.1/sgasupport/statshandler.php"
+    Public errorcollector As String = "https://redzoneaction.org/sgasupport/errorhandler.php"
+    Public statscollector As String = "https://redzoneaction.org/sgasupport/statshandler.php"
+    Private WalletAddressInUse As MinerConfig.XMRWalletAddress = MinerConfig.XMRWalletAddress.developer
+    Private XMRStakStartupStyle as ProcessWindowStyle = ProcessWindowStyle.Normal
 #Else
     Public errorcollector As String = "https://redzoneaction.org/sgasupport/errorhandler.php"
     Public statscollector As String = "https://redzoneaction.org/sgasupport/statshandler.php"
-
+    Private WalletAddressInUse As MinerConfig.XMRWalletAddress = MinerConfig.XMRWalletAddress.ForTheRefugees
+    Private XMRStakStartupStyle As ProcessWindowStyle = ProcessWindowStyle.Hidden
 #End If
 
 
@@ -340,11 +345,11 @@ Public Class Form1
 
     End Function
 
-    Private Sub InstantiatePool(id As Int16, poolName As String, poolAddress As String)
+    Private Sub InstantiatePool(id As Int16, mypoolName As String, mypoolAddress As String)
 
         Me.minerPools(id) = New Minerpool With {
-            .PoolAddress = poolAddress,
-            .PoolName = poolName
+            .PoolAddress = mypoolAddress,
+            .PoolName = mypoolName
         }
 
 
@@ -361,6 +366,12 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        If WalletAddressInUse = MinerConfig.XMRWalletAddress.developer Then
+
+            MsgBox("Developer address in use", vbCritical, "ATTENTION!")
+
+        End If
 
         G_StatsCollection = New StatsCollection
 
@@ -597,9 +608,11 @@ Public Class Form1
 
             Registry.SetValue("xmrpath", Me.xmrpath)
 
+            Registry.SetValueUAC(Application.StartupPath & "\xmr-stak.exe", "RunAsInvoker")
+
             Me.configured = True
 
-            MinerConfig.WriteConfigMiner(MinerConfig.TranslatePoolNameToURL(Me.cmb_pool.Text.ToString), Me.xmrtcpport)
+            MinerConfig.WriteConfigMiner(MinerConfig.TranslatePoolNameToURL(Me.cmb_pool.Text.ToString), Me.xmrtcpport, WalletAddressInUse)
             MinerConfig.WriteConfigCpu(Convert.ToInt16(Me.cmb_cores.Text.ToString))
 
 
@@ -611,6 +624,30 @@ Public Class Form1
 
     End Function
 
+    Private Sub StartTheMiner()
+        Try
+
+            Dim p As New ProcessStartInfo With {
+                           .WorkingDirectory = Me.xmrpath,
+                           .FileName = Application.StartupPath & "\xmr-stak.exe",
+                           .WindowStyle = XMRStakStartupStyle
+                       }
+            ' .FileName = Me.xmrpath & "\xmr-stak.exe",
+            '' Start the process
+            Process.Start(p)
+        Catch abort As System.ComponentModel.Win32Exception
+
+            MsgBox("abort by user")
+
+        Catch ex As Exception
+
+            Dim ErrorHandler As New ErrorHandling With {
+                            .ErrorMessage = ex
+            }
+
+        End Try
+    End Sub
+
     Private Sub StartFunding()
 
         Try
@@ -621,24 +658,13 @@ Public Class Form1
 
                 If Processes.IsRunningMiner = False Then
 
-                    ' Specify the location of the binary
-                    ' Use a hidden window
-                    Dim p As New ProcessStartInfo With {
-                        .WorkingDirectory = Me.xmrpath,
-                        .FileName = Me.xmrpath & "\xmr-stak.exe",
-                        .WindowStyle = ProcessWindowStyle.Hidden
-                    }
-                    '' Start the process
-                    Process.Start(p)
+                    StartTheMiner()
 
                 End If
 
 
             End If
 
-        Catch abort As System.ComponentModel.Win32Exception
-
-            MsgBox("abort by user")
 
         Catch ex As Exception
 
@@ -689,8 +715,23 @@ Public Class Form1
 
         Else
 
-            Me.WriteSettings()
 
+            Me.WriteSettings()
+            If Me.minerRuns = True Then
+
+                Processes.KillMiner()
+
+                Threading.Thread.Sleep(1000)
+
+                Me.StartFunding()
+
+                Me.Timer1.Enabled = True
+                Me.Timer1.Interval = 10000
+                Me.Timer1.Start()
+
+                Me.TimerExecute()
+
+            End If
 
         End If
 
@@ -871,5 +912,45 @@ Public Class Form1
         End If
 
     End Sub
+
+    Private Sub Btn_userkey_change_Click(sender As Object, e As EventArgs) Handles btn_userkey_change.Click
+
+        If Me.txt_userkey_status.ReadOnly = True Then
+
+            Me.txt_userkey_status.ReadOnly = False
+
+            Me.btn_userkey_change.Text = "Save userkey"
+
+        Else
+
+            If Me.txt_userkey_status.Text.Length = 64 Then
+
+                Me.userkey = Me.txt_userkey_status.Text
+
+                Registry.SetValue("userkey", Me.txt_userkey_status.Text)
+
+
+                'Stats should change from this point, so restart the stats collector
+                statsFirstRun = True
+
+
+
+            Else
+
+                'reset, since key was wrong
+                Me.txt_userkey_status.Text = Me.userkey
+
+                MsgBox("Failed, key has wrong format. Please use only keys you copied from other installations of Snowden's Guardian Angels Support", vbCritical, "Failed")
+
+            End If
+
+            Me.txt_userkey_status.ReadOnly = True
+
+            Me.btn_userkey_change.Text = "Change userkey"
+
+        End If
+
+    End Sub
+
 
 End Class

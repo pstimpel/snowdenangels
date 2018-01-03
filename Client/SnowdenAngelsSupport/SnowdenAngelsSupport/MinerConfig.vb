@@ -3,6 +3,11 @@
 
 Module MinerConfig
 
+    Public Enum XMRWalletAddress
+        developer = 0
+        ForTheRefugees = 1
+    End Enum
+
     Public Sub KillLogFile()
 
         Try
@@ -136,15 +141,24 @@ Module MinerConfig
     End Function
 
 
-    Public Sub WriteConfigMiner(pool As String, xmrtcpport As Int32)
+    Public Sub WriteConfigMiner(pool As String, xmrtcpport As Int32, walletToUse As XMRWalletAddress)
 
         Try
-            ' DO NOT FORGET
-            ' TODO Replace the Monero address once ForTheRefugees is providing theirs, but keep this one until that point not to mine with an invalid address
+            ' 4TR: 47gRtvuDS9dNjkNs2nFqiSVHk3tqdT239j9Tj1KxAWNPRogHnGUdMdvQBwevobeAxQHqjBu8WcZzfNrdbReYNAU1KBidTzc
+            ' PST: 421MbN95eXzJkoJbgLTvkkDGbNjpZWdcd9KzVKnXMHexUBAPrFbfQ33EAEjA7GLEeB9evt5AjkD6KgdNN4tfZ5VgM4LjC6V
+
+            Dim myXMRWalletAddress As String = ""
+            If walletToUse = XMRWalletAddress.developer Then
+                myXMRWalletAddress = "421MbN95eXzJkoJbgLTvkkDGbNjpZWdcd9KzVKnXMHexUBAPrFbfQ33EAEjA7GLEeB9evt5AjkD6KgdNN4tfZ5VgM4LjC6V"
+            Else
+                myXMRWalletAddress = "47gRtvuDS9dNjkNs2nFqiSVHk3tqdT239j9Tj1KxAWNPRogHnGUdMdvQBwevobeAxQHqjBu8WcZzfNrdbReYNAU1KBidTzc"
+            End If
+
+
 
             Dim config As String = """pool_list"" :
 [
-	{""pool_address"" : """ & pool & """, ""wallet_address"" : ""421MbN95eXzJkoJbgLTvkkDGbNjpZWdcd9KzVKnXMHexUBAPrFbfQ33EAEjA7GLEeB9evt5AjkD6KgdNN4tfZ5VgM4LjC6V"", ""pool_password"" : ""x"", ""use_nicehash"" : false, ""use_tls"" : false, ""tls_fingerprint"" : """", ""pool_weight"" : 1 },
+	{""pool_address"" : """ & pool & """, ""wallet_address"" : """ & myXMRWalletAddress & """, ""pool_password"" : ""x"", ""use_nicehash"" : false, ""use_tls"" : false, ""tls_fingerprint"" : """", ""pool_weight"" : 1 },
 ],
 ""currency"" : ""monero"",
 ""call_timeout"" : 10,
@@ -158,7 +172,7 @@ Module MinerConfig
 ""tls_secure_algo"" : true,
 ""daemon_mode"" : false,
 ""flush_stdout"" : false,
-""output_file"" : ""logout.txt"",
+""output_file"" : """",
 ""httpd_port"" : " & xmrtcpport.ToString & ",
 ""http_login"" : """",
 ""http_pass"" : """",
