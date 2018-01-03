@@ -270,6 +270,7 @@ function cron() {
 
     $result = pg_execute($db, "query", array($uniqueUsersTotal, $uniqueUsersLast, $uniqueComputersTotal, $uniqueComputersLast));
 
+    echo "SUCCESS";
     exit;
 }
 
