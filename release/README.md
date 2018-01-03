@@ -1,3 +1,7 @@
+# Download
+
+https://github.com/pstimpel/snowdenangels/raw/master/release/sassetup-0.9.2.0.exe
+
 # System requirements
 
 You need to run your computer with Microsoft Windows Vista or later. dot-net Framework 4.6 has to be installed. The software in this package does not run on 32 bit operating systems. You need an Internet connection, and once the Software asks for permission to transfer data, you should allow this.
