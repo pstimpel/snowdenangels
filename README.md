@@ -26,6 +26,8 @@ You can find me by email as well: pstimpel@googlemail.com, PGP available on key-
 
 This project relies in parts on xmr-stak, a mining software written by fireice-uk, https://github.com/fireice-uk/xmr-stak, GNU General Public License v3.0
 
+This project has a homepage where users can find support, staistics and so on: https://redzoneaction.org/sgasupport/
+
 Current status: **early beta**
 
 
