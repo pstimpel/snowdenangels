@@ -139,6 +139,16 @@ Module MinerConfig
         Return "monerohash.com:3333"
 
     End Function
+    Public Function GetMonerWalletAddress(walletToUse As XMRWalletAddress) As String
+
+        If walletToUse = XMRWalletAddress.developer Then
+            Return "421MbN95eXzJkoJbgLTvkkDGbNjpZWdcd9KzVKnXMHexUBAPrFbfQ33EAEjA7GLEeB9evt5AjkD6KgdNN4tfZ5VgM4LjC6V"
+        Else
+            Return "47gRtvuDS9dNjkNs2nFqiSVHk3tqdT239j9Tj1KxAWNPRogHnGUdMdvQBwevobeAxQHqjBu8WcZzfNrdbReYNAU1KBidTzc"
+        End If
+
+
+    End Function
 
 
     Public Sub WriteConfigMiner(pool As String, xmrtcpport As Int32, walletToUse As XMRWalletAddress)
@@ -147,12 +157,7 @@ Module MinerConfig
             ' 4TR: 47gRtvuDS9dNjkNs2nFqiSVHk3tqdT239j9Tj1KxAWNPRogHnGUdMdvQBwevobeAxQHqjBu8WcZzfNrdbReYNAU1KBidTzc
             ' PST: 421MbN95eXzJkoJbgLTvkkDGbNjpZWdcd9KzVKnXMHexUBAPrFbfQ33EAEjA7GLEeB9evt5AjkD6KgdNN4tfZ5VgM4LjC6V
 
-            Dim myXMRWalletAddress As String = ""
-            If walletToUse = XMRWalletAddress.developer Then
-                myXMRWalletAddress = "421MbN95eXzJkoJbgLTvkkDGbNjpZWdcd9KzVKnXMHexUBAPrFbfQ33EAEjA7GLEeB9evt5AjkD6KgdNN4tfZ5VgM4LjC6V"
-            Else
-                myXMRWalletAddress = "47gRtvuDS9dNjkNs2nFqiSVHk3tqdT239j9Tj1KxAWNPRogHnGUdMdvQBwevobeAxQHqjBu8WcZzfNrdbReYNAU1KBidTzc"
-            End If
+            Dim myXMRWalletAddress As String = GetMonerWalletAddress(walletToUse)
 
 
 

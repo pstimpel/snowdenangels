@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="800px-34c3-tuwat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\800px-34c3-tuwat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="300px-34c3-tuwat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\300px-34c3-tuwat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\300px-34c3-tuwat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ForTheRefugees_851_315" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\ForTheRefugees_851_315.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="800px-34c3-tuwat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\800px-34c3-tuwat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ForTheRefugees_552_204" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\ForTheRefugees_552_204.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\ForTheRefugees_552_204.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ForTheRefugees_851_315" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ForTheRefugees_851_315.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -63,6 +63,8 @@ Partial Class Form1
         Me.lbl_status_name = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pct_box_tuwat = New System.Windows.Forms.PictureBox()
+        Me.lbl_xmraddress_name = New System.Windows.Forms.Label()
+        Me.txt_moneroaddress_status = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout()
         Me.tab_stats.SuspendLayout()
         Me.tab_config.SuspendLayout()
@@ -87,16 +89,18 @@ Partial Class Form1
         Me.TabControl1.Location = New System.Drawing.Point(8, 40)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(864, 312)
+        Me.TabControl1.Size = New System.Drawing.Size(864, 288)
         Me.TabControl1.TabIndex = 31
         '
         'tab_stats
         '
+        Me.tab_stats.Controls.Add(Me.txt_moneroaddress_status)
+        Me.tab_stats.Controls.Add(Me.lbl_xmraddress_name)
         Me.tab_stats.Controls.Add(Me.lbl_hashrate_status)
         Me.tab_stats.Controls.Add(Me.lbl_currenthashrate_name)
         Me.tab_stats.Location = New System.Drawing.Point(4, 22)
         Me.tab_stats.Name = "tab_stats"
-        Me.tab_stats.Size = New System.Drawing.Size(856, 286)
+        Me.tab_stats.Size = New System.Drawing.Size(856, 262)
         Me.tab_stats.TabIndex = 2
         Me.tab_stats.Text = "Statistics"
         Me.tab_stats.UseVisualStyleBackColor = True
@@ -149,14 +153,14 @@ Partial Class Form1
         Me.tab_config.Location = New System.Drawing.Point(4, 22)
         Me.tab_config.Name = "tab_config"
         Me.tab_config.Padding = New System.Windows.Forms.Padding(3)
-        Me.tab_config.Size = New System.Drawing.Size(856, 286)
+        Me.tab_config.Size = New System.Drawing.Size(856, 262)
         Me.tab_config.TabIndex = 0
         Me.tab_config.Text = "Configuration"
         Me.tab_config.UseVisualStyleBackColor = True
         '
         'btn_userkey_change
         '
-        Me.btn_userkey_change.Location = New System.Drawing.Point(720, 256)
+        Me.btn_userkey_change.Location = New System.Drawing.Point(720, 232)
         Me.btn_userkey_change.Name = "btn_userkey_change"
         Me.btn_userkey_change.Size = New System.Drawing.Size(129, 23)
         Me.btn_userkey_change.TabIndex = 57
@@ -210,7 +214,7 @@ Partial Class Form1
         'lbl_userkey_name
         '
         Me.lbl_userkey_name.AutoSize = True
-        Me.lbl_userkey_name.Location = New System.Drawing.Point(8, 264)
+        Me.lbl_userkey_name.Location = New System.Drawing.Point(8, 240)
         Me.lbl_userkey_name.Name = "lbl_userkey_name"
         Me.lbl_userkey_name.Size = New System.Drawing.Size(46, 13)
         Me.lbl_userkey_name.TabIndex = 52
@@ -218,7 +222,7 @@ Partial Class Form1
         '
         'txt_userkey_status
         '
-        Me.txt_userkey_status.Location = New System.Drawing.Point(232, 256)
+        Me.txt_userkey_status.Location = New System.Drawing.Point(232, 232)
         Me.txt_userkey_status.Name = "txt_userkey_status"
         Me.txt_userkey_status.ReadOnly = True
         Me.txt_userkey_status.Size = New System.Drawing.Size(480, 20)
@@ -365,7 +369,7 @@ Partial Class Form1
         Me.tab_logs.Location = New System.Drawing.Point(4, 22)
         Me.tab_logs.Name = "tab_logs"
         Me.tab_logs.Padding = New System.Windows.Forms.Padding(3)
-        Me.tab_logs.Size = New System.Drawing.Size(856, 286)
+        Me.tab_logs.Size = New System.Drawing.Size(856, 262)
         Me.tab_logs.TabIndex = 1
         Me.tab_logs.Text = "Logs"
         Me.tab_logs.UseVisualStyleBackColor = True
@@ -377,7 +381,7 @@ Partial Class Form1
         Me.txtOutput.Name = "txtOutput"
         Me.txtOutput.ReadOnly = True
         Me.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtOutput.Size = New System.Drawing.Size(840, 272)
+        Me.txtOutput.Size = New System.Drawing.Size(840, 248)
         Me.txtOutput.TabIndex = 20
         '
         'lnk_update
@@ -392,7 +396,7 @@ Partial Class Form1
         '
         'btn_miner_stop
         '
-        Me.btn_miner_stop.Location = New System.Drawing.Point(528, 8)
+        Me.btn_miner_stop.Location = New System.Drawing.Point(544, 8)
         Me.btn_miner_stop.Name = "btn_miner_stop"
         Me.btn_miner_stop.Size = New System.Drawing.Size(129, 23)
         Me.btn_miner_stop.TabIndex = 60
@@ -401,17 +405,18 @@ Partial Class Form1
         '
         'btn_miner_start
         '
-        Me.btn_miner_start.Location = New System.Drawing.Point(392, 8)
+        Me.btn_miner_start.BackColor = System.Drawing.Color.LightGreen
+        Me.btn_miner_start.Location = New System.Drawing.Point(408, 8)
         Me.btn_miner_start.Name = "btn_miner_start"
         Me.btn_miner_start.Size = New System.Drawing.Size(129, 23)
         Me.btn_miner_start.TabIndex = 59
         Me.btn_miner_start.Text = "Start Funding"
-        Me.btn_miner_start.UseVisualStyleBackColor = True
+        Me.btn_miner_start.UseVisualStyleBackColor = False
         '
         'lbl_status_response
         '
         Me.lbl_status_response.AutoSize = True
-        Me.lbl_status_response.Location = New System.Drawing.Point(232, 16)
+        Me.lbl_status_response.Location = New System.Drawing.Point(240, 16)
         Me.lbl_status_response.Name = "lbl_status_response"
         Me.lbl_status_response.Size = New System.Drawing.Size(53, 13)
         Me.lbl_status_response.TabIndex = 62
@@ -431,7 +436,7 @@ Partial Class Form1
         Me.PictureBox1.BackgroundImage = Global.SnowdenAngelsSupport.My.Resources.Resources.ForTheRefugees_552_204
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox1.Location = New System.Drawing.Point(8, 360)
+        Me.PictureBox1.Location = New System.Drawing.Point(8, 336)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(552, 200)
         Me.PictureBox1.TabIndex = 64
@@ -443,17 +448,34 @@ Partial Class Form1
         Me.pct_box_tuwat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.pct_box_tuwat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pct_box_tuwat.ImageLocation = ""
-        Me.pct_box_tuwat.Location = New System.Drawing.Point(568, 360)
+        Me.pct_box_tuwat.Location = New System.Drawing.Point(568, 336)
         Me.pct_box_tuwat.Name = "pct_box_tuwat"
         Me.pct_box_tuwat.Size = New System.Drawing.Size(304, 56)
         Me.pct_box_tuwat.TabIndex = 63
         Me.pct_box_tuwat.TabStop = False
         '
+        'lbl_xmraddress_name
+        '
+        Me.lbl_xmraddress_name.AutoSize = True
+        Me.lbl_xmraddress_name.Location = New System.Drawing.Point(8, 240)
+        Me.lbl_xmraddress_name.Name = "lbl_xmraddress_name"
+        Me.lbl_xmraddress_name.Size = New System.Drawing.Size(114, 13)
+        Me.lbl_xmraddress_name.TabIndex = 62
+        Me.lbl_xmraddress_name.Text = "Monero address in use"
+        '
+        'txt_moneroaddress_status
+        '
+        Me.txt_moneroaddress_status.Location = New System.Drawing.Point(128, 232)
+        Me.txt_moneroaddress_status.Name = "txt_moneroaddress_status"
+        Me.txt_moneroaddress_status.ReadOnly = True
+        Me.txt_moneroaddress_status.Size = New System.Drawing.Size(720, 20)
+        Me.txt_moneroaddress_status.TabIndex = 63
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(880, 568)
+        Me.ClientSize = New System.Drawing.Size(880, 543)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.pct_box_tuwat)
         Me.Controls.Add(Me.lbl_status_response)
@@ -519,4 +541,6 @@ Partial Class Form1
     Friend WithEvents pct_box_tuwat As PictureBox
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents btn_userkey_change As Button
+    Friend WithEvents txt_moneroaddress_status As TextBox
+    Friend WithEvents lbl_xmraddress_name As Label
 End Class

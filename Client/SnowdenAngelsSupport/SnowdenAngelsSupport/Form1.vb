@@ -64,6 +64,11 @@ Public Class Form1
 
             Me.txtOutput.Text = ""
 
+            Me.lbl_hashrate_status.Text = "unknown"
+
+            Me.btn_miner_start.BackColor = Color.LightGreen
+
+
             statsFirstRun = True
 
         Else
@@ -79,6 +84,7 @@ Public Class Form1
 
             Me.lnk_minerport.Enabled = True
 
+            Me.btn_miner_start.BackColor = SystemColors.Control
 
 
 
@@ -398,6 +404,16 @@ Public Class Form1
 
         End If
 
+
+        'TODO remove these 4 lines once we turn from BETA into PRODUCTIVE
+
+        Me.chk_allowErrorTransfer.Checked = True
+        Me.chk_allowStatsTransfer.Checked = True
+        Me.chk_allowErrorTransfer.Enabled = False
+        Me.chk_allowStatsTransfer.Enabled = False
+
+
+
         Me.xmrtcpport = MinerConfig.GetFreeTcpPort()
 
         Me.lbl_xmrtcpport_status.Text = Me.xmrtcpport.ToString
@@ -490,6 +506,7 @@ Public Class Form1
         Me.Timer1.Interval = 10000
         Me.Timer1.Start()
 
+        Me.txt_moneroaddress_status.Text = MinerConfig.GetMonerWalletAddress(Me.WalletAddressInUse)
 
         Dim menuitem1 As New ToolStripMenuItem With {
             .Text = "Sto&p Funding",
@@ -552,7 +569,7 @@ Public Class Form1
 
         End If
 
-
+        Me.btn_apply_settings.BackColor = SystemColors.Control
 
 
 
@@ -561,6 +578,7 @@ Public Class Form1
     Private Function WriteSettings() As Boolean
 
         If Me.cmb_pool.Text.Length > 0 And Me.cmb_cores.Text.Length > 0 Then
+
 
             If Me.chk_allowErrorTransfer.CheckState = CheckState.Checked Then
 
@@ -735,7 +753,7 @@ Public Class Form1
 
         End If
 
-
+        Me.btn_apply_settings.BackColor = SystemColors.Control
 
     End Sub
 
@@ -952,5 +970,45 @@ Public Class Form1
 
     End Sub
 
+    Private Sub ChangeApplyButtonColor()
 
+        Me.btn_apply_settings.BackColor = Color.LightGoldenrodYellow
+
+    End Sub
+
+    Private Sub Cmb_cores_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_cores.SelectedIndexChanged
+
+        ChangeApplyButtonColor()
+
+    End Sub
+
+    Private Sub Cmb_pool_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_pool.SelectedIndexChanged
+
+        ChangeApplyButtonColor()
+
+    End Sub
+
+    Private Sub Chk_autostart_true_CheckedChanged(sender As Object, e As EventArgs) Handles chk_autostart_true.CheckedChanged
+
+        ChangeApplyButtonColor()
+
+    End Sub
+
+    Private Sub Chk_startminimized_CheckedChanged(sender As Object, e As EventArgs) Handles chk_startminimized.CheckedChanged
+
+        ChangeApplyButtonColor()
+
+    End Sub
+
+    Private Sub Chk_allowErrorTransfer_CheckedChanged(sender As Object, e As EventArgs) Handles chk_allowErrorTransfer.CheckedChanged
+
+        ChangeApplyButtonColor()
+
+    End Sub
+
+    Private Sub Chk_allowStatsTransfer_CheckedChanged(sender As Object, e As EventArgs) Handles chk_allowStatsTransfer.CheckedChanged
+
+        ChangeApplyButtonColor()
+
+    End Sub
 End Class

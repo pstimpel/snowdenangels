@@ -26,7 +26,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>0.9.2.%2a</ApplicationVersion>
+    <ApplicationVersion>0.9.3.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -148,6 +148,7 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -175,10 +176,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="800px-34c3-tuwat.png" />
-    <None Include="300px-34c3-tuwat.png" />
-    <None Include="ForTheRefugees_851_315.jpg" />
-    <None Include="ForTheRefugees_552_204.png" />
+    <None Include="Resources\800px-34c3-tuwat.png" />
+    <None Include="Resources\300px-34c3-tuwat.png" />
+    <None Include="Resources\ForTheRefugees_851_315.jpg" />
+    <None Include="Resources\ForTheRefugees_552_204.png" />
     <Content Include="SnowdenAngelsSupport.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
