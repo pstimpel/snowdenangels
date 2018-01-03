@@ -10,10 +10,12 @@
 
     <div id="container">
 
-        {if $display eq ""}
-            {include file=".tpl"}
-        {elseif $display eq ""}
-            {include file=".tpl"}
+        {if $display eq "faq"}
+            {include file="faq.tpl"}
+        {elseif $display eq "about"}
+            {include file="about.tpl"}
+        {elseif $display eq "legal"}
+            {include file="legal.tpl"}
         {else}
             {include file="main.tpl"}
         {/if}

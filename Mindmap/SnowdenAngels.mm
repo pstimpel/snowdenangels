@@ -80,13 +80,15 @@
 <font NAME="SansSerif" SIZE="16"/>
 <icon BUILTIN="button_ok"/>
 </node>
-<node COLOR="#00b439" CREATED="1514649204304" ID="ID_123659340" MODIFIED="1514649222433" TEXT="Should explain the project, goals, and people behind">
+<node COLOR="#00b439" CREATED="1514649204304" ID="ID_123659340" MODIFIED="1515023095539" TEXT="Should explain the project, goals, and people behind">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_ok"/>
 </node>
-<node COLOR="#00b439" CREATED="1514649227435" ID="ID_56778627" MODIFIED="1514649244271" TEXT="Should offer basic support contacts for both technics and payments">
+<node COLOR="#00b439" CREATED="1514649227435" ID="ID_56778627" MODIFIED="1515023100008" TEXT="Should offer basic support contacts for both technics and payments">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_ok"/>
 </node>
 </node>
 <node COLOR="#0033ff" CREATED="1514649262059" ID="ID_1195678914" MODIFIED="1514654912963" POSITION="right" TEXT="Github">

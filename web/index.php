@@ -28,9 +28,15 @@ switch($action) {
 
 
 switch($_GET['page']) {
-
-    case "me":
-        $display="me";
+    
+    case "about":
+        $display="about";
+        break;
+    case "faq":
+        $display="faq";
+        break;
+    case "legal":
+        $display="legal";
         break;
     default:
         $display="main";

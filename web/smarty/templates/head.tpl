@@ -10,17 +10,27 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 
-    <meta property="og:title" content="Snowden's Guardian Angels - Support @4TheRefugees" />
+    <meta property="og:title" content="Snowden's Guardian Angels - Support ForTheRefugees.com" />
+    <meta property="og:type" content="website" />
+
     <meta property="og:url" content="https://RedZoneAction.org/sgasupport/" />
-    <meta property="og:image" content="https://redzoneaction.org/sgasupport/...img" />
-    <meta property="og:description" content="" />
+    <meta property="og:image" content="https://redzoneaction.org/sgasupport/images/socialv2.png" />
+    <meta property="og:description" content="Join me in Helping Snowden's Guardian Angels, and share a little of your CPU power. Learn more at bit.ly/SnowdenAngels #tuwat" />
+    <meta property="fb:admins" content="100000629949351"/>
+
+    <meta name="twitter:card" content="https://redzoneaction.org/sgasupport/images/socialv2.png" />
+    <meta name="twitter:site" content="@pjotr72" />
+    <meta name="twitter:title" content="Snowden's Guardian Angels - Support ForTheRefugees.com" />
+    <meta name="twitter:description" content="Join me in Helping Snowden's Guardian Angels, and share a little of your CPU power. Learn more at bit.ly/SnowdenAngels #tuwat" />
+    <meta name="twitter:image" content="https://redzoneaction.org/sgasupport/images/socialv2.png" />
+    <meta name="twitter:domain" content="redzoneaction.org" />
 
     <meta http-equiv="pragma" content="no-cache"/>
     <meta http-equiv="expires" content="0"/>
     <meta name="revisit-after" content="15 days"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="description" content=""/>
-    <meta name="keywords" content=""/>
+    <meta name="description" content="Join me in Helping Snowden's Guardian Angels, and share a little of your CPU power. ForTheRefugees.com #tuwat"/>
+    <meta name="keywords" content="Snowden, Guardian Angels, Refugees, ForTheRefugees, For the refugees, Hashpower, Hashrate, Monero, #tuwat"/>
     <meta name="author" content="Pete"/>
     <meta name="robots" content="index,follow"/>
     <meta name="Rating" content="General"/>
@@ -32,7 +42,7 @@
 
     <link rel="apple-touch-icon" href="https://RedZoneAction.org/sgasupport/favicon.png"/>
 
-    <title>Hello, world!</title>
+    <title>Snowden's Guardian Angels - Support ForTheRefugees.com</title>
 
     <link href="css/font-awesome.min.css" rel="stylesheet">
 
@@ -52,6 +62,17 @@
     <link href="css/sga.css?ts={$cachets}" rel="stylesheet">
 
     <script src="js/jquery-3.2.1.min.js" ></script>
+
+    <script type="text/javascript">
+        window.cookieconsent_options = {
+            "message": "This website uses cookies to ensure you get the best experience on our website",
+            "dismiss": "Got it!",
+            "learnMore": "More info",
+            "link": "?page=legal",
+            "theme": "light-top"
+        };
+    </script>
+    <script type="text/javascript" src="js/cookieconsent.latest.min.js"></script>
 
 </head>
 

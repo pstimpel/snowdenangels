@@ -12,23 +12,38 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-
+                <a class="nav-link" href="?" title="Home"><b class="fa fa-home" style="font-size: 40px;"></b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="?page=about" title="About"><b class="fa fa-info" style="font-size: 40px;"></b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://github.com/pstimpel/snowdenangels/tree/master/release" target="_blank" title="Download"><b class="fa fa-download" style="font-size: 40px;"></b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="?page=faq" title="FAQ"><b class="fa fa-question" style="font-size: 40px;"></b></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="">A</a>
+                <a class="nav-link" href="?page=legal" title="Legal"><b class="fa fa-legal" style="font-size: 40px;"></b></a>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link" href="">B</a>
+                <a class="nav-link" title="Share" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fredzoneaction.org%2Fsgasupport" target="_blank" ><b class="fa fa-facebook-square" style="font-size: 40px;"></b></a>
             </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="?page=home" role="button" aria-haspopup="true" aria-expanded="false">C</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="">CA</a>
-
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" title="Share" href="https://plus.google.com/share?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport" target="_blank" ><b class="fa fa-google-plus-square" style="font-size: 40px;"></b></a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" title="Share" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport" target="_blank" ><b class="fa fa-twitter-square" style="font-size: 40px;"></b></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="https://fortherefugees.com/" target="_blank" title="ForTheRefugees.com" style="font-size: 25px;">https://fortherefugees.com</a>
+            </li>
+
 
         </ul>
 
