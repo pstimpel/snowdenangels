@@ -8,6 +8,8 @@
                 <th>&nbsp;</th>
                 <th>Hashrate/s</th>
                 <th>Hashrate sum</th>
+                <th>XMR</th>
+                <th>USD</th>
                 <th>Computers</th>
                 <th>Users</th>
             </tr>
@@ -17,6 +19,8 @@
                 <td><b>Total</b></td>
                 <td>{$summaries.hashRatePerSecondSummaryTotal}</td>
                 <td>{$summaries.hashRateSummaryTotal}</td>
+                <td>{$summaries.sumXMRTotal}</td>
+                <td>{$summaries.sumUSDTotal}</td>
                 <td>{$summaries.uniqueComputersTotal}</td>
                 <td>{$summaries.uniqueUsersTotal}</td>
             </tr>
@@ -24,6 +28,8 @@
                 <td><b>Last 24h</b></td>
                 <td>{$summaries.hashRatePerSecondSummaryLast}</td>
                 <td>{$summaries.hashRateSummaryLast}</td>
+                <td>{$summaries.sumXMRLast}</td>
+                <td>{$summaries.sumUSDLast}</td>
                 <td>{$summaries.uniqueComputersLast}</td>
                 <td>{$summaries.uniqueUsersLast}</td>
             </tr>
@@ -54,7 +60,7 @@
             ]);
 
             var options = {
-                title: 'Last 30 days',
+                title: 'Last 30 days (refresh nightly)',
                 curveType: 'function',
                 colors: ['#000000','#FF0000','#00FF00','#0000FF']
             };
@@ -91,7 +97,7 @@
             ]);
 
             var options = {
-                title: 'Since the very beginning',
+                title: 'Since the very beginning (refresh nightly)',
                 curveType: 'function',
                 colors: ['#000000','#FF0000','#00FF00','#0000FF']
             };

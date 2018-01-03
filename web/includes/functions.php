@@ -96,6 +96,71 @@ function insertError($postdata) {
     return false;
 }
 
+function getMarketData() {
+
+    //print_r($array);
+
+    $XMRMarket=array("XMR2BTC"=>0, "BTC2USD"=>0);
+
+    $XMRMarketget=false;
+    if($_SERVER["HTTP_HOST"] != "127.0.0.1") {
+
+        $memcache = new Memcached;
+        $memcache->addServers(array(array("127.0.0.1", 11211)));
+        $XMRMarketget = $memcache->get("SGAXMRMarket");
+
+    }
+    if($XMRMarketget===false) {
+
+
+
+        $homepage = file_get_contents('https://blockchain.info/de/ticker');
+        $array=json_decode($homepage, true);
+
+        $rateBtcInUsd=$array["USD"]["last"];
+
+
+
+
+        $homepage = file_get_contents('https://bittrex.com/api/v1.1/public/getmarkets');
+        $array=json_decode($homepage, true);
+
+
+
+
+        $rateXmrInBtc=0;
+
+
+        foreach ($array['result'] as $item) {
+            if($item['MarketCurrency']=="XMR" && $item['BaseCurrency']=="BTC") {
+                $rateXmrInBtc=$item['MinTradeSize'];
+            }
+
+        }
+
+        $XMR1InBTC = $rateXmrInBtc;
+
+        $XMR2USD = $XMR1InBTC * $rateBtcInUsd;
+
+
+        $HashesPerXMR = (120000 * 86400);
+
+        $XMRMarket=array("XMR2BTC"=>$rateXmrInBtc, "BTC2USD"=>$rateBtcInUsd, "XMR2USD"=> $XMR2USD, "HashesPerXMR"=>$HashesPerXMR);
+
+
+        if($_SERVER["HTTP_HOST"] != "127.0.0.1") {
+            $memcache->set("SGAXMRMarket", $XMRMarket, 600);
+        }
+
+        return $XMRMarket;
+
+    } else {
+        return $XMRMarketget;
+    }
+
+
+}
+
 function getSummaries() {
 
     $countscache=false;
@@ -119,6 +184,9 @@ function getSummaries() {
         $uniqueUsersTotal = getUniqueUsersCount(false);
         $uniqueUsersLast = getUniqueUsersCount(true);
 
+        $market = getMarketData();
+
+
         $countscache=array(
             "hashRatePerSecondSummaryTotal"=>$hashRatePerSecondSummaryTotal,
             "hashRatePerSecondSummaryLast"=>$hashRatePerSecondSummaryLast,
@@ -127,7 +195,11 @@ function getSummaries() {
             "uniqueComputersTotal"=>$uniqueComputersTotal,
             "uniqueComputersLast"=>$uniqueComputersLast,
             "uniqueUsersTotal"=>$uniqueUsersTotal,
-            "uniqueUsersLast"=>$uniqueUsersLast
+            "uniqueUsersLast"=>$uniqueUsersLast,
+            "sumXMRTotal"=>round($hashRateSummaryTotal/$market['HashesPerXMR'],8),
+            "sumXMRLast"=>round($hashRateSummaryLast/$market['HashesPerXMR'],8),
+            "sumUSDTotal"=>round(($hashRateSummaryTotal/$market['HashesPerXMR'])*$market['XMR2USD'],2),
+            "sumUSDLast"=>round(($hashRateSummaryLast/$market['HashesPerXMR'])*$market['XMR2USD'],2)
         );
         if($_SERVER["HTTP_HOST"] != "127.0.0.1") {
             $memcache->set("SGAScounters", $countscache, 60);
