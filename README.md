@@ -28,7 +28,6 @@ This project relies in parts on xmr-stak, a mining software written by fireice-u
 
 Current status: **early beta**
 
-Most important things to do:
-* find a way to supress warnings on starting the miner
 
-**Attention: right now there is no Monero address available from 4TheRefugees. This is the reason one of my addresses is in place during the beta. As soon as I am receiving an official Monero address from 4TheRefugees, I will change this.**
+
+
