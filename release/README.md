@@ -23,6 +23,6 @@ To update your installation, just download the latest setup-package, and run it 
 
 # Is it safe to ignore the security warnings during installation?
 
-We cannot answer this for you, and we are as foreign from your point of view as anybody else. However, all included components were checked with the latest AV scanners, and from our point of view they are no risk for you or your computer. Since this whole thing is about create fundings for Snowden's Guardian Angels, we saved the money to purchase expensive certificates just to sign our little piece of software. Sorry, if this invconvinient for you!
+We cannot answer this for you, and we are as foreign from your point of view as anybody else when it comes to installations of software. However, all included components were checked with the latest AV scanners, and from our point of view it is no risk for you or your computer. Since this whole thing is about creating funds for Snowden's Guardian Angels, we saved the money to purchase expensive certificates just to sign our little piece of software. Sorry, if this is invconvinient for you!
 
 
