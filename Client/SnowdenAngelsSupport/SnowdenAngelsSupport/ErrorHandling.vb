@@ -75,7 +75,7 @@ Public Class ErrorHandling
             content = content & ", "
             content = content & """error"": """ & errormessage.Message.Replace(vbCrLf, " ").Replace("\", "\\") & """"
             content = content & ", "
-            content = content & """stacktrace"": """ & errormessage.StackTrace.Replace(vbCrLf, " ").Replace("\", "\\") & """"
+            content = content & """stacktrace"": """ & errormessage.StackTrace.Replace(vbCrLf, " ").Replace("\", "\\") & " " & errormessage.GetBaseException.ToString().Replace(vbCrLf, " ").Replace("\", "\\") & """"
             content = content & ", "
             content = content & """version"": """ & Assembly.GetExecutingAssembly().GetName().Version.ToString & """"
             content = content & " } "

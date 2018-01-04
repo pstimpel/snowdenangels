@@ -158,9 +158,15 @@ Module XMRStakParser
 
             Else
 
-                    Return ""
+                Return ""
 
             End If
+
+        Catch exa As Net.WebException
+
+            ' Ignore these exceptions since they happen if the port is not ready to use yet
+
+            Return ""
 
         Catch ex As Exception
 

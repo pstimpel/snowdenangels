@@ -56,9 +56,8 @@ Public Class Form1
             Me.btn_miner_start.Enabled = True
             Me.btn_miner_stop.Enabled = False
 
-            Me.lbl_status_response.Text = "Funding stopped"
-            Me.lbl_status_response.BackColor = Color.Red
-            Me.lbl_status_response.ForeColor = Color.White
+            Me.pct_trafficlight.BackgroundImage = My.Resources.ResourceManager.GetObject("traffic_red")
+
 
             Me.lnk_minerport.Enabled = False
 
@@ -82,9 +81,7 @@ Public Class Form1
             Me.btn_miner_start.Enabled = False
             Me.btn_miner_stop.Enabled = True
 
-            Me.lbl_status_response.Text = "Funding started"
-            Me.lbl_status_response.BackColor = Color.LightGreen
-            Me.lbl_status_response.ForeColor = Color.Black
+            Me.pct_trafficlight.BackgroundImage = My.Resources.ResourceManager.GetObject("traffic_green")
 
             Me.lnk_minerport.Enabled = True
 
@@ -612,14 +609,14 @@ Public Class Form1
 
         If Updates.QueryUpdate = True Then
 
-            Me.lnk_update.Visible = True
-            Me.lnk_update.Links.Add(0, ("https://github.com/pstimpel/snowdenangels/blob/master/release/").Length, "https://github.com/pstimpel/snowdenangels/blob/master/release/")
-            Me.lnk_update.Enabled = True
+            Me.pct_update.Visible = True
+
+            Dim tt As New ToolTip()
+            tt.SetToolTip(Me.pct_update, "There are updates available, please click!")
 
         Else
 
-            Me.lnk_update.Visible = False
-            Me.lnk_update.Enabled = False
+            Me.pct_update.Visible = True
 
             If Me.startminimized = True Then
 
@@ -923,12 +920,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Lnk_update_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnk_update.LinkClicked
-
-        System.Diagnostics.Process.Start(e.Link.LinkData.ToString())
-
-    End Sub
-
     Private Sub Lnk_minerport_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnk_minerport.LinkClicked
 
         System.Diagnostics.Process.Start(e.Link.LinkData.ToString())
@@ -1142,6 +1133,13 @@ Public Class Form1
             link = link & "?key=" & Me.userkey
         End If
         System.Diagnostics.Process.Start(link)
+
+    End Sub
+
+    Private Sub Pct_update_Click(sender As Object, e As EventArgs) Handles pct_update.Click
+
+        System.Diagnostics.Process.Start("https://github.com/pstimpel/snowdenangels/blob/master/release/")
+
 
     End Sub
 End Class

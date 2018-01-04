@@ -15,7 +15,14 @@
 
             Else
 
-                My.Computer.Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run", True).DeleteValue(Application.ProductName)
+                Try
+
+                    My.Computer.Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run", True).DeleteValue(Application.ProductName)
+
+                Catch exa As Exception
+
+                    ' we are interested in errors telling the object does not exist, since we want to delete it anyways..
+                End Try
 
             End If
 
@@ -111,7 +118,7 @@
 
             If Not Registry.KeyExistsUAC(key) Then
 
-                My.Computer.Registry.LocalMachine.CreateSubKey(regPathUAC & "/" & key)
+                My.Computer.Registry.LocalMachine.CreateSubKey(regPathUAC & "\" & key)
 
             End If
 
@@ -210,7 +217,7 @@
 
             If Not Registry.KeyExists(key) Then
 
-                My.Computer.Registry.LocalMachine.CreateSubKey(regPath & "/" & key)
+                My.Computer.Registry.LocalMachine.CreateSubKey(regPath & "\" & key)
 
             End If
 
