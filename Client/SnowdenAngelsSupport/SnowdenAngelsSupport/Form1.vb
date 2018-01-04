@@ -4,8 +4,6 @@ Imports System.Reflection
 Imports System.Security.Cryptography
 
 Public Class Form1
-    'TODO create "Share to SocialNetwork" stuff so the users could brag with something
-
 
     Public configured As Boolean
     Public cores As Int16
@@ -32,11 +30,13 @@ Public Class Form1
 #If DEBUG Then
     'Public errorcollector As String = "http://127.0.0.1/sgasupport/errorhandler.php"
     'Public statscollector As String = "http://127.0.0.1/sgasupport/statshandler.php"
+    Public link_SharerEncoded As String = "https%3A%2F%2Fredzoneaction.org%2Fsgasupport%2F%3Fkey%3D"
     Public errorcollector As String = "https://redzoneaction.org/sgasupport/errorhandler.php"
     Public statscollector As String = "https://redzoneaction.org/sgasupport/statshandler.php"
     Private WalletAddressInUse As MinerConfig.XMRWalletAddress = MinerConfig.XMRWalletAddress.developer
     Private XMRStakStartupStyle as ProcessWindowStyle = ProcessWindowStyle.Normal
 #Else
+    Public link_SharerEncoded As String = "https%3A%2F%2Fredzoneaction.org%2Fsgasupport%2F%3Fkey%3D"
     Public errorcollector As String = "https://redzoneaction.org/sgasupport/errorhandler.php"
     Public statscollector As String = "https://redzoneaction.org/sgasupport/statshandler.php"
     Private WalletAddressInUse As MinerConfig.XMRWalletAddress = MinerConfig.XMRWalletAddress.ForTheRefugees
@@ -71,7 +71,11 @@ Public Class Form1
 
             statsFirstRun = True
 
+            Me.lbl_turnfundingontoseestats.Visible = True
+
         Else
+
+            Me.lbl_turnfundingontoseestats.Visible = False
 
             minerRuns = True
 
@@ -141,9 +145,17 @@ Public Class Form1
 
         End If
 
+        If timercounter = 1 Then
+
+            CreateFundingStatsDisplay()
+
+        End If
+
         If timercounter = 5 Then
 
             ErrorHandling.TransferErrors()
+
+
 
         End If
 
@@ -156,6 +168,54 @@ Public Class Form1
         End If
 
     End Sub
+
+    Private Sub CreateFundingStatsDisplay()
+
+        Try
+            If minerRuns = True Then
+
+                Dim personalStats As New XMLData()
+
+                If Me.allowStatsTransfer = True Then
+
+                    personalStats = XMLStats.ReadXml(XMLStatsType.personal)
+
+                    Me.lbl_stats_personal_computers.Text = personalStats.key_uniqueComputersTotal.ToString
+                    Me.lbl_stats_personal_hashes.Text = personalStats.key_hashRateSummaryTotal.ToString
+                    Me.lbl_stats_personal_hashrateavg.Text = personalStats.key_hashRatePerSecondSummaryTotal.ToString
+                    Me.lbl_stats_personal_usd.Text = personalStats.key_sumUSDTotal.ToString
+                    Me.lbl_stats_personal_users.Text = personalStats.key_uniqueUsersTotal.ToString
+                    Me.lbl_stats_personal_xmr.Text = personalStats.key_sumXMRTotal.ToString
+
+                Else
+
+                    personalStats.key_key = "none"
+
+                End If
+
+                Dim overallStats As New XMLData()
+                overallStats = XMLStats.ReadXml(XMLStatsType.overall)
+
+                Me.lbl_stats_allusers_computers.Text = overallStats.key_uniqueComputersTotal.ToString
+                Me.lbl_stats_allusers_hashes.Text = overallStats.key_hashRateSummaryTotal.ToString
+                Me.lbl_stats_allusers_hashrateavg.Text = overallStats.key_hashRatePerSecondSummaryTotal.ToString
+                Me.lbl_stats_allusers_usd.Text = overallStats.key_sumUSDTotal.ToString
+                Me.lbl_stats_allusers_users.Text = overallStats.key_uniqueUsersTotal.ToString
+                Me.lbl_stats_allusers_xmr.Text = overallStats.key_sumXMRTotal.ToString
+
+            End If
+
+        Catch exa As Exception
+
+            Dim ErrorHandler As New ErrorHandling With {
+                            .ErrorMessage = exa
+            }
+
+        End Try
+
+    End Sub
+
+
 
     Private Sub TimerEventProcessor(ByVal myObject As Object, ByVal myEventArgs As EventArgs) Handles Timer1.Tick
 
@@ -170,8 +230,8 @@ Public Class Form1
         Me.cores = 1
         Me.configured = False
         Me.startminimized = False
-        Me.allowErrorTransfer = True
-        Me.allowStatsTransfer = True
+        Me.allowErrorTransfer = False
+        Me.allowStatsTransfer = False
 
         Dim configCount As Integer = 0
         Dim configCountGoal As Integer = 7
@@ -373,6 +433,8 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
 
+        Me.lbl_turnfundingontoseestats.Visible = True
+
         If WalletAddressInUse = MinerConfig.XMRWalletAddress.developer Then
 
             MsgBox("Developer address in use", vbCritical, "ATTENTION!")
@@ -421,6 +483,9 @@ Public Class Form1
         Me.lnk_minerport.Text = "Local Mining Stats"
         Me.lnk_minerport.Links.Add(0, ("http://127.0.0.1:" & Me.xmrtcpport.ToString & "/").Length, "http://127.0.0.1:" & Me.xmrtcpport.ToString & "/")
         Me.lnk_minerport.Enabled = False
+
+        Me.lnk_helponline.Links.Add(0, ("https://redzoneaction.org/sgasupport/?page=faq").Length, "https://redzoneaction.org/sgasupport/?page=faq")
+        Me.lnk_helponline.Enabled = False
 
         Me.cmb_pool.Items.Clear()
 
@@ -583,20 +648,24 @@ Public Class Form1
             If Me.chk_allowErrorTransfer.CheckState = CheckState.Checked Then
 
                 Registry.SetValue("allowerrortransfer", "on")
+                Me.allowErrorTransfer = True
 
             Else
 
                 Registry.SetValue("allowerrortransfer", "off")
+                Me.allowErrorTransfer = False
 
             End If
 
             If Me.chk_allowStatsTransfer.CheckState = CheckState.Checked Then
 
                 Registry.SetValue("allowstatstransfer", "on")
+                Me.allowStatsTransfer = True
 
             Else
 
                 Registry.SetValue("allowstatstransfer", "off")
+                Me.allowStatsTransfer = False
 
             End If
 
@@ -604,9 +673,17 @@ Public Class Form1
 
                 Registry.SetValue("autostart", "on")
 
+                Registry.SetAutostart(True)
+
+                Me.autostart = True
+
             Else
 
                 Registry.SetValue("autostart", "off")
+
+                Registry.SetAutostart(False)
+
+                Me.autostart = False
 
             End If
 
@@ -614,17 +691,24 @@ Public Class Form1
 
                 Registry.SetValue("startminimized", "on")
 
+                Me.startminimized = True
+
             Else
 
                 Registry.SetValue("startminimized", "off")
 
+                Me.startminimized = False
+
             End If
 
             Registry.SetValue("pool", Me.cmb_pool.Text.ToString)
+            Me.pool = Me.cmb_pool.Text.ToString
 
             Registry.SetValue("cores", Me.cmb_cores.Text.ToString)
+            Me.cores = Convert.ToInt16(Me.cmb_cores.Text.ToString)
 
             Registry.SetValue("xmrpath", Me.xmrpath)
+
 
             Registry.SetValueUAC(Application.StartupPath & "\xmr-stak.exe", "RunAsInvoker")
 
@@ -833,6 +917,12 @@ Public Class Form1
 
     End Sub
 
+    Private Sub Lnk_helponline_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnk_helponline.LinkClicked
+
+        System.Diagnostics.Process.Start(e.Link.LinkData.ToString())
+
+    End Sub
+
     Private Sub Lnk_update_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnk_update.LinkClicked
 
         System.Diagnostics.Process.Start(e.Link.LinkData.ToString())
@@ -1009,6 +1099,49 @@ Public Class Form1
     Private Sub Chk_allowStatsTransfer_CheckedChanged(sender As Object, e As EventArgs) Handles chk_allowStatsTransfer.CheckedChanged
 
         ChangeApplyButtonColor()
+
+    End Sub
+
+    Private Function CreateShareLink() As String
+
+        If Me.allowStatsTransfer = True Then
+            Return Me.link_SharerEncoded & Me.userkey
+        Else
+            Return Me.link_SharerEncoded
+        End If
+
+
+    End Function
+
+    Private Sub Pct_facebook_Click(sender As Object, e As EventArgs) Handles pct_facebook.Click
+
+        Dim link As String = "https://www.facebook.com/sharer.php?u=" & CreateShareLink()
+        System.Diagnostics.Process.Start(link)
+
+
+    End Sub
+
+    Private Sub Pct_googleplus_Click(sender As Object, e As EventArgs) Handles pct_googleplus.Click
+
+        Dim link As String = "https://plus.google.com/share?url=" & CreateShareLink()
+        System.Diagnostics.Process.Start(link)
+
+    End Sub
+
+    Private Sub Pct_twitter_Click(sender As Object, e As EventArgs) Handles pct_twitter.Click
+
+        Dim link As String = "https://twitter.com/intent/tweet?url=" & CreateShareLink()
+        System.Diagnostics.Process.Start(link)
+
+    End Sub
+
+    Private Sub Lnk_moreinfo_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnk_moreinfo.LinkClicked
+
+        Dim link As String = " https://redzoneaction.org/sgasupport/"
+        If Me.allowStatsTransfer = True Then
+            link = link & "?key=" & Me.userkey
+        End If
+        System.Diagnostics.Process.Start(link)
 
     End Sub
 End Class

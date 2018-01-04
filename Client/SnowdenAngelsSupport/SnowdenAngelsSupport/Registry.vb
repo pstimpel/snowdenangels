@@ -4,6 +4,35 @@
     Private Const regPathUAC As String = "HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"
 
     'TODO: make this more nice, by determining regPath dynamic instead of having different sets of similar functions
+
+    Public Function SetAutostart(enabled As Boolean) As Boolean
+
+        Try
+
+            If enabled = True Then
+
+                My.Computer.Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run", True).SetValue(Application.ProductName, Application.ExecutablePath)
+
+            Else
+
+                My.Computer.Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run", True).DeleteValue(Application.ProductName)
+
+            End If
+
+            Return True
+
+        Catch ex As Exception
+
+            Dim ErrorHandler As New ErrorHandling With {
+                .ErrorMessage = ex
+            }
+
+            Return False
+
+        End Try
+
+    End Function
+
     Public Function KeyExistsUAC(key As String) As Boolean
 
         Try
