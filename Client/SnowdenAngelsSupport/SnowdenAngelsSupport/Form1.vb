@@ -616,7 +616,7 @@ Public Class Form1
 
         Else
 
-            Me.pct_update.Visible = True
+            Me.pct_update.Visible = False
 
             If Me.startminimized = True Then
 
