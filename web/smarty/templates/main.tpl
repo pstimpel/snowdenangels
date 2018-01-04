@@ -2,6 +2,51 @@
 <h3>Generating funds and awareness!</h3>
 <h4>Summaries</h4>
 
+{if sizeof($personal)!=0}
+
+    <div class="row flex-row" >
+        <div class="col-lg-12 col-sm-12">
+            <p>Stats for user <b>{$personal.key}</b></p>
+            <table class="table table-responsive">
+                <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Hashrate/s</th>
+                    <th>Hashrate sum</th>
+                    <th>XMR</th>
+                    <th>USD</th>
+                    <th>Computers</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><b>est. Total</b></td>
+                    <td>{$personal.hashRatePerSecondSummaryTotal}</td>
+                    <td>{$personal.hashRateSummaryTotal}</td>
+                    <td>{$personal.sumXMRTotal}</td>
+                    <td>{$personal.sumUSDTotal}</td>
+                    <td>{$personal.uniqueComputersTotal}</td>
+
+                </tr>
+                <tr>
+                    <td><b>est. Last 24h</b></td>
+                    <td>{$personal.hashRatePerSecondSummaryLast}</td>
+                    <td>{$personal.hashRateSummaryLast}</td>
+                    <td>{$personal.sumXMRLast}</td>
+                    <td>{$personal.sumUSDLast}</td>
+                    <td>{$personal.uniqueComputersLast}</td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+{/if}
+
+
 <div class="row flex-row" >
     <div class="col-lg-12 col-sm-12">
         <table class="table table-responsive">
@@ -18,7 +63,7 @@
             </thead>
             <tbody>
             <tr>
-                <td><b>Total</b></td>
+                <td><b>est. Total</b></td>
                 <td>{$summaries.hashRatePerSecondSummaryTotal}</td>
                 <td>{$summaries.hashRateSummaryTotal}</td>
                 <td>{$summaries.sumXMRTotal}</td>
@@ -27,7 +72,7 @@
                 <td>{$summaries.uniqueUsersTotal}</td>
             </tr>
             <tr>
-                <td><b>Last 24h</b></td>
+                <td><b>est. Last 24h</b></td>
                 <td>{$summaries.hashRatePerSecondSummaryLast}</td>
                 <td>{$summaries.hashRateSummaryLast}</td>
                 <td>{$summaries.sumXMRLast}</td>

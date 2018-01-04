@@ -12,9 +12,9 @@
     </div>
     <div class="col-sm-12 col-lg-3" style="vertical-align: middle;">
         <p class="text-center" style="vertical-align: middle;">Follow us on
-        <a style="vertical-align: middle" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fredzoneaction.org%2Fsgasupport" target="_blank"><b class="fa fa-facebook-square" style="font-size: 30px; vertical-align: middle;"></b></a>
-            <a style="vertical-align: middle" href="https://plus.google.com/share?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport" target="_blank"><b class="fa fa-google-plus-square" style="font-size: 30px; vertical-align: middle;"></b></a>
-            <a style="vertical-align: middle" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport" target="_blank"><b class="fa fa-twitter-square" style="font-size: 30px; vertical-align: middle;"></b></a>
+        <a style="vertical-align: middle" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fredzoneaction.org%2Fsgasupport%2F{$share_userkey}" target="_blank"><b class="fa fa-facebook-square" style="font-size: 30px; vertical-align: middle;"></b></a>
+            <a style="vertical-align: middle" href="https://plus.google.com/share?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport%2F{$share_userkey}" target="_blank"><b class="fa fa-google-plus-square" style="font-size: 30px; vertical-align: middle;"></b></a>
+            <a style="vertical-align: middle" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport%2F{$share_userkey}" target="_blank"><b class="fa fa-twitter-square" style="font-size: 30px; vertical-align: middle;"></b></a>
         </p>
     </div>
 </div>
@@ -27,9 +27,9 @@
         &nbsp;<a href="https://github.com/pstimpel/snowdenangels/tree/master/release" target="_blank" title="Download"><b class="fa fa-download" style="font-size: 30px;"></b></a>
         &nbsp;<a href="?page=faq" title="FAQ"><b class="fa fa-question" style="font-size: 30px;"></b></a>
         &nbsp;<a href="?page=legal" title="Legal"><b class="fa fa-legal" style="font-size: 30px;"></b></a>
-        &nbsp;<a title="Share" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fredzoneaction.org%2Fsgasupport" target="_blank" ><b class="fa fa-facebook-square" style="font-size: 30px;"></b></a>
-        &nbsp;<a title="Share" href="https://plus.google.com/share?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport" target="_blank" ><b class="fa fa-google-plus-square" style="font-size: 30px;"></b></a>
-        &nbsp;<a title="Share" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport" target="_blank" ><b class="fa fa-twitter-square" style="font-size: 30px;"></b></a>
+            &nbsp;<a title="Share" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fredzoneaction.org%2Fsgasupport%2F{$share_userkey}" target="_blank" ><b class="fa fa-facebook-square" style="font-size: 30px;"></b></a>
+        &nbsp;<a title="Share" href="https://plus.google.com/share?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport%2F{$share_userkey}" target="_blank" ><b class="fa fa-google-plus-square" style="font-size: 30px;"></b></a>
+        &nbsp;<a title="Share" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport%2F{$share_userkey}" target="_blank" ><b class="fa fa-twitter-square" style="font-size: 30px;"></b></a>
         &nbsp;<a href="https://fortherefugees.com/" target="_blank" title="ForTheRefugees.com" style="font-size: 20px;">https://fortherefugees.com</a>
 
     </div>

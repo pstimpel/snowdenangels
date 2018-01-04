@@ -29,15 +29,15 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" title="Share" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fredzoneaction.org%2Fsgasupport" target="_blank" ><b class="fa fa-facebook-square" style="font-size: 40px;"></b></a>
+                <a class="nav-link" title="Share" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fredzoneaction.org%2Fsgasupport%2F{$share_userkey}" target="_blank" ><b class="fa fa-facebook-square" style="font-size: 40px;"></b></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" title="Share" href="https://plus.google.com/share?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport" target="_blank" ><b class="fa fa-google-plus-square" style="font-size: 40px;"></b></a>
+                <a class="nav-link" title="Share" href="https://plus.google.com/share?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport%2F{$share_userkey}" target="_blank" ><b class="fa fa-google-plus-square" style="font-size: 40px;"></b></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" title="Share" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport" target="_blank" ><b class="fa fa-twitter-square" style="font-size: 40px;"></b></a>
+                <a class="nav-link" title="Share" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport%2F{$share_userkey}" target="_blank" ><b class="fa fa-twitter-square" style="font-size: 40px;"></b></a>
             </li>
 
             <li class="nav-item">

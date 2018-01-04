@@ -1,32 +1,8 @@
 <?php
-/**
- * Copyright (c) 2018. Peters Webcorner, All rights reserved if not mentioned different!
- */
 
 function insertStats($postdata) {
     global $db;
-/*
-        content = content & " [ "
-        content = content & " { "
 
-        content = content & """userkey"": """ & c_statscollection.s_userkey & """"
-        content = content & ", "
-        content = content & """computerkey"": """ & c_statscollection.s_computerkey & """"
-        content = content & ", "
-        content = content & """sessionstart"": """ & Math.Round((c_statscollection.d_sessionstart.ToUniversalTime - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds, 0).ToString & """"
-        content = content & ", "
-        content = content & """sessionend"": """ & Math.Round((c_statscollection.d_lastupdate.ToUniversalTime - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds, 0).ToString & """"
-        content = content & ", "
-        content = content & """hashes"": " & c_statscollection.i_hashessummary.ToString
-        content = content & " } "
-        content = content & " ] "
-
- 'stats_persession_userkey
-        'stats_persession_sessionstart
-        'stats_persession_sessionend
-        'stats_persession_hashes
-        'stats_persession_computerkey
-*/
     $json = json_decode($postdata, true);
     
     foreach($json as $item) {
@@ -161,33 +137,40 @@ function getMarketData() {
 
 }
 
-function getSummaries() {
+function getSummaries($mykey='') {
 
+    $memcacheobject='SGAScounters';
+    $memcachecachetime=300;
+    if($mykey!='') {
+        $memcacheobject='SGAScounters_'.$mykey;
+        $memcachecachetime=300;
+    }
     $countscache=false;
     if($_SERVER["HTTP_HOST"] != "127.0.0.1") {
 
         $memcache = new Memcached;
         $memcache->addServers(array(array("127.0.0.1", 11211)));
-        $countscache = $memcache->get("SGAScounters");
+        $countscache = $memcache->get($memcacheobject);
 
     }
     if($countscache===false) {
-        $hashRatePerSecondSummaryTotal = getHashratePerSecondSummary(false);
-        $hashRatePerSecondSummaryLast = getHashratePerSecondSummary(true);
+        $hashRatePerSecondSummaryTotal = getHashratePerSecondSummary(false, $mykey);
+        $hashRatePerSecondSummaryLast = getHashratePerSecondSummary(true, $mykey);
 
-        $hashRateSummaryTotal=getHashrateSummary(false);
-        $hashRateSummaryLast=getHashrateSummary(true);
+        $hashRateSummaryTotal=getHashrateSummary(false, $mykey);
+        $hashRateSummaryLast=getHashrateSummary(true, $mykey);
 
-        $uniqueComputersTotal=getUniqueComputersCount(false);
-        $uniqueComputersLast=getUniqueComputersCount(true);
+        $uniqueComputersTotal=getUniqueComputersCount(false, $mykey);
+        $uniqueComputersLast=getUniqueComputersCount(true, $mykey);
 
-        $uniqueUsersTotal = getUniqueUsersCount(false);
-        $uniqueUsersLast = getUniqueUsersCount(true);
+        $uniqueUsersTotal = getUniqueUsersCount(false, $mykey);
+        $uniqueUsersLast = getUniqueUsersCount(true, $mykey);
 
         $market = getMarketData();
 
 
         $countscache=array(
+            "key"=>$mykey,
             "hashRatePerSecondSummaryTotal"=>$hashRatePerSecondSummaryTotal,
             "hashRatePerSecondSummaryLast"=>$hashRatePerSecondSummaryLast,
             "hashRateSummaryTotal"=>$hashRateSummaryTotal,
@@ -196,18 +179,59 @@ function getSummaries() {
             "uniqueComputersLast"=>$uniqueComputersLast,
             "uniqueUsersTotal"=>$uniqueUsersTotal,
             "uniqueUsersLast"=>$uniqueUsersLast,
-            "sumXMRTotal"=>round($hashRateSummaryTotal/$market['HashesPerXMR'],8),
-            "sumXMRLast"=>round($hashRateSummaryLast/$market['HashesPerXMR'],8),
-            "sumUSDTotal"=>round(($hashRateSummaryTotal/$market['HashesPerXMR'])*$market['XMR2USD'],2),
-            "sumUSDLast"=>round(($hashRateSummaryLast/$market['HashesPerXMR'])*$market['XMR2USD'],2)
+            "sumXMRTotal"=>sprintf('%.8f', round($hashRateSummaryTotal/$market['HashesPerXMR'],8)),
+            "sumXMRLast"=>sprintf('%.8f', round($hashRateSummaryLast/$market['HashesPerXMR'],8)),
+            "sumUSDTotal"=>sprintf('%.2f', round(($hashRateSummaryTotal/$market['HashesPerXMR'])*$market['XMR2USD'],2)),
+            "sumUSDLast"=>sprintf('%.2f', round(($hashRateSummaryLast/$market['HashesPerXMR'])*$market['XMR2USD'],2))
         );
         if($_SERVER["HTTP_HOST"] != "127.0.0.1") {
-            $memcache->set("SGAScounters", $countscache, 60);
+            $memcache->set($memcacheobject, $countscache, $memcachecachetime);
         }
     }
 
     return $countscache;
 
+}
+
+function to_xml(SimpleXMLElement $object, array $data)
+{
+    foreach ($data as $key => $value) {
+        if (is_array($value)) {
+            $new_object = $object->addChild($key);
+            to_xml($new_object, $value);
+        } else {
+            // if the key is an integer, it needs text with it to actually work.
+            if ($key == (int) $key) {
+                $key = "key_$key";
+            }
+
+            $object->addChild($key, $value);
+        }
+    }
+}
+
+function generateXML($personal=false, $mykey='') {
+
+    if($personal==false) {
+        $data=getSummaries();
+        $data['key']='none';
+
+    } else {
+        if(strlen($mykey)==64) {
+
+            $data=getSummaries($mykey);
+        } else {
+
+            $data=array();
+        }
+
+    }
+
+    $xml = new SimpleXMLElement('<data/>');
+    to_xml($xml, $data);
+
+    print $xml->asXML();
+    exit;
 }
 
 function displayMain() {
@@ -218,11 +242,46 @@ function displayMain() {
     $smarty->assign("chartdataFull",prepareChart(false));
     $smarty->assign("chartdata30d",prepareChart(true));
 
+    if(strlen($_SESSION["userkey"])==64) {
+
+        $smarty->assign("personal", getSummaries($_SESSION["userkey"]));
+    } else {
+
+        $smarty->assign("personal", array());
+    }
+
+
 }
 
-function getHashratePerSecondSummary($last24hours = false) {
+function checkKey($mykey) {
     global $db;
-    $sql = "select sum(stats_persession_hashes / (1+((DATE_PART('day', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp) * 24 + 
+    if(strlen($mykey)==64) {
+        $result = pg_prepare($db, "query",
+            "select count(*) as counter from stats_persession where stats_persession_userkey = $1 ");
+
+        $result = pg_execute($db, "query", array($mykey));
+
+        $num3 = pg_numrows($result);
+
+        if ($num3 > 0) {
+            for ($i3 = 0; $i3 < $num3; $i3++) {
+
+                $r = pg_fetch_array($result);
+
+                if ($r['counter'] > 0) {
+                    return true;
+                }
+
+            }
+        }
+    }
+    return false;
+
+}
+
+function getHashratePerSecondSummary($last24hours = false, $mykey='') {
+    global $db;
+    $sql = "select avg(stats_persession_hashes / (1+((DATE_PART('day', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp) * 24 + 
                 DATE_PART('hour', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp)) * 60 +
                 DATE_PART('minute', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp)) * 60 +
                 DATE_PART('second', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp))) as hashspersecsum 
@@ -230,7 +289,9 @@ from stats_persession where stats_persession_sessionend<>stats_persession_sessio
     if($last24hours==true) {
         $sql = $sql . " and stats_persession_sessionend > now() - INTERVAL '1 days'";
     }
-
+    if($mykey!='') {
+        $sql = $sql . " and stats_persession_userkey='" . $mykey . "'";
+    }
     $result3 = pg_query($db,$sql);
     $num3 = pg_numrows($result3);
 
@@ -244,13 +305,16 @@ from stats_persession where stats_persession_sessionend<>stats_persession_sessio
     return 0;
 }
 
-function getHashrateSummary($last24hours = false) {
+function getHashrateSummary($last24hours = false, $mykey='') {
     global $db;
-    $sql = "select sum(stats_persession_hashes) as summary  from stats_persession ";
+    $sql = "select sum(stats_persession_hashes) as summary  from stats_persession where 1=1 ";
     if($last24hours==true) {
-        $sql = $sql . " where stats_persession_sessionend > now() - INTERVAL '1 days'";
+        $sql = $sql . " and stats_persession_sessionend > now() - INTERVAL '1 days'";
     }
 
+    if($mykey!='') {
+        $sql = $sql . " and stats_persession_userkey='" . $mykey . "'";
+    }
     $result3 = pg_query($db,$sql);
 
     $num3 = pg_numrows($result3);
@@ -265,11 +329,14 @@ function getHashrateSummary($last24hours = false) {
     return 0;
 }
 
-function getUniqueComputersCount($activeonly = false) {
+function getUniqueComputersCount($activeonly = false, $mykey='') {
     global $db;
-    $sql = "select count(distinct stats_persession_computerkey) as counter  from stats_persession ";
+    $sql = "select count(distinct stats_persession_computerkey) as counter  from stats_persession where 1=1 ";
     if($activeonly==true) {
-        $sql = $sql . " where stats_persession_sessionend > now() - INTERVAL '1 days'";
+        $sql = $sql . " and stats_persession_sessionend > now() - INTERVAL '1 days'";
+    }
+    if($mykey!='') {
+        $sql = $sql . " and stats_persession_userkey='" . $mykey . "'";
     }
     $result3 = pg_query($db,$sql);
     $num3 = pg_numrows($result3);
@@ -284,11 +351,14 @@ function getUniqueComputersCount($activeonly = false) {
     return 0;
 }
 
-function getUniqueUsersCount($activeonly = false) {
+function getUniqueUsersCount($activeonly = false, $mykey='') {
     global $db;
-    $sql = "select count(distinct stats_persession_userkey) as counter  from stats_persession ";
+    $sql = "select count(distinct stats_persession_userkey) as counter  from stats_persession where 1=1 ";
     if($activeonly==true) {
-        $sql = $sql . " where stats_persession_sessionend > now() - INTERVAL '1 days'";
+        $sql = $sql . " and stats_persession_sessionend > now() - INTERVAL '1 days'";
+    }
+    if($mykey!='') {
+        $sql = $sql . " and stats_persession_userkey='" . $mykey . "'";
     }
     $result3 = pg_query($db,$sql);
     $num3 = pg_numrows($result3);

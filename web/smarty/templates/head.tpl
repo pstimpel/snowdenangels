@@ -14,15 +14,15 @@
     <meta property="og:type" content="website" />
 
     <meta property="og:url" content="https://RedZoneAction.org/sgasupport/" />
-    <meta property="og:image" content="https://redzoneaction.org/sgasupport/images/socialv2.png" />
-    <meta property="og:description" content="Join me in Helping Snowden's Guardian Angels, and share a little of your CPU power. Learn more at bit.ly/SnowdenAngels #tuwat" />
+    <meta property="og:image" content="https://redzoneaction.org/sgasupport/images/socialv3.png" />
+    <meta property="og:description" content="Join me in Helping Snowden's Guardian Angels, and share a little of your CPU power. Learn more at bit.ly/snowdenangels #tuwat" />
     <meta property="fb:admins" content="100000629949351"/>
 
-    <meta name="twitter:card" content="https://redzoneaction.org/sgasupport/images/socialv2.png" />
+    <meta name="twitter:card" content="https://redzoneaction.org/sgasupport/images/socialv3.png" />
     <meta name="twitter:site" content="@pjotr72" />
     <meta name="twitter:title" content="Snowden's Guardian Angels - Support ForTheRefugees.com" />
-    <meta name="twitter:description" content="Join me in Helping Snowden's Guardian Angels, and share a little of your CPU power. Learn more at bit.ly/SnowdenAngels #tuwat" />
-    <meta name="twitter:image" content="https://redzoneaction.org/sgasupport/images/socialv2.png" />
+    <meta name="twitter:description" content="Join me in Helping Snowden's Guardian Angels, and share a little of your CPU power. Learn more at bit.ly/snowdenangels #tuwat" />
+    <meta name="twitter:image" content="https://redzoneaction.org/sgasupport/images/socialv3.png" />
     <meta name="twitter:domain" content="redzoneaction.org" />
 
     <meta http-equiv="pragma" content="no-cache"/>
