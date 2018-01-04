@@ -1,6 +1,6 @@
 # Download
 
-https://github.com/pstimpel/snowdenangels/raw/master/release/sassetup-0.9.2.0.exe
+https://github.com/pstimpel/snowdenangels/raw/master/release/sassetup-0.9.3.0.exe
 
 # System requirements
 
