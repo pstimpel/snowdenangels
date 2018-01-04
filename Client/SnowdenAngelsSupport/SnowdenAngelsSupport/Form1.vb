@@ -40,7 +40,7 @@ Public Class Form1
     Public errorcollector As String = "https://redzoneaction.org/sgasupport/errorhandler.php"
     Public statscollector As String = "https://redzoneaction.org/sgasupport/statshandler.php"
     Private WalletAddressInUse As MinerConfig.XMRWalletAddress = MinerConfig.XMRWalletAddress.ForTheRefugees
-    Private XMRStakStartupStyle As ProcessWindowStyle = ProcessWindowStyle.Hidden
+    Private XMRStakStartupStyle As ProcessWindowStyle = ProcessWindowStyle.Minimized
 #End If
 
 
