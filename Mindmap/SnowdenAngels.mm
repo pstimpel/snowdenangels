@@ -24,13 +24,15 @@
 <node COLOR="#0033ff" CREATED="1514649051008" ID="ID_143444321" MODIFIED="1514649122637" POSITION="right" TEXT="Desktop Client">
 <edge STYLE="sharp_bezier" WIDTH="8"/>
 <font NAME="SansSerif" SIZE="18"/>
-<node COLOR="#00b439" CREATED="1514649061008" ID="ID_1400178043" MODIFIED="1514649122638" TEXT="Should show some nifty stats">
+<node COLOR="#00b439" CREATED="1514649061008" ID="ID_1400178043" MODIFIED="1515072384505" TEXT="Should show some nifty stats">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_ok"/>
 </node>
-<node COLOR="#00b439" CREATED="1514649072552" ID="ID_329484595" MODIFIED="1514649122639" TEXT="Should give opportunity to brag with the support">
+<node COLOR="#00b439" CREATED="1514649072552" ID="ID_329484595" MODIFIED="1515072388926" TEXT="Should give opportunity to brag with the support">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_ok"/>
 </node>
 <node COLOR="#00b439" CREATED="1514649089120" ID="ID_1754962058" MODIFIED="1514853185739" TEXT="Should handle updates of both xmr-stak and the client">
 <edge STYLE="bezier" WIDTH="thin"/>
@@ -109,7 +111,7 @@
 <font NAME="SansSerif" SIZE="16"/>
 <icon BUILTIN="button_ok"/>
 </node>
-<node COLOR="#00b439" CREATED="1514649351127" ID="ID_74473220" MODIFIED="1514649361642" TEXT="How much Hashrate at the moment">
+<node COLOR="#00b439" CREATED="1514649351127" ID="ID_74473220" MODIFIED="1515074031791" TEXT="How much Hashrate at the moment">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
 </node>
@@ -118,9 +120,10 @@
 <font NAME="SansSerif" SIZE="16"/>
 <icon BUILTIN="button_ok"/>
 </node>
-<node COLOR="#00b439" CREATED="1514649383110" ID="ID_1491073529" MODIFIED="1514649395460" TEXT="How many Moneros total">
+<node COLOR="#00b439" CREATED="1514649383110" ID="ID_1491073529" MODIFIED="1515072406173" TEXT="How many Moneros total">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_ok"/>
 </node>
 <node COLOR="#00b439" CREATED="1514649399724" ID="ID_153266142" MODIFIED="1514910567433" TEXT="Maybe a list of supporters, needs username inside stats">
 <edge STYLE="bezier" WIDTH="thin"/>
