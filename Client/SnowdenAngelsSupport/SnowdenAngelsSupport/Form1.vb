@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Reflection
 Imports System.Security.Cryptography
+Imports Microsoft.Win32
 
 Public Class Form1
 
@@ -25,7 +26,9 @@ Public Class Form1
 
     Private timercounter As Int16 = 0
 
-
+    Public Shared Event SessionEnding As SessionEndingEventHandler
+    Private Shared WM_QUERYENDSESSION As Integer = &H11
+    Private Shared systemShutdown As Boolean = False
 
 #If DEBUG Then
     'Public errorcollector As String = "http://127.0.0.1/sgasupport/errorhandler.php"
@@ -465,7 +468,6 @@ Public Class Form1
 
 
         'TODO remove these 4 lines once we turn from BETA into PRODUCTIVE
-
         Me.chk_allowErrorTransfer.Checked = True
         Me.chk_allowStatsTransfer.Checked = True
         Me.chk_allowErrorTransfer.Enabled = False
@@ -634,8 +636,8 @@ Public Class Form1
         Me.btn_apply_settings.BackColor = SystemColors.Control
 
 
-
     End Sub
+
 
     Private Function WriteSettings() As Boolean
 
@@ -838,57 +840,80 @@ Public Class Form1
 
     End Sub
 
+
+    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+        If m.Msg = WM_QUERYENDSESSION Then
+            'MessageBox.Show("queryendsession: this is a logoff, shutdown, or reboot")
+            systemShutdown = True
+        End If
+        ' If this is WM_QUERYENDSESSION, the closing event should be raised in the base WndProc.
+        MyBase.WndProc(m)
+    End Sub 'WndProc 
+
     Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
 
-        Dim nfresult As MsgBoxResult = MsgBox("Should we minimize to the system tray instead of closing the application?", vbYesNoCancel)
 
         Dim hideIcon As Boolean = True
 
-        If nfresult = MsgBoxResult.Yes Then
 
-            Me.WindowState = FormWindowState.Minimized
-
-            Me.Visible = False
-
-            'Me.ShowInTaskbar = False
-
-            hideIcon = False
-
-            e.Cancel() = True
-
-        ElseIf nfresult = MsgBoxResult.No Then
-            'ignore for the moment
-
-        ElseIf nfresult = MsgBoxResult.Cancel Then
-
-            e.Cancel() = True
-
-            hideIcon = False
-
-            Exit Sub
-
-        End If
+        If systemShutdown = False Then
 
 
-        If Processes.IsRunningMiner = True Then
+            Dim nfresult As MsgBoxResult = MsgBox("Should we minimize to the system tray instead of closing the application?", vbYesNoCancel)
 
-            Dim result As MsgBoxResult = MsgBox("The Funding is still active, closing as well?", MsgBoxStyle.YesNoCancel, "Funding still active")
 
-            If result = MsgBoxResult.Yes Then
+            If nfresult = MsgBoxResult.Yes Then
 
-                Processes.KillMiner()
+                Me.WindowState = FormWindowState.Minimized
 
-            ElseIf result = MsgBoxResult.No Then
-                'ok, close this
+                Me.Visible = False
 
-            ElseIf result = MsgBoxResult.Cancel Then
+                'Me.ShowInTaskbar = False
+
+                hideIcon = False
+
+                e.Cancel() = True
+
+            ElseIf nfresult = MsgBoxResult.No Then
+                'ignore for the moment
+
+            ElseIf nfresult = MsgBoxResult.Cancel Then
 
                 e.Cancel() = True
 
                 hideIcon = False
 
+                Exit Sub
 
             End If
+
+
+            If Processes.IsRunningMiner = True Then
+
+                Dim result As MsgBoxResult = MsgBox("The Funding is still active, closing as well?", MsgBoxStyle.YesNoCancel, "Funding still active")
+
+                If result = MsgBoxResult.Yes Then
+
+                    Processes.KillMiner()
+
+                ElseIf result = MsgBoxResult.No Then
+                    'ok, close this
+
+                ElseIf result = MsgBoxResult.Cancel Then
+
+                    e.Cancel() = True
+
+                    hideIcon = False
+
+
+                End If
+            End If
+
+        Else
+
+            'this is when the form is closing due Powerdown or Logoff from Windows, triggered by the session-handler
+            hideIcon = True
+
         End If
 
         'dregister the nf-icon
