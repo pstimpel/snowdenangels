@@ -99,24 +99,31 @@ Module XMRStakParser
                 subtotal = subtotal.Substring(subtotal.IndexOf("<td>") + 4, 10)
                 'is now  50.5</td><td></td><td></td></tr><tr><th>Hi
 
-                subtotal = subtotal.Substring(0, subtotal.IndexOf("</td>"))
-                subtotal = subtotal.Trim
+                Try
 
-                If subtotal.Length > 0 Then
+                    subtotal = subtotal.Substring(0, subtotal.IndexOf("</td>"))
+                    subtotal = subtotal.Trim
 
-                    If subtotal.IndexOf(".") > 0 Then
-                        subtotal = subtotal.Substring(0, subtotal.IndexOf("."))
+                    If subtotal.Length > 0 Then
+
+                        If subtotal.IndexOf(".") > 0 Then
+                            subtotal = subtotal.Substring(0, subtotal.IndexOf("."))
+                        End If
+
+                        Try
+
+                            Form1.currentHashrate = Convert.ToInt32(subtotal)
+
+                        Catch exa As Exception
+
+                        End Try
+
                     End If
 
-                    Try
+                Catch exb As Exception
 
-                        Form1.currentHashrate = Convert.ToInt32(subtotal)
+                End Try
 
-                    Catch exa As Exception
-
-                    End Try
-
-                End If
             End If
 
 
