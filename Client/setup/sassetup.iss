@@ -27,6 +27,7 @@ OutputBaseFilename=sassetup-{#MyAppVersion}
 SetupIconFile=SnowdenAngelsSupport.ico
 Compression=lzma
 SolidCompression=yes
+;SignTool=signtool
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
