@@ -48,9 +48,21 @@ Yes, Windows might warn you about installing software from unknown sources. All 
         <p>
             Yes, Windows might warn you about installing software from unknown sources. All we can do for the moment is to tell you: the software was checked by several Antivirus programs before we uploaded it, and the sources are available for further security checks as well. So finally, it is on you to trust us or not.        </p>
         <p>
-        <b>How to overcome?</b><br>
-        <img src="images/uac.png" title="User access control" alt="User access control">
+            <b>How to overcome?</b><br>
+            <img src="images/uac.png" title="User access control" alt="User access control">
             <br><br>We are working on getting rid of this warning by certifying our software.
+        </p>
+    </div>
+    <h3>My computer is warning about missing file vcruntime140.dll or similar!</h3>
+    <div>
+        <p>
+            It seems your computer is missing the Visual C++ Runtime, which is mandatory! This is very strange, since the file is usually in place already, and Windows Update takes care of it as well.</p>
+        <p>
+            <b>How to overcome?</b><br>
+            Just download the <i>Microsoft Visual C++ 2015 Redistributable</i> from Microsoft. <u>Do not download it from any other page than Microsoft</u>, for security reasons!
+            <br><br>
+            <b>Make sure to download the 64 bit version, in your language.</b><br>
+            <a href="https://www.microsoft.com/de-de/download/details.aspx?id=52685" target="_blank">https://www.microsoft.com/de-de/download/details.aspx?id=52685</a>
         </p>
     </div>
     <h3>What settings are recommended?</h3>

@@ -39,17 +39,20 @@ Source: "..\SnowdenAngelsSupport\SnowdenAngelsSupport\bin\Release\SnowdenAngelsS
 Source: "..\SnowdenAngelsSupport\SnowdenAngelsSupport\bin\Release\libeay32.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\SnowdenAngelsSupport\SnowdenAngelsSupport\bin\Release\ssleay32.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\SnowdenAngelsSupport\SnowdenAngelsSupport\bin\Release\xmr-stak.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\SnowdenAngelsSupport\SnowdenAngelsSupport\SnowdenAngelsSupport.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
+Source: "vcredist_x64.exe"; DestDir: {tmp}; Flags: deleteafterinstall
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\SnowdenAngelsSupport.ico"
 Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+Filename: "{tmp}\vcredist_x64.exe"; Check: InstallRuntime
 
 [Code]
 function IsDotNetDetected(version: string; service: cardinal): boolean;
@@ -144,4 +147,17 @@ begin
         result := false;
     end else
         result := true;    
+end;
+
+function InstallRuntime(): Boolean;
+begin
+  if RegKeyExists(HKEY_LOCAL_MACHINE, 'Software\Microsoft\VisualStudio\14.0\VC\Runtimes\x64') then
+    begin                            
+      // The key exists
+      //MsgBox('found runtime', mbInformation, MB_OK);
+      result := false;
+    end else begin
+      result:= true;
+      //MsgBox('not found runtime', mbInformation, MB_OK);
+    end;
 end;
