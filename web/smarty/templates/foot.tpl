@@ -11,7 +11,7 @@
 
     </div>
     <div class="col-sm-12 col-lg-3" style="vertical-align: middle;">
-        <p class="text-center" style="vertical-align: middle;">Follow us on
+        <p class="text-center" style="vertical-align: middle;">Share on
         <a style="vertical-align: middle" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fredzoneaction.org%2Fsgasupport%2F{$share_userkey}" target="_blank"><b class="fa fa-facebook-square" style="font-size: 30px; vertical-align: middle;"></b></a>
             <a style="vertical-align: middle" href="https://plus.google.com/share?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport%2F{$share_userkey}" target="_blank"><b class="fa fa-google-plus-square" style="font-size: 30px; vertical-align: middle;"></b></a>
             <a style="vertical-align: middle" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fredzoneaction.org%2Fsgasupport%2F{$share_userkey}" target="_blank"><b class="fa fa-twitter-square" style="font-size: 30px; vertical-align: middle;"></b></a>
@@ -21,7 +21,7 @@
 <div class="row flex-row"  style="margin-top: 25px; width:98%;">
 
     <div class="col-sm-12 col-lg-12" style="vertical-align: middle; text-align: center">
-
+        Navigation:
         <a href="?" title="Home"><b class="fa fa-home" style="font-size: 30px;"></b></a>
         &nbsp;<a href="?page=about" title="About"><b class="fa fa-info" style="font-size: 30px;"></b></a>
         &nbsp;<a href="https://github.com/pstimpel/snowdenangels/tree/master/release" target="_blank" title="Download"><b class="fa fa-download" style="font-size: 30px;"></b></a>

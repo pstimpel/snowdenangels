@@ -137,6 +137,39 @@ function getMarketData() {
 
 }
 
+function getTops() {
+    global $db;
+    
+    $sql = "select sum(stats_persession_hashes) as hashes, stats_persession_userkey from stats_persession
+            group by stats_persession_userkey order by hashes desc limit 5";
+
+    $result = pg_query($db, $sql);
+    
+    $num3 = pg_numrows($result);
+
+    $counts=array();
+    $market = getMarketData();
+    
+    if ($num3 > 0) {
+        for ($i3 = 0; $i3 < $num3; $i3++) {
+            
+            $r = pg_fetch_array($result);
+    
+    
+            array_push($counts,array(
+                "key"=>substr($r['stats_persession_userkey'],0,10)."...".substr($r['stats_persession_userkey'],54,
+                        10),
+                "hashRatePerSecondSummaryTotal"=>$r['hashes'],
+                "sumXMRTotal"=>sprintf('%.8f', round($r['hashes']/$market['HashesPerXMR'],8)),
+                "sumUSDTotal"=>sprintf('%.2f', round(($r['hashes']/$market['HashesPerXMR'])*$market['XMR2USD'],2))
+            ));
+        }
+    }
+    return $counts;
+    
+}
+
+
 function getSummaries($mykey='') {
 
     $memcacheobject='SGAScounters';
@@ -250,7 +283,8 @@ function displayMain() {
         $smarty->assign("personal", array());
     }
 
-
+    $smarty->assign("tops",getTops());
+    
 }
 
 function checkKey($mykey) {

@@ -48,7 +48,7 @@
 
 
 <div class="row flex-row" >
-    <div class="col-lg-12 col-sm-12">
+    <div class="col-lg-6 col-sm-12">
         <table class="table table-responsive">
             <thead>
             <tr>
@@ -85,6 +85,35 @@
 
         </table>
     </div>
+
+    <div class="col-lg-6 col-sm-12">
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th>Userkey</th>
+                <th>Hashrate sum</th>
+                <th>XMR</th>
+                <th>USD</th>
+            </tr>
+            </thead>
+            <tbody>
+                {section name=mysec loop=$tops}
+
+                    <tr>
+                        <td>{$tops[mysec].key}</td>
+                        <td>{$tops[mysec].hashRatePerSecondSummaryTotal}</td>
+                        <td>{$tops[mysec].sumXMRTotal}</td>
+                        <td>{$tops[mysec].sumUSDTotal}</td>
+                    </tr>
+
+                {/section}
+
+            </tbody>
+
+        </table>
+    </div>
+
+
 </div>
 
 {if sizeof($chartdata30d) > 0}
