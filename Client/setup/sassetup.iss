@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Snowden's Guardian Angels Support"
-#define MyAppVersion "0.9.6.2"
+#define MyAppVersion "0.9.6.3"
 #define MyAppPublisher "https://github.com/pstimpel/snowdenangels"
 #define MyAppURL "https://github.com/pstimpel/snowdenangels"
 #define MyAppExeName "SnowdenAngelsSupport.exe"
@@ -40,6 +40,8 @@ Source: "..\SnowdenAngelsSupport\SnowdenAngelsSupport\bin\Release\SnowdenAngelsS
 Source: "..\SnowdenAngelsSupport\SnowdenAngelsSupport\bin\Release\libeay32.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\SnowdenAngelsSupport\SnowdenAngelsSupport\bin\Release\ssleay32.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\SnowdenAngelsSupport\SnowdenAngelsSupport\bin\Release\xmr-stak.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\SnowdenAngelsSupport\SnowdenAngelsSupport\bin\Release\xmr-stak-backend.lib"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\SnowdenAngelsSupport\SnowdenAngelsSupport\bin\Release\xmr-stak-c.lib"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\SnowdenAngelsSupport\SnowdenAngelsSupport\SnowdenAngelsSupport.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 Source: "vcredist_x64.exe"; DestDir: {tmp}; Flags: deleteafterinstall

@@ -24,11 +24,11 @@ This is what I would like to start...now!
 In case you would like to support this, please reach out to me, and find me at Twitter, https://twitter.com/PjotrS72.
 You can find me by email as well: pstimpel@googlemail.com, PGP available on key-servers.
 
-This project relies in parts on xmr-stak, a mining software written by fireice-uk, https://github.com/fireice-uk/xmr-stak, GNU General Public License v3.0
+This project relies in parts on xmr-stak, a mining software written by fireice-uk, https://github.com/fireice-uk/xmr-stak, GNU General Public License v3.0. Changes documented in fork located at https://github.com/pstimpel/xmr-stak, GNU Public License v3.0.
 
-This project has a homepage where users can find support, staistics and so on: https://redzoneaction.org/sgasupport/
+This project has a homepage where users can find support, statistics and so on: https://redzoneaction.org/sgasupport/
 
-Current status: **beta**
+Current status: **release test**
 
 
 
