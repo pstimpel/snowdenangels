@@ -1,4 +1,8 @@
-
+/* Freakin horizontal scrollbar caused by original marhins of "-15" */
+.row { 
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
 
 .responsive-video iframe {
     position: absolute;
