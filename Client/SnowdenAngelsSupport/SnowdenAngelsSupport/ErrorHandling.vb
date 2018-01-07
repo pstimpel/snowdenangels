@@ -174,6 +174,8 @@ Public Class ErrorHandling
 
         Catch ex As Exception
 
+            Form1.txt_errorlog.Text = ex.Message & " " & ex.StackTrace & vbCrLf & Form1.txt_errorlog.Text
+
             Return False
 
         End Try

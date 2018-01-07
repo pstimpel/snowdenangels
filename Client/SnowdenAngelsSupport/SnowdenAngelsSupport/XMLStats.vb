@@ -10,6 +10,56 @@ Module XMLStats
         overall = 2
     End Enum
 
+    Public Function ReadLocalXml() As XMLLocalData
+        Dim returnlocaldata As New XMLLocalData
+        returnlocaldata.hashrate = 0
+        Try
+            Dim document As New System.Xml.XmlDocument
+            document = GetLocalXML()
+
+            Dim root As XmlNode = document.ChildNodes(1)
+
+            Dim c As CultureInfo = CultureInfo.InvariantCulture
+
+
+            'Display the contents of the child nodes.
+            If root.HasChildNodes Then
+                Dim i As Integer
+                For i = 0 To root.ChildNodes.Count - 1
+                    'MsgBox(root.ChildNodes(i).Name & " " & root.ChildNodes(i).InnerText)
+                    Select Case root.ChildNodes(i).Name
+                        Case "total"
+
+                            If IsNumeric(root.ChildNodes(i).InnerText) = True Then
+                                returnlocaldata.hashrate = Convert.ToDouble(root.ChildNodes(i).InnerText, c)
+                            Else
+                                'empty
+                                'MsgBox(">" & root.ChildNodes(i).InnerText & "<")
+                                returnlocaldata.hashrate = -1
+                            End If
+
+                    End Select
+                    Application.DoEvents()
+                Next i
+            End If
+
+            Return returnlocaldata
+
+        Catch ex As Exception
+
+            'Dim ErrorHandler As New ErrorHandling With {
+            '.ErrorMessage = ex
+            '   }
+
+        End Try
+
+
+        Return returnlocaldata
+
+    End Function
+
+
+
     Public Function ReadXml(type As XMLStatsType) As XMLData
         Dim returndata As New XMLData
 
@@ -20,7 +70,6 @@ Module XMLStats
             Dim root As XmlNode = document.ChildNodes(1)
 
             Dim c As CultureInfo = CultureInfo.InvariantCulture
-
 
             'Display the contents of the child nodes.
             If root.HasChildNodes Then
@@ -56,6 +105,7 @@ Module XMLStats
                             returndata.key_sumUSDLast = Convert.ToDouble(root.ChildNodes(i).InnerText, c)
 
                     End Select
+                    Application.DoEvents()
                 Next i
             End If
 
@@ -85,7 +135,6 @@ Module XMLStats
         End If
 
         Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create(url)
-
         request.Credentials = New System.Net.NetworkCredential("username", "password")
 
         Dim response As System.Net.HttpWebResponse = request.GetResponse()
@@ -109,5 +158,33 @@ Module XMLStats
 
     End Function
 
+    Private Function GetLocalXML() As System.Xml.XmlDocument
+
+        Dim url As String = "http://127.0.0.1:" & Form1.xmrtcpport & "/totalhashrate.xml"
+
+        Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create(url)
+        request.Credentials = New System.Net.NetworkCredential("username", "password")
+
+        Dim response As System.Net.HttpWebResponse = request.GetResponse()
+
+        If response.StatusCode = System.Net.HttpStatusCode.OK Then
+
+            Dim stream As System.IO.Stream = response.GetResponseStream()
+            Dim reader As New System.IO.StreamReader(stream)
+            Dim contents As String = reader.ReadToEnd()
+            Dim document As New System.Xml.XmlDocument()
+            'MsgBox(contents)
+            document.LoadXml(contents)
+
+            Return document
+
+        Else
+
+            Dim document As New System.Xml.XmlDocument()
+            Return document
+
+        End If
+
+    End Function
 
 End Module

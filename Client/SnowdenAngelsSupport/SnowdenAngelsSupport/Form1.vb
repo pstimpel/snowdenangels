@@ -104,11 +104,15 @@ Public Class Form1
 
             Me.txtOutput.Text = output
 
-            If Me.currentHashrate > 0 Then
 
-                Me.lbl_hashrate_status.Text = Me.currentHashrate.ToString
+            Application.DoEvents()
 
-            End If
+            Dim XMLhashrate As New XMLLocalData()
+            XMLhashrate = XMLStats.ReadLocalXml()
+            Me.lbl_hashrate_status.Text = XMLhashrate.hashrate.ToString
+            Me.currentHashrate = Convert.ToInt32(XMLhashrate.hashrate)
+
+            Application.DoEvents()
 
             If statsFirstRun = True Then
 
@@ -166,6 +170,8 @@ Public Class Form1
             timercounter = 0
 
         End If
+        Application.DoEvents()
+
 
     End Sub
 
@@ -192,6 +198,7 @@ Public Class Form1
                     personalStats.key_key = "none"
 
                 End If
+                Application.DoEvents()
 
                 Dim overallStats As New XMLData()
                 overallStats = XMLStats.ReadXml(XMLStatsType.overall)
@@ -202,6 +209,9 @@ Public Class Form1
                 Me.lbl_stats_allusers_usd.Text = overallStats.key_sumUSDTotal.ToString
                 Me.lbl_stats_allusers_users.Text = overallStats.key_uniqueUsersTotal.ToString
                 Me.lbl_stats_allusers_xmr.Text = overallStats.key_sumXMRTotal.ToString
+
+                Application.DoEvents()
+
 
             End If
 
@@ -484,7 +494,7 @@ Public Class Form1
         Me.lnk_minerport.Enabled = False
 
         Me.lnk_helponline.Links.Add(0, ("https://redzoneaction.org/sgasupport/?page=faq").Length, "https://redzoneaction.org/sgasupport/?page=faq")
-        Me.lnk_helponline.Enabled = False
+        Me.lnk_helponline.Enabled = True
 
         Me.cmb_pool.Items.Clear()
 

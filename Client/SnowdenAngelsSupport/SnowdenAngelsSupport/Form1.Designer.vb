@@ -98,6 +98,7 @@ Partial Class Form1
         Me.pct_facebook = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pct_box_tuwat = New System.Windows.Forms.PictureBox()
+        Me.txt_errorlog = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout()
         Me.tab_stats.SuspendLayout()
         Me.tab_config.SuspendLayout()
@@ -741,6 +742,7 @@ Partial Class Form1
         '
         'tab_logs
         '
+        Me.tab_logs.Controls.Add(Me.txt_errorlog)
         Me.tab_logs.Controls.Add(Me.txtOutput)
         Me.tab_logs.Location = New System.Drawing.Point(4, 22)
         Me.tab_logs.Name = "tab_logs"
@@ -757,7 +759,7 @@ Partial Class Form1
         Me.txtOutput.Name = "txtOutput"
         Me.txtOutput.ReadOnly = True
         Me.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtOutput.Size = New System.Drawing.Size(840, 248)
+        Me.txtOutput.Size = New System.Drawing.Size(840, 189)
         Me.txtOutput.TabIndex = 20
         '
         'btn_miner_stop
@@ -787,7 +789,7 @@ Partial Class Form1
         '
         Me.lbl_share_name.AutoSize = True
         Me.lbl_share_name.Font = New System.Drawing.Font("Microsoft Sans Serif", 26.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_share_name.Location = New System.Drawing.Point(560, 454)
+        Me.lbl_share_name.Location = New System.Drawing.Point(561, 454)
         Me.lbl_share_name.Name = "lbl_share_name"
         Me.lbl_share_name.Size = New System.Drawing.Size(155, 39)
         Me.lbl_share_name.TabIndex = 68
@@ -885,6 +887,16 @@ Partial Class Form1
         Me.pct_box_tuwat.Size = New System.Drawing.Size(304, 56)
         Me.pct_box_tuwat.TabIndex = 63
         Me.pct_box_tuwat.TabStop = False
+        '
+        'txt_errorlog
+        '
+        Me.txt_errorlog.Location = New System.Drawing.Point(8, 200)
+        Me.txt_errorlog.Multiline = True
+        Me.txt_errorlog.Name = "txt_errorlog"
+        Me.txt_errorlog.ReadOnly = True
+        Me.txt_errorlog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txt_errorlog.Size = New System.Drawing.Size(840, 56)
+        Me.txt_errorlog.TabIndex = 21
         '
         'Form1
         '
@@ -1000,4 +1012,5 @@ Partial Class Form1
     Friend WithEvents lbl_turnfundingontoseestats As Label
     Friend WithEvents pct_trafficlight As PictureBox
     Friend WithEvents pct_update As PictureBox
+    Friend WithEvents txt_errorlog As TextBox
 End Class

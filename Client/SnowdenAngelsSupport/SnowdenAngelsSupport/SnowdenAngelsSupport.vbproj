@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>0.9.6.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -139,6 +139,7 @@
     <Compile Include="StatsCollection.vb" />
     <Compile Include="Updates.vb" />
     <Compile Include="XMLData.vb" />
+    <Compile Include="XMLLocalData.vb" />
     <Compile Include="XMLStats.vb" />
     <Compile Include="XMRStakParser.vb" />
   </ItemGroup>

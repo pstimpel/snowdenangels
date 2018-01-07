@@ -24,7 +24,7 @@ Module XMRStakParser
         End Select
 
 
-        Return CleanHtml(GetHtml("http://127.0.0.1:" & Form1.xmrtcpport & "/" & connparam, toParse))
+        Return CleanHtml(GetHtml("http://127.0.0.1:" & Form1.xmrtcpport & "/" & connparam))
 
     End Function
 
@@ -84,63 +84,8 @@ Module XMRStakParser
 
     End Function
 
-    Private Sub ParseHashrate(content As String)
 
-        Try
-
-            '
-            '       <!DOCTYPE html><html><head><meta name='viewport' content='width=device-width' /><link rel='stylesheet' href='style.css' /><title>Hashrate Report</title></head><body><div class='all'><div class='version'>v2.0.0-0005e4a</div><div class='header'><span style='color: rgb(255, 160, 0)'>XMR</span>-Stak Monero Miner</div><div class='flex-container'><div class='links flex-item'><a href='/h'><div><span class='letter'>H</span>ashrate</div></a></div><div class='links flex-item'><a href='/r'><div><span class='letter'>R</span>esults</div></a></div><div class='links flex-item'><a href='/c'><div><span class='letter'>C</span>onnection</div></a></div></div><h4>Hashrate Report</h4><div class=data><table><tr><th>Thread ID</th><th>10s</th><th>60s</th><th>15m</th><th rowspan='5'>H/s</td></tr><tr><th>0</th><td> 23.1</td><td></td><td></td></tr><tr><th>1</th><td> 27.4</td><td></td><td></td></tr><tr><th>Totals:</th><td> 50.5</td><td></td><td></td></tr><tr><th>Highest:</th><td> 0.0</td><td colspan='2'></td></tr></table></div></div></body></html>
-            '
-            If content.IndexOf("Totals:") Then
-
-                Dim subtotal As String = content.Substring(content.IndexOf("Totals:"), 50)
-                'is now something like Totals:</th><td> 50.5</td><td></td><td></td></tr><tr><th>Hi
-
-                subtotal = subtotal.Substring(subtotal.IndexOf("<td>") + 4, 10)
-                'is now  50.5</td><td></td><td></td></tr><tr><th>Hi
-
-                Try
-
-                    subtotal = subtotal.Substring(0, subtotal.IndexOf("</td>"))
-                    subtotal = subtotal.Trim
-
-                    If subtotal.Length > 0 Then
-
-                        If subtotal.IndexOf(".") > 0 Then
-                            subtotal = subtotal.Substring(0, subtotal.IndexOf("."))
-                        End If
-
-                        Try
-
-                            Form1.currentHashrate = Convert.ToInt32(subtotal)
-
-                        Catch exa As Exception
-
-                        End Try
-
-                    End If
-
-                Catch exb As Exception
-
-                End Try
-
-            End If
-
-
-
-
-        Catch ex As Exception
-
-            Dim ErrorHandler As New ErrorHandling With {
-                .ErrorMessage = ex
-            }
-
-        End Try
-
-
-    End Sub
-
-    Private Function GetHtml(url As String, xmrquerytype As XMRHttpType) As String
+    Private Function GetHtml(url As String) As String
 
         Try
             Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create(url)
@@ -154,12 +99,6 @@ Module XMRStakParser
                 Dim reader As New System.IO.StreamReader(stream)
 
                 Dim contents As String = reader.ReadToEnd()
-
-                If xmrquerytype = XMRHttpType.Hashrate Then
-
-                    ParseHashrate(contents)
-
-                End If
 
                 Return contents
 
