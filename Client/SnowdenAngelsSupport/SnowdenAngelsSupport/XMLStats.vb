@@ -11,8 +11,13 @@ Module XMLStats
     End Enum
 
     Public Function ReadLocalXml() As XMLLocalData
-        Dim returnlocaldata As New XMLLocalData
-        returnlocaldata.hashrate = 0
+
+        Dim returnlocaldata As New XMLLocalData With {
+            .hashrate = 0,
+            .hashrate_10seconds = 0,
+            .xmrversion = "unknown"
+        }
+
         Try
             Dim document As New System.Xml.XmlDocument
             document = GetLocalXML()
@@ -36,6 +41,24 @@ Module XMLStats
                                 'empty
                                 'MsgBox(">" & root.ChildNodes(i).InnerText & "<")
                                 returnlocaldata.hashrate = -1
+                            End If
+                        Case "total10"
+
+                            If IsNumeric(root.ChildNodes(i).InnerText) = True Then
+                                returnlocaldata.hashrate_10seconds = Convert.ToDouble(root.ChildNodes(i).InnerText, c)
+                            Else
+                                'empty
+                                'MsgBox(">" & root.ChildNodes(i).InnerText & "<")
+                                returnlocaldata.hashrate_10seconds = -1
+                            End If
+                        Case "version"
+
+                            If root.ChildNodes(i).InnerText.Length > 2 Then
+                                returnlocaldata.xmrversion = root.ChildNodes(i).InnerText
+                            Else
+                                'empty
+                                'MsgBox(">" & root.ChildNodes(i).InnerText & "<")
+                                returnlocaldata.xmrversion = "unknown"
                             End If
 
                     End Select

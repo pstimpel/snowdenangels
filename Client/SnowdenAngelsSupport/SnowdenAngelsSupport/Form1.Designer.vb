@@ -28,6 +28,8 @@ Partial Class Form1
         Me.nf = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tab_stats = New System.Windows.Forms.TabPage()
+        Me.lbl_minerversion_status = New System.Windows.Forms.Label()
+        Me.lbl_minerversion_name = New System.Windows.Forms.Label()
         Me.lbl_turnfundingontoseestats = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lbl_stats_allusers_xmr = New System.Windows.Forms.Label()
@@ -86,6 +88,7 @@ Partial Class Form1
         Me.lbl_pool_name = New System.Windows.Forms.Label()
         Me.lbl_cores_name = New System.Windows.Forms.Label()
         Me.tab_logs = New System.Windows.Forms.TabPage()
+        Me.txt_errorlog = New System.Windows.Forms.TextBox()
         Me.txtOutput = New System.Windows.Forms.TextBox()
         Me.btn_miner_stop = New System.Windows.Forms.Button()
         Me.btn_miner_start = New System.Windows.Forms.Button()
@@ -98,7 +101,13 @@ Partial Class Form1
         Me.pct_facebook = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pct_box_tuwat = New System.Windows.Forms.PictureBox()
-        Me.txt_errorlog = New System.Windows.Forms.TextBox()
+        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
+        Me.sts_strip = New System.Windows.Forms.StatusStrip()
+        Me.sts_strip_label1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.sts_strip_label2 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.sts_strip_label3 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.sts_strip_label4 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.sts_strip_label5 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.TabControl1.SuspendLayout()
         Me.tab_stats.SuspendLayout()
         Me.tab_config.SuspendLayout()
@@ -110,6 +119,7 @@ Partial Class Form1
         CType(Me.pct_facebook, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pct_box_tuwat, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.sts_strip.SuspendLayout()
         Me.SuspendLayout()
         '
         'Timer1
@@ -133,6 +143,8 @@ Partial Class Form1
         '
         'tab_stats
         '
+        Me.tab_stats.Controls.Add(Me.lbl_minerversion_status)
+        Me.tab_stats.Controls.Add(Me.lbl_minerversion_name)
         Me.tab_stats.Controls.Add(Me.lbl_turnfundingontoseestats)
         Me.tab_stats.Controls.Add(Me.Label1)
         Me.tab_stats.Controls.Add(Me.lbl_stats_allusers_xmr)
@@ -172,12 +184,30 @@ Partial Class Form1
         Me.tab_stats.Text = "Statistics"
         Me.tab_stats.UseVisualStyleBackColor = True
         '
+        'lbl_minerversion_status
+        '
+        Me.lbl_minerversion_status.AutoSize = True
+        Me.lbl_minerversion_status.Location = New System.Drawing.Point(127, 209)
+        Me.lbl_minerversion_status.Name = "lbl_minerversion_status"
+        Me.lbl_minerversion_status.Size = New System.Drawing.Size(170, 13)
+        Me.lbl_minerversion_status.TabIndex = 93
+        Me.lbl_minerversion_status.Text = "Unknown, please start funding first"
+        '
+        'lbl_minerversion_name
+        '
+        Me.lbl_minerversion_name.AutoSize = True
+        Me.lbl_minerversion_name.Location = New System.Drawing.Point(8, 209)
+        Me.lbl_minerversion_name.Name = "lbl_minerversion_name"
+        Me.lbl_minerversion_name.Size = New System.Drawing.Size(73, 13)
+        Me.lbl_minerversion_name.TabIndex = 92
+        Me.lbl_minerversion_name.Text = "Miner version "
+        '
         'lbl_turnfundingontoseestats
         '
         Me.lbl_turnfundingontoseestats.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_turnfundingontoseestats.Location = New System.Drawing.Point(6, 10)
+        Me.lbl_turnfundingontoseestats.Location = New System.Drawing.Point(7, 9)
         Me.lbl_turnfundingontoseestats.Name = "lbl_turnfundingontoseestats"
-        Me.lbl_turnfundingontoseestats.Size = New System.Drawing.Size(841, 214)
+        Me.lbl_turnfundingontoseestats.Size = New System.Drawing.Size(841, 196)
         Me.lbl_turnfundingontoseestats.TabIndex = 91
         Me.lbl_turnfundingontoseestats.Text = "Please Start Funding, and allow transfers of funding statistics"
         Me.lbl_turnfundingontoseestats.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -185,12 +215,12 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(484, 9)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(490, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(264, 37)
+        Me.Label1.Size = New System.Drawing.Size(166, 24)
         Me.Label1.TabIndex = 90
-        Me.Label1.Text = "Remote All Users"
+        Me.Label1.Text = "All users stats, total"
         '
         'lbl_stats_allusers_xmr
         '
@@ -315,22 +345,22 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(110, 9)
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(116, 9)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(262, 37)
+        Me.Label4.Size = New System.Drawing.Size(212, 24)
         Me.Label4.TabIndex = 77
-        Me.Label4.Text = "Remote Personal"
+        Me.Label4.Text = "Your personal stats, total"
         '
         'lbl_localstats
         '
         Me.lbl_localstats.AutoSize = True
-        Me.lbl_localstats.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_localstats.Location = New System.Drawing.Point(10, 9)
+        Me.lbl_localstats.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_localstats.Location = New System.Drawing.Point(3, 9)
         Me.lbl_localstats.Name = "lbl_localstats"
-        Me.lbl_localstats.Size = New System.Drawing.Size(94, 37)
+        Me.lbl_localstats.Size = New System.Drawing.Size(96, 24)
         Me.lbl_localstats.TabIndex = 76
-        Me.lbl_localstats.Text = "Local"
+        Me.lbl_localstats.Text = "Local stats"
         '
         'lbl_stats_personal_xmr
         '
@@ -473,7 +503,7 @@ Partial Class Form1
         '
         Me.lbl_hashrate_status.AutoSize = True
         Me.lbl_hashrate_status.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_hashrate_status.Location = New System.Drawing.Point(16, 77)
+        Me.lbl_hashrate_status.Location = New System.Drawing.Point(3, 77)
         Me.lbl_hashrate_status.Name = "lbl_hashrate_status"
         Me.lbl_hashrate_status.Size = New System.Drawing.Size(73, 20)
         Me.lbl_hashrate_status.TabIndex = 61
@@ -483,7 +513,7 @@ Partial Class Form1
         'lbl_currenthashrate_name
         '
         Me.lbl_currenthashrate_name.AutoSize = True
-        Me.lbl_currenthashrate_name.Location = New System.Drawing.Point(16, 53)
+        Me.lbl_currenthashrate_name.Location = New System.Drawing.Point(4, 53)
         Me.lbl_currenthashrate_name.Name = "lbl_currenthashrate_name"
         Me.lbl_currenthashrate_name.Size = New System.Drawing.Size(91, 13)
         Me.lbl_currenthashrate_name.TabIndex = 60
@@ -752,6 +782,16 @@ Partial Class Form1
         Me.tab_logs.Text = "Logs"
         Me.tab_logs.UseVisualStyleBackColor = True
         '
+        'txt_errorlog
+        '
+        Me.txt_errorlog.Location = New System.Drawing.Point(8, 200)
+        Me.txt_errorlog.Multiline = True
+        Me.txt_errorlog.Name = "txt_errorlog"
+        Me.txt_errorlog.ReadOnly = True
+        Me.txt_errorlog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txt_errorlog.Size = New System.Drawing.Size(840, 56)
+        Me.txt_errorlog.TabIndex = 21
+        '
         'txtOutput
         '
         Me.txtOutput.Location = New System.Drawing.Point(8, 8)
@@ -888,21 +928,53 @@ Partial Class Form1
         Me.pct_box_tuwat.TabIndex = 63
         Me.pct_box_tuwat.TabStop = False
         '
-        'txt_errorlog
+        'Timer2
         '
-        Me.txt_errorlog.Location = New System.Drawing.Point(8, 200)
-        Me.txt_errorlog.Multiline = True
-        Me.txt_errorlog.Name = "txt_errorlog"
-        Me.txt_errorlog.ReadOnly = True
-        Me.txt_errorlog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txt_errorlog.Size = New System.Drawing.Size(840, 56)
-        Me.txt_errorlog.TabIndex = 21
+        '
+        'sts_strip
+        '
+        Me.sts_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.sts_strip_label1, Me.sts_strip_label2, Me.sts_strip_label3, Me.sts_strip_label4, Me.sts_strip_label5})
+        Me.sts_strip.Location = New System.Drawing.Point(0, 593)
+        Me.sts_strip.Name = "sts_strip"
+        Me.sts_strip.Size = New System.Drawing.Size(880, 22)
+        Me.sts_strip.TabIndex = 72
+        '
+        'sts_strip_label1
+        '
+        Me.sts_strip_label1.AutoSize = False
+        Me.sts_strip_label1.Name = "sts_strip_label1"
+        Me.sts_strip_label1.Size = New System.Drawing.Size(0, 17)
+        '
+        'sts_strip_label2
+        '
+        Me.sts_strip_label2.AutoSize = False
+        Me.sts_strip_label2.Name = "sts_strip_label2"
+        Me.sts_strip_label2.Size = New System.Drawing.Size(0, 17)
+        '
+        'sts_strip_label3
+        '
+        Me.sts_strip_label3.AutoSize = False
+        Me.sts_strip_label3.Name = "sts_strip_label3"
+        Me.sts_strip_label3.Size = New System.Drawing.Size(0, 17)
+        '
+        'sts_strip_label4
+        '
+        Me.sts_strip_label4.AutoSize = False
+        Me.sts_strip_label4.Name = "sts_strip_label4"
+        Me.sts_strip_label4.Size = New System.Drawing.Size(0, 17)
+        '
+        'sts_strip_label5
+        '
+        Me.sts_strip_label5.AutoSize = False
+        Me.sts_strip_label5.Name = "sts_strip_label5"
+        Me.sts_strip_label5.Size = New System.Drawing.Size(120, 17)
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(880, 595)
+        Me.ClientSize = New System.Drawing.Size(880, 615)
+        Me.Controls.Add(Me.sts_strip)
         Me.Controls.Add(Me.pct_update)
         Me.Controls.Add(Me.pct_trafficlight)
         Me.Controls.Add(Me.lnk_moreinfo)
@@ -934,6 +1006,8 @@ Partial Class Form1
         CType(Me.pct_facebook, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pct_box_tuwat, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.sts_strip.ResumeLayout(False)
+        Me.sts_strip.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1013,4 +1087,13 @@ Partial Class Form1
     Friend WithEvents pct_trafficlight As PictureBox
     Friend WithEvents pct_update As PictureBox
     Friend WithEvents txt_errorlog As TextBox
+    Friend WithEvents Timer2 As Timer
+    Friend WithEvents lbl_minerversion_status As Label
+    Friend WithEvents lbl_minerversion_name As Label
+    Friend WithEvents sts_strip As StatusStrip
+    Friend WithEvents sts_strip_label1 As ToolStripStatusLabel
+    Friend WithEvents sts_strip_label2 As ToolStripStatusLabel
+    Friend WithEvents sts_strip_label3 As ToolStripStatusLabel
+    Friend WithEvents sts_strip_label4 As ToolStripStatusLabel
+    Friend WithEvents sts_strip_label5 As ToolStripStatusLabel
 End Class

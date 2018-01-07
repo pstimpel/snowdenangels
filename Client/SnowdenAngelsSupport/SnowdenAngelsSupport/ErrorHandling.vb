@@ -29,6 +29,12 @@ Public Class ErrorHandling
 
             End If
 
+            Try
+                Form1.sts_strip_label4.Text = "Error report created"
+            Catch exex As Exception
+
+            End Try
+
         End Set
     End Property
 
@@ -148,23 +154,38 @@ Public Class ErrorHandling
 
         Try
 
-            If Form1.allowErrorTransfer = True Then
+            If Directory.Exists(errordirectory) = True Then
 
-                Dim fileEntries As String() = Directory.GetFiles(errordirectory)
+                If Form1.allowErrorTransfer = True Then
 
-                Dim fileName As String
+                    Dim fileEntries As String() = Directory.GetFiles(errordirectory)
 
-                For Each fileName In fileEntries
+                    Dim fileName As String
 
-                    If PostFile(fileName) = True Then
+                    For Each fileName In fileEntries
 
-                        File.Delete(fileName)
+                        If PostFile(fileName) = True Then
 
-                    End If
+                            File.Delete(fileName)
 
-                Next fileName
+                        End If
 
-                Return True
+                    Next fileName
+
+                    Try
+                        Form1.sts_strip_label5.Text = "Error reports sent"
+                    Catch exex As Exception
+
+                    End Try
+
+
+                    Return True
+
+                Else
+
+                    Return False
+
+                End If
 
             Else
 

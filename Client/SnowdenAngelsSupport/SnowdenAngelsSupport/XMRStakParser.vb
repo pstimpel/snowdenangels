@@ -2,9 +2,8 @@
 
 Module XMRStakParser
 
-    'TODO replace this dirty parser by something useful once there is a nice output format from xmr-stak available
-
     Public Enum XMRHttpType
+
         Connection = 0
         Hashrate = 1
         Result = 2

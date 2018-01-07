@@ -3,20 +3,17 @@
 <node COLOR="#000000" CREATED="1514648834486" ID="ID_649291143" MODIFIED="1514649122640" TEXT="Snowden Angels">
 <font NAME="SansSerif" SIZE="20"/>
 <hook NAME="accessories/plugins/AutomaticLayout.properties"/>
-<node COLOR="#0033ff" CREATED="1514648887283" ID="ID_1369415457" MODIFIED="1514649122626" POSITION="right" TEXT="xmr-stak">
+<node COLOR="#0033ff" CREATED="1514648887283" ID="ID_1369415457" MODIFIED="1515335962611" POSITION="right" TEXT="xmr-stak">
 <edge STYLE="sharp_bezier" WIDTH="8"/>
 <font NAME="SansSerif" SIZE="18"/>
-<node COLOR="#00b439" CREATED="1514648900617" ID="ID_930778869" MODIFIED="1514654926434" TEXT="Contact maintener and find a way to reduce maintainers fee">
+<icon BUILTIN="button_ok"/>
+<node COLOR="#00b439" CREATED="1514648931301" ID="ID_308846184" MODIFIED="1515335946537" TEXT="How to maintain a xmr-stak-clone - if needed?">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
-<icon BUILTIN="messagebox_warning"/>
-</node>
-<node COLOR="#00b439" CREATED="1514648931301" ID="ID_308846184" MODIFIED="1514649122630" TEXT="How to maintain a xmr-stak-clone - if needed?">
-<edge STYLE="bezier" WIDTH="thin"/>
-<font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_ok"/>
 </node>
 </node>
-<node COLOR="#0033ff" CREATED="1514648956157" ID="ID_1511640378" MODIFIED="1514853225146" POSITION="left" TEXT="Create a bullet-proof setup">
+<node COLOR="#0033ff" CREATED="1514648956157" ID="ID_1511640378" MODIFIED="1515336064621" POSITION="left" TEXT="Create a bullet-proof setup">
 <edge STYLE="sharp_bezier" WIDTH="8"/>
 <font NAME="SansSerif" SIZE="18"/>
 <icon BUILTIN="button_ok"/>
@@ -74,9 +71,10 @@
 <icon BUILTIN="button_ok"/>
 </node>
 </node>
-<node COLOR="#0033ff" CREATED="1514649156418" ID="ID_1073592987" MODIFIED="1514649165522" POSITION="left" TEXT="official support site">
+<node COLOR="#0033ff" CREATED="1514649156418" ID="ID_1073592987" MODIFIED="1515336005501" POSITION="left" TEXT="official support site">
 <edge STYLE="sharp_bezier" WIDTH="8"/>
 <font NAME="SansSerif" SIZE="18"/>
+<icon BUILTIN="button_ok"/>
 <node COLOR="#00b439" CREATED="1514649167441" ID="ID_319360227" MODIFIED="1514980091760" TEXT="Needs a public usable XMR address, without the need of an payment id (no exchange address)">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
@@ -93,7 +91,7 @@
 <icon BUILTIN="button_ok"/>
 </node>
 </node>
-<node COLOR="#0033ff" CREATED="1514649262059" ID="ID_1195678914" MODIFIED="1514654912963" POSITION="right" TEXT="Github">
+<node COLOR="#0033ff" CREATED="1514649262059" ID="ID_1195678914" MODIFIED="1515335979836" POSITION="right" TEXT="Github">
 <edge STYLE="sharp_bezier" WIDTH="8"/>
 <font NAME="SansSerif" SIZE="18"/>
 <icon BUILTIN="button_ok"/>
@@ -103,17 +101,19 @@
 <icon BUILTIN="button_ok"/>
 </node>
 </node>
-<node COLOR="#0033ff" CREATED="1514649336829" ID="ID_1347767414" MODIFIED="1514649341114" POSITION="left" TEXT="Stats page">
+<node COLOR="#0033ff" CREATED="1514649336829" ID="ID_1347767414" MODIFIED="1515335989288" POSITION="left" TEXT="Stats page">
 <edge STYLE="sharp_bezier" WIDTH="8"/>
 <font NAME="SansSerif" SIZE="18"/>
+<icon BUILTIN="button_ok"/>
 <node COLOR="#00b439" CREATED="1514649342869" ID="ID_90090936" MODIFIED="1514910552032" TEXT="How many supporters">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
 <icon BUILTIN="button_ok"/>
 </node>
-<node COLOR="#00b439" CREATED="1514649351127" ID="ID_74473220" MODIFIED="1515074031791" TEXT="How much Hashrate at the moment">
+<node COLOR="#00b439" CREATED="1514649351127" ID="ID_74473220" MODIFIED="1515335998878" TEXT="How much Hashrate at the moment">
 <edge STYLE="bezier" WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="16"/>
+<icon BUILTIN="button_cancel"/>
 </node>
 <node COLOR="#00b439" CREATED="1514649364743" ID="ID_135043432" MODIFIED="1514910743892" TEXT="How many hashes total">
 <edge STYLE="bezier" WIDTH="thin"/>

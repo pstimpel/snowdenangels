@@ -30,6 +30,8 @@ Public Class Form1
     Private Shared WM_QUERYENDSESSION As Integer = &H11
     Private Shared systemShutdown As Boolean = False
 
+    Private fundingstopped_counter As Integer = 0
+
 #If DEBUG Then
     'Public errorcollector As String = "http://127.0.0.1/sgasupport/errorhandler.php"
     'Public statscollector As String = "http://127.0.0.1/sgasupport/statshandler.php"
@@ -54,6 +56,16 @@ Public Class Form1
 
         If Processes.IsRunningMiner() = False Then
 
+            If fundingstopped_counter > 2 Then
+
+                Me.sts_strip_label1.Text = "Funding stopped"
+
+            Else
+
+                fundingstopped_counter = fundingstopped_counter + 1
+
+            End If
+
             minerRuns = False
 
             Me.btn_miner_start.Enabled = True
@@ -75,7 +87,11 @@ Public Class Form1
 
             Me.lbl_turnfundingontoseestats.Visible = True
 
+            Application.DoEvents()
+
         Else
+
+            fundingstopped_counter = 0
 
             Me.lbl_turnfundingontoseestats.Visible = False
 
@@ -91,6 +107,8 @@ Public Class Form1
             Me.btn_miner_start.BackColor = SystemColors.Control
 
 
+            Me.sts_strip_label3.Text = "Collecting local stats"
+            Application.DoEvents()
 
             Dim output As String = ""
 
@@ -109,9 +127,31 @@ Public Class Form1
 
             Dim XMLhashrate As New XMLLocalData()
             XMLhashrate = XMLStats.ReadLocalXml()
-            Me.lbl_hashrate_status.Text = XMLhashrate.hashrate.ToString
-            Me.currentHashrate = Convert.ToInt32(XMLhashrate.hashrate)
 
+            If XMLhashrate.hashrate > 0 Then
+
+                Me.lbl_hashrate_status.Text = Convert.ToInt16(XMLhashrate.hashrate).ToString
+                Me.currentHashrate = Convert.ToInt32(XMLhashrate.hashrate)
+
+            ElseIf XMLhashrate.hashrate <= 0 And XMLhashrate.hashrate_10seconds > 0 Then
+
+                Me.lbl_hashrate_status.Text = Convert.ToInt16(XMLhashrate.hashrate_10seconds).ToString
+                Me.currentHashrate = Convert.ToInt32(XMLhashrate.hashrate)
+
+            Else
+
+                Me.lbl_hashrate_status.Text = "warming up"
+                Me.currentHashrate = 0
+
+            End If
+
+            If XMLhashrate.xmrversion.Length > 0 Then
+
+                Me.lbl_minerversion_status.Text = XMLhashrate.xmrversion
+
+            End If
+
+            Me.sts_strip_label3.Text = "Local stats collected"
             Application.DoEvents()
 
             If statsFirstRun = True Then
@@ -151,7 +191,11 @@ Public Class Form1
 
         If timercounter = 1 Then
 
+            Me.sts_strip_label2.Text = "Collecting remote stats"
+
             CreateFundingStatsDisplay()
+
+            Me.sts_strip_label2.Text = "Remote stats collected"
 
         End If
 
@@ -189,7 +233,7 @@ Public Class Form1
                     Me.lbl_stats_personal_computers.Text = personalStats.key_uniqueComputersTotal.ToString
                     Me.lbl_stats_personal_hashes.Text = personalStats.key_hashRateSummaryTotal.ToString
                     Me.lbl_stats_personal_hashrateavg.Text = personalStats.key_hashRatePerSecondSummaryTotal.ToString
-                    Me.lbl_stats_personal_usd.Text = personalStats.key_sumUSDTotal.ToString
+                    Me.lbl_stats_personal_usd.Text = FormatNumber(personalStats.key_sumUSDTotal, 2).ToString
                     Me.lbl_stats_personal_users.Text = personalStats.key_uniqueUsersTotal.ToString
                     Me.lbl_stats_personal_xmr.Text = personalStats.key_sumXMRTotal.ToString
 
@@ -206,7 +250,7 @@ Public Class Form1
                 Me.lbl_stats_allusers_computers.Text = overallStats.key_uniqueComputersTotal.ToString
                 Me.lbl_stats_allusers_hashes.Text = overallStats.key_hashRateSummaryTotal.ToString
                 Me.lbl_stats_allusers_hashrateavg.Text = overallStats.key_hashRatePerSecondSummaryTotal.ToString
-                Me.lbl_stats_allusers_usd.Text = overallStats.key_sumUSDTotal.ToString
+                Me.lbl_stats_allusers_usd.Text = FormatNumber(overallStats.key_sumUSDTotal, 2).ToString
                 Me.lbl_stats_allusers_users.Text = overallStats.key_uniqueUsersTotal.ToString
                 Me.lbl_stats_allusers_xmr.Text = overallStats.key_sumXMRTotal.ToString
 
@@ -443,6 +487,15 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
 
+        Me.sts_strip_label1.Width = 170
+        Me.sts_strip_label2.Width = 170
+        Me.sts_strip_label3.Width = 170
+        Me.sts_strip_label4.Width = 170
+        Me.sts_strip_label5.Width = 170
+
+        Me.Timer2.Stop()
+        Me.Timer2.Enabled = False
+
         Me.lbl_turnfundingontoseestats.Visible = True
 
         If WalletAddressInUse = MinerConfig.XMRWalletAddress.developer Then
@@ -538,21 +591,16 @@ Public Class Form1
 
         Me.lbl_xmrpath_status.Text = Me.xmrpath
 
-        If Processes.IsRunningMiner = True Then
+        If Processes.IsRunningMiner() = True Then
             'Kill the miner, to make sure we are using the right config
             Processes.KillMiner()
+            Me.sts_strip_label1.Text = "Funding stopped"
+            Application.DoEvents()
 
         End If
 
         MinerConfig.KillLogFile()
 
-        If Me.autostart = True Then
-
-            Me.chk_autostart_true.CheckState = CheckState.Checked
-
-            Me.StartFunding()
-
-        End If
 
         If Me.allowStatsTransfer = True Then
 
@@ -576,9 +624,12 @@ Public Class Form1
 
         Me.TimerExecute()
 
+        timercounter = 0
+
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 10000
         Me.Timer1.Start()
+
 
         Me.txt_moneroaddress_status.Text = MinerConfig.GetMonerWalletAddress(Me.WalletAddressInUse)
 
@@ -643,11 +694,38 @@ Public Class Form1
 
         End If
 
-        Me.btn_apply_settings.BackColor = SystemColors.Control
+        If Me.autostart = True Then
 
+            Me.chk_autostart_true.CheckState = CheckState.Checked
+
+            SoftstartMinerviaTimer2()
+
+        End If
+
+        Me.btn_apply_settings.BackColor = SystemColors.Control
 
     End Sub
 
+    Private Sub Timer2_Fired() Handles Timer2.Tick
+
+        Me.StartFunding()
+
+        timercounter = 0
+
+
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 10000
+        Me.Timer1.Start()
+
+        Me.TimerExecute()
+
+        Me.Timer2.Stop()
+        Me.Timer2.Enabled = False
+
+        Me.sts_strip_label1.Text = "Funding started"
+        Application.DoEvents()
+
+    End Sub
 
     Private Function WriteSettings() As Boolean
 
@@ -723,6 +801,12 @@ Public Class Form1
 
             Me.configured = True
 
+            Me.xmrtcpport = MinerConfig.GetFreeTcpPort()
+            Me.lbl_xmrtcpport_status.Text = Me.xmrtcpport
+            Me.lnk_minerport.Links.Clear()
+            Me.lnk_minerport.Links.Add(0, ("http://127.0.0.1:" & Me.xmrtcpport.ToString & "/").Length, "http://127.0.0.1:" & Me.xmrtcpport.ToString & "/")
+
+
             MinerConfig.WriteConfigMiner(MinerConfig.TranslatePoolNameToURL(Me.cmb_pool.Text.ToString), Me.xmrtcpport, WalletAddressInUse)
             MinerConfig.WriteConfigCpu(Convert.ToInt16(Me.cmb_cores.Text.ToString))
 
@@ -746,6 +830,9 @@ Public Class Form1
             ' .FileName = Me.xmrpath & "\xmr-stak.exe",
             '' Start the process
             Process.Start(p)
+            Me.sts_strip_label1.Text = "Funding started"
+            Application.DoEvents()
+
         Catch abort As System.ComponentModel.Win32Exception
 
             MsgBox("abort by user")
@@ -759,19 +846,43 @@ Public Class Form1
         End Try
     End Sub
 
+    Private Sub SoftstartMinerviaTimer2()
+
+        Me.sts_strip_label1.Text = "Attempt to start funding"
+        Application.DoEvents()
+        'do this 5 seconds later
+        Me.Timer2.Enabled = True
+        Me.Timer2.Interval = 5000
+        Me.Timer2.Start()
+
+
+    End Sub
+
     Private Sub StartFunding()
 
         Try
 
             If Me.cmb_pool.Text.Length > 0 And Me.cmb_cores.Text.Length > 0 Then
 
+                'save settings again, just in case...
                 Me.WriteSettings()
 
-                If Processes.IsRunningMiner = False Then
+                If Processes.IsRunningMiner() = False Then
 
+                    Me.sts_strip_label1.Text = "Start funding"
+                    Application.DoEvents()
                     StartTheMiner()
 
+                Else
+
+                    Processes.KillMiner()
+                    Me.sts_strip_label1.Text = "Funding stopped"
+                    Application.DoEvents()
+                    SoftstartMinerviaTimer2()
+
                 End If
+
+                Application.DoEvents()
 
 
             End If
@@ -792,6 +903,9 @@ Public Class Form1
 
         Me.StartFunding()
 
+        timercounter = 0
+
+
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 10000
         Me.Timer1.Start()
@@ -803,7 +917,8 @@ Public Class Form1
     Private Sub Btn_miner_stop_Click(sender As Object, e As EventArgs) Handles btn_miner_stop.Click
 
         Processes.KillMiner()
-
+        Me.sts_strip_label1.Text = "Funding stopped"
+        Application.DoEvents()
         Threading.Thread.Sleep(3000)
 
         Me.TimerExecute()
@@ -813,34 +928,25 @@ Public Class Form1
 
     Private Sub Btn_apply_settings_Click(sender As Object, e As EventArgs) Handles btn_apply_settings.Click
 
-        If Me.chk_autostart_true.CheckState = CheckState.Checked Then
+        Me.WriteSettings()
 
-            Me.StartFunding()
+        If Processes.IsRunningMiner() = True Then
 
-            Me.Timer1.Enabled = True
-            Me.Timer1.Interval = 10000
-            Me.Timer1.Start()
+            ' restart the miner, no matter what autostart is at
 
-            Me.TimerExecute()
+            Processes.KillMiner()
+            Me.sts_strip_label1.Text = "Funding stopped"
+            Application.DoEvents()
 
+            SoftstartMinerviaTimer2()
 
         Else
 
+            If Me.chk_autostart_true.CheckState = CheckState.Checked Then
 
-            Me.WriteSettings()
-            If Me.minerRuns = True Then
+                ' start the miner since the user told autostart true
 
-                Processes.KillMiner()
-
-                Threading.Thread.Sleep(1000)
-
-                Me.StartFunding()
-
-                Me.Timer1.Enabled = True
-                Me.Timer1.Interval = 10000
-                Me.Timer1.Start()
-
-                Me.TimerExecute()
+                SoftstartMinerviaTimer2()
 
             End If
 
@@ -898,7 +1004,7 @@ Public Class Form1
             End If
 
 
-            If Processes.IsRunningMiner = True Then
+            If Processes.IsRunningMiner() = True Then
 
                 Dim result As MsgBoxResult = MsgBox("The Funding is still active, closing as well?", MsgBoxStyle.YesNoCancel, "Funding still active")
 
@@ -977,9 +1083,11 @@ Public Class Form1
 
     Private Sub MenuItem1_Click()
 
-        If minerRuns = True Then
+        If Processes.IsRunningMiner() = True Then
 
             Processes.KillMiner()
+            Me.sts_strip_label1.Text = "Funding stopped"
+            Application.DoEvents()
 
             Threading.Thread.Sleep(3000)
 
@@ -990,14 +1098,9 @@ Public Class Form1
     End Sub
     Private Sub MenuItem2_Click()
 
-        If minerRuns = False Then
-            Me.StartFunding()
+        If Processes.IsRunningMiner() = False Then
 
-            Me.Timer1.Enabled = True
-            Me.Timer1.Interval = 10000
-            Me.Timer1.Start()
-
-            Me.TimerExecute()
+            SoftstartMinerviaTimer2()
 
         End If
 
@@ -1015,7 +1118,7 @@ Public Class Form1
     End Sub
     Private Sub MenuItem4_Click()
 
-        If Processes.IsRunningMiner = True Then
+        If Processes.IsRunningMiner() = True Then
 
             Dim result As MsgBoxResult = MsgBox("The Funding is still active, closing as well?", MsgBoxStyle.YesNoCancel, "Funding still active")
 
