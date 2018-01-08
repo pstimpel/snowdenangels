@@ -28,7 +28,7 @@ This project relies in parts on xmr-stak, a mining software written by fireice-u
 
 This project has a homepage where users can find support, statistics and so on: https://redzoneaction.org/sgasupport/
 
-Current status: **release test**
+Current status: **release candidate**
 
 
 
