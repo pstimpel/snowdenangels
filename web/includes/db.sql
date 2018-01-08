@@ -2,6 +2,7 @@
 
 -- DROP TABLE public.errors;
 
+
 CREATE TABLE public.errors
 (
     errors_id integer NOT NULL DEFAULT nextval('errors_errors_id_seq'::regclass),
@@ -47,9 +48,9 @@ CREATE INDEX idx_errors_errors_stacktrace
     ON public.errors USING btree
     (errors_stacktrace COLLATE pg_catalog."default")
     TABLESPACE pg_default;
-	
-	
-	
+    
+    
+    
 -- Table: public.stats_persession
 
 -- DROP TABLE public.stats_persession;
@@ -100,7 +101,7 @@ CREATE INDEX idx_stats_persession_userkey
     TABLESPACE pg_default;
 
 
-	-- Table: public.stats_daily
+    -- Table: public.stats_daily
 
 -- DROP TABLE public.stats_daily;
 
@@ -121,4 +122,4 @@ ALTER TABLE public.stats_daily
   OWNER TO dbsgasupport;
 
 
-	
+    
