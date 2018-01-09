@@ -18,12 +18,14 @@
     <meta property="og:description" content="Join me in Helping Snowden's Guardian Angels, and share a little of your CPU power. Learn more at bit.ly/snowdenangels #tuwat" />
     <meta property="fb:admins" content="100000629949351"/>
 
-    <meta name="twitter:card" content="https://redzoneaction.org/sgasupport/images/socialv3.png" />
-    <meta name="twitter:site" content="@pjotr72" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@PjotrS72" />
     <meta name="twitter:title" content="Snowden's Guardian Angels - Support ForTheRefugees.com" />
     <meta name="twitter:description" content="Join me in Helping Snowden's Guardian Angels, and share a little of your CPU power. Learn more at bit.ly/snowdenangels #tuwat" />
     <meta name="twitter:image" content="https://redzoneaction.org/sgasupport/images/socialv3.png" />
     <meta name="twitter:domain" content="redzoneaction.org" />
+    <meta name="twitter:creator" content="@PjotrS72" />
+
 
     <meta http-equiv="pragma" content="no-cache"/>
     <meta http-equiv="expires" content="0"/>
