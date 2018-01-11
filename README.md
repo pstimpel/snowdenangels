@@ -34,7 +34,7 @@ You could check the checksums of the provided files, just to make sure they are 
 
 The file containing the hash of the setup file:
 
-[List of hashes](setuphash.txt)
+[Hash of setup file](setuphash.txt)
 
 The file containing the hashes of the files installed on your computer by the setup:
 
