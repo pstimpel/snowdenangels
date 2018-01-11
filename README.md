@@ -28,7 +28,21 @@ This project relies in parts on xmr-stak, a mining software written by fireice-u
 
 This project has a homepage where users can find support, statistics and so on: https://redzoneaction.org/sgasupport/
 
-Current status: **release candidate**
+# Checksums
+
+You could check the checksums of the provided files, just to make sure they are the ones we provide to you. The hashes are generated using sha256sum, and the files are signed by using gpg/pgp with the key belonging to pstimpel@googlemail.com. You can find the keys at https://pgp.mit.edu/pks/lookup?search=pstimpel%40googlemail.com&op=index, just make sure using the latest one!
+
+The file containing the hash of the setup file:
+
+[List of hashes](setuphash.txt)
+
+The file containing the hashes of the files installed on your computer by the setup:
+
+[List of hashes](hashes.txt)
+
+You could verify the signature using your gpg/pgp installation, or by using online services such as https://keybase.io/verify. Once you verified the "list of hashes"-file itself is valid and signed by the key belonging to pstimpel@googlemail.com, you could check the installed files against the table of hashes using sha256sum.  
+
+# Current status: **release candidate**
 
 
 
