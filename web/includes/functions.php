@@ -94,18 +94,13 @@ function getMarketData() {
         $array=json_decode($homepage, true);
 
         $rateBtcInUsd=$array["USD"]["last"];
-
-
-
-
-        $homepage = file_get_contents('https://bittrex.com/api/v1.1/public/getmarkets');
-        $array=json_decode($homepage, true);
-
-
-
-
+    
         $rateXmrInBtc=0;
 
+
+        /*
+        $homepage = file_get_contents('https://bittrex.com/api/v1.1/public/getmarkets');
+        $array=json_decode($homepage, true);
 
         foreach ($array['result'] as $item) {
             if($item['MarketCurrency']=="XMR" && $item['BaseCurrency']=="BTC") {
@@ -113,7 +108,13 @@ function getMarketData() {
             }
 
         }
-
+        */
+    
+        $homepage = file_get_contents('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=XMR,BTC');
+        $array=json_decode($homepage, true);
+    
+        $rateXmrInBtc=$array['BTC']/$array['XMR'];
+    
         $XMR1InBTC = $rateXmrInBtc;
 
         $XMR2USD = $XMR1InBTC * $rateBtcInUsd;
