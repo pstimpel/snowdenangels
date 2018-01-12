@@ -530,14 +530,6 @@ Public Class Form1
         End If
 
 
-        'TODO remove these 4 lines once we turn from BETA into PRODUCTIVE
-        Me.chk_allowErrorTransfer.Checked = True
-        Me.chk_allowStatsTransfer.Checked = True
-        Me.chk_allowErrorTransfer.Enabled = False
-        Me.chk_allowStatsTransfer.Enabled = False
-
-
-
         Me.xmrtcpport = MinerConfig.GetFreeTcpPort()
 
         Me.lbl_xmrtcpport_status.Text = Me.xmrtcpport.ToString
