@@ -285,6 +285,11 @@ function displayMain() {
 
     $smarty->assign("tops",getTops());
     
+    $market = getMarketData();
+    
+    $smarty->assign("market", $market);
+    
+    
 }
 
 function checkKey($mykey) {
