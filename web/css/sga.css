@@ -1,6 +1,17 @@
-.ui-state-active {
+.ui-state-active  {
     background: #000000 !important;
     border: 1px solid #444444 !important;
+    outline: none;
+}
+.ui-accordion-header-active {
+    background: #000000 !important;
+    border: 1px solid #444444 !important;
+    outline: none;
+}
+.ui-state-focus {
+    background: #000000 !important;
+    border: 1px solid #444444 !important;
+    outline: none;
 }
 
 .addtopmargin {
