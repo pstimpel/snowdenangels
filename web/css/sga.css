@@ -1,3 +1,8 @@
+.ui-state-active {
+    background: #000000 !important;
+    border: 1px solid #444444 !important;
+}
+
 .addtopmargin {
     margin-top: 25px;
 }
