@@ -12,10 +12,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link" href="?" title="Home"><b class="fa fa-home" style="font-size: 40px;"></b></a>
+                <a class="nav-link" href="?page=about" title="Home"><b class="fa fa-home" style="font-size: 40px;"></b></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="?page=about" title="About"><b class="fa fa-info" style="font-size: 40px;"></b></a>
+                <a class="nav-link" href="?page=stats" title="Stats"><b class="fa fa-line-chart" style="font-size: 40px;"></b></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="https://github.com/pstimpel/snowdenangels/tree/master/release" target="_blank" title="Download"><b class="fa fa-download" style="font-size: 40px;"></b></a>

@@ -59,9 +59,12 @@ switch($_GET['page']) {
     case "legal":
         $display="legal";
         break;
-    default:
-        $display="main";
+    case "stats":
+        $display="stats";
         displayMain();
+        break;
+    default:
+        $display="about";
 
 }
 $smarty->assign("display",$display);
