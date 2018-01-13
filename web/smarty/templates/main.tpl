@@ -92,12 +92,12 @@
                     <th>1 XMR in BTC</th>
                     <th>1 BTC in USD</th>
                     <th>1 XMR in USD</th>
-                    <th>Hashes per XMR</th>
+                    <th>est. Hashes per XMR</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><b>estimated market</b></td>
+                    <td><b>Market data</b></td>
                     <td>{$market['XMR2BTC']|number_format:6:".":","}</td>
                     <td>{$market['BTC2USD']|number_format:2:".":","}</td>
                     <td>{$market['XMR2USD']|number_format:2:".":","}</td>
