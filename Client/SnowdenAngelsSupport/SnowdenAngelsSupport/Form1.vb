@@ -1258,9 +1258,9 @@ Public Class Form1
 
     Private Sub Lnk_moreinfo_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnk_moreinfo.LinkClicked
 
-        Dim link As String = "https://redzoneaction.org/sgasupport/"
+        Dim link As String = "https://redzoneaction.org/sgasupport/?page=stats"
         If Me.allowStatsTransfer = True Then
-            link = link & "?key=" & Me.userkey
+            link = link & "&key=" & Me.userkey
         End If
         System.Diagnostics.Process.Start(link)
 
