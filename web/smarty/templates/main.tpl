@@ -16,7 +16,7 @@
                     <th>XMR</th>
                     <th>USD</th>
                     <th>Computers</th>
-
+                    <th>Days to 1 XMR</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -27,7 +27,7 @@
                     <td>{$personal.sumXMRTotal}</td>
                     <td>{$personal.sumUSDTotal}</td>
                     <td>{$personal.uniqueComputersTotal}</td>
-
+                    <td>{$personal.daysToXMRTotal}</td>
                 </tr>
                 <tr>
                     <td><b>est. Last 24h</b></td>
@@ -36,6 +36,7 @@
                     <td>{$personal.sumXMRLast}</td>
                     <td>{$personal.sumUSDLast}</td>
                     <td>{$personal.uniqueComputersLast}</td>
+                    <td>{$personal.daysToXMRLast}</td>
 
                 </tr>
 
@@ -59,6 +60,8 @@
                 <th>USD</th>
                 <th>Computers</th>
                 <th>Users</th>
+                <th>Days to 1 XMR</th>
+
             </tr>
             </thead>
             <tbody>
@@ -70,6 +73,7 @@
                 <td>{$summaries.sumUSDTotal}</td>
                 <td>{$summaries.uniqueComputersTotal}</td>
                 <td>{$summaries.uniqueUsersTotal}</td>
+                <td>{$summaries.daysToXMRTotal}</td>
             </tr>
             <tr>
                 <td><b>est. Last 24h</b></td>
@@ -79,6 +83,7 @@
                 <td>{$summaries.sumUSDLast}</td>
                 <td>{$summaries.uniqueComputersLast}</td>
                 <td>{$summaries.uniqueUsersLast}</td>
+                <td>{$summaries.daysToXMRLast}</td>
             </tr>
 
             </tbody>

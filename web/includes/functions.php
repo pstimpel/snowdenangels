@@ -187,6 +187,7 @@ function getSummaries($mykey='') {
         $countscache = $memcache->get($memcacheobject);
 
     }
+    //$countscache=false;
     if($countscache===false) {
         $hashRatePerSecondSummaryTotal = getHashratePerSecondSummary(false, $mykey);
         $hashRatePerSecondSummaryLast = getHashratePerSecondSummary(true, $mykey);
@@ -202,9 +203,18 @@ function getSummaries($mykey='') {
 
         $market = getMarketData();
 
-
+        //now calculate how long it takes to 1 monero
+        $hashesPer24hTotal = $hashRatePerSecondSummaryTotal * 86400;
+        $hashesPer24hLast = $hashRatePerSecondSummaryLast * 86400;
+        $daysToXMRTotal = $market['HashesPerXMR'] / $hashesPer24hTotal;
+        $daysToXMRLast = $market['HashesPerXMR'] / $hashesPer24hLast;
+        //echo $hashesPer24hTotal." ".$hashesPer24hLast." ".$daysToXMRTotal." ".$daysToXMRLast."<hr>";
+    
+    
         $countscache=array(
             "key"=>$mykey,
+            "daysToXMRTotal"=>sprintf('%.1f',round($daysToXMRTotal,1)),
+            "daysToXMRLast"=>sprintf('%.1f',round($daysToXMRLast,1)),
             "hashRatePerSecondSummaryTotal"=>$hashRatePerSecondSummaryTotal,
             "hashRatePerSecondSummaryLast"=>$hashRatePerSecondSummaryLast,
             "hashRateSummaryTotal"=>$hashRateSummaryTotal,
@@ -221,6 +231,7 @@ function getSummaries($mykey='') {
         if($_SERVER["HTTP_HOST"] != "127.0.0.1") {
             $memcache->set($memcacheobject, $countscache, $memcachecachetime);
         }
+ 
     }
 
     return $countscache;
@@ -325,7 +336,7 @@ function getHashratePerSecondSummary($last24hours = false, $mykey='') {
                 DATE_PART('hour', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp)) * 60 +
                 DATE_PART('minute', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp)) * 60 +
                 DATE_PART('second', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp))) as hashspersecsum 
-from stats_persession where stats_persession_sessionend<>stats_persession_sessionstart";
+from stats_persession where stats_persession_sessionend<>stats_persession_sessionstart and stats_persession_hashes > 0";
     if($last24hours==true) {
         $sql = $sql . " and stats_persession_sessionend > now() - INTERVAL '1 days'";
     }
@@ -347,7 +358,7 @@ from stats_persession where stats_persession_sessionend<>stats_persession_sessio
 
 function getHashrateSummary($last24hours = false, $mykey='') {
     global $db;
-    $sql = "select sum(stats_persession_hashes) as summary  from stats_persession where 1=1 ";
+    $sql = "select sum(stats_persession_hashes) as summary  from stats_persession where 1=1 and stats_persession_hashes > 0";
     if($last24hours==true) {
         $sql = $sql . " and stats_persession_sessionend > now() - INTERVAL '1 days'";
     }
@@ -371,7 +382,7 @@ function getHashrateSummary($last24hours = false, $mykey='') {
 
 function getUniqueComputersCount($activeonly = false, $mykey='') {
     global $db;
-    $sql = "select count(distinct stats_persession_computerkey) as counter  from stats_persession where 1=1 ";
+    $sql = "select count(distinct stats_persession_computerkey) as counter  from stats_persession where 1=1  and stats_persession_hashes > 0";
     if($activeonly==true) {
         $sql = $sql . " and stats_persession_sessionend > now() - INTERVAL '1 days'";
     }
@@ -393,7 +404,7 @@ function getUniqueComputersCount($activeonly = false, $mykey='') {
 
 function getUniqueUsersCount($activeonly = false, $mykey='') {
     global $db;
-    $sql = "select count(distinct stats_persession_userkey) as counter  from stats_persession where 1=1 ";
+    $sql = "select count(distinct stats_persession_userkey) as counter  from stats_persession where 1=1  and stats_persession_hashes > 0";
     if($activeonly==true) {
         $sql = $sql . " and stats_persession_sessionend > now() - INTERVAL '1 days'";
     }
