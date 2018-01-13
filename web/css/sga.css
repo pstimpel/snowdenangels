@@ -1,3 +1,11 @@
+.addtopmargin {
+    margin-top: 25px;
+}
+
+.greyheader {
+    color: #444444;
+}
+
 /* Freakin horizontal scrollbar caused by original marhins of "-15" */
 .row {
     margin-right: 0px !important;

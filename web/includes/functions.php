@@ -279,10 +279,40 @@ function generateXML($personal=false, $mykey='') {
     exit;
 }
 
+function calc1000UsersSummary($summary) {
+    
+    $factorTotal=1000/$summary['uniqueUsersTotal'];
+    $factorLast=1000/$summary['uniqueUsersLast'];
+    
+    $returnvalue=array(
+        "key"=>"",
+        "daysToXMRTotal"=>sprintf('%.1f',round($summary['daysToXMRTotal'] / $factorTotal,1)),
+        "daysToXMRLast"=>sprintf('%.1f',round($summary['daysToXMRLast'] / $factorLast,1)),
+        "hashRatePerSecondSummaryTotal"=>round($summary['hashRatePerSecondSummaryTotal'] * $factorTotal,0),
+        "hashRatePerSecondSummaryLast"=>round($summary['hashRatePerSecondSummaryLast'] * $factorLast,0),
+        "hashRateSummaryTotal"=>round($summary['hashRateSummaryTotal'] * $factorTotal, 9),
+        "hashRateSummaryLast"=>round($summary['hashRateSummaryLast'] * $factorLast, 0),
+        "uniqueComputersTotal"=>0,
+        "uniqueComputersLast"=>0,
+        "uniqueUsersTotal"=>0,
+        "uniqueUsersLast"=>0,
+        "sumXMRTotal"=>sprintf('%.8f', round( $factorTotal * $summary['sumXMRTotal'],8)),
+        "sumXMRLast"=>sprintf('%.8f', round($factorLast * $summary['sumXMRLast'],8)),
+        "sumUSDTotal"=>sprintf('%.2f', round($factorTotal * $summary['sumUSDTotal'],2)),
+        "sumUSDLast"=>sprintf('%.2f', round($factorLast * $summary['sumUSDLast'],2))
+    );
+    return $returnvalue;
+}
+
 function displayMain() {
     global $smarty;
 
-    $smarty->assign("summaries",getSummaries());
+    $globalSummary=getSummaries();
+    $smarty->assign("summaries",$globalSummary);
+    
+    $estimated100Users = calc1000UsersSummary($globalSummary);
+    $smarty->assign("summaries1000users",$estimated100Users);
+    
 
     $smarty->assign("chartdataFull",prepareChart(false));
     $smarty->assign("chartdata30d",prepareChart(true));
