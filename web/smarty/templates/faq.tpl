@@ -1,4 +1,6 @@
-<h3>Frequently Asked Questions</h3>
+<div class="flex-row row">
+    <div class="col-lg-6 col-sm-12">
+        <h3>Frequently Asked Questions</h3>
 
 {literal}
 
@@ -96,5 +98,7 @@ Yes, Windows might warn you about installing software from unknown sources. All 
             No problem, just contact me on <a href="https://twitter.com/PjotrS72" class="marklink" target="_blank">https://twitter.com/PjotrS72</a> or shot me an email: <a class="marklink" href="mailto:pstimpel@googlemail.com">pstimpel@googlemail.com</a>, <a href="https://pgp.mit.edu/pks/lookup?op=get&search=0xA3019B6AC7BAC5F2" class="marklink" target="_blank">PGP key</a> available on key-servers.
 
         </p>
+    </div>
+</div>
     </div>
 </div>

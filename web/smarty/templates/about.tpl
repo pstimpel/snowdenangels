@@ -1,6 +1,6 @@
-<h3>What is this good for, and who are "Snowden's Guardian Angels"?</h3>
 <div class="flex-row row">
     <div class="col-lg-6 col-sm-12">
+        <h3>What is this good for, and who are "Snowden's Guardian Angels"?</h3>
         <h4>Snowden's Guardian Angels, a.k.a. Snowden refugees</h4>
         <p>
 

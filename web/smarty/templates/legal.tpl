@@ -1,6 +1,6 @@
-<h3>Legal stuff / Impressum / Contact</h3>
 <div class="flex-row row">
     <div class="col-lg-6 col-sm-12">
+        <h3>Legal stuff / Impressum / Contact</h3>
 
 <pre>
 Software written by:

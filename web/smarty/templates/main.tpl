@@ -1,5 +1,9 @@
-<h2>Snowden's Guardian Angels - Support</h2>
-<h3>Generating funds and awareness!</h3>
+<div class="row flex-row" >
+    <div class="col-lg-12 col-sm-12">
+        <h2>Snowden's Guardian Angels - Support</h2>
+        <h3>Generating funds and awareness!</h3>
+    </div>
+</div>
 
 <div class="row flex-row" >
     <div class="col-lg-12 col-sm-12">
@@ -8,8 +12,12 @@
     </div>
 </div>
 
-<h4>Summaries</h4>
+<div class="row flex-row" >
+    <div class="col-lg-12 col-sm-12">
 
+<h4>Summaries</h4>
+    </div>
+</div>
 {if sizeof($personal)!=0}
 
     <div class="row flex-row" >
