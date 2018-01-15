@@ -72,172 +72,6 @@ function insertError($postdata) {
     return false;
 }
 
-function getMarketData() {
-
-    //print_r($array);
-
-    $XMRMarket=array("XMR2BTC"=>0, "BTC2USD"=>0);
-
-    $XMRMarketget=false;
-    if($_SERVER["HTTP_HOST"] != "127.0.0.1") {
-
-        $memcache = new Memcached;
-        $memcache->addServers(array(array("127.0.0.1", 11211)));
-        $XMRMarketget = $memcache->get("SGAXMRMarket");
-
-    }
-    if($XMRMarketget===false) {
-
-
-
-        $homepage = file_get_contents('https://blockchain.info/de/ticker');
-        $array=json_decode($homepage, true);
-
-        $rateBtcInUsd=$array["USD"]["last"];
-    
-        $rateXmrInBtc=0;
-
-
-        /*
-        $homepage = file_get_contents('https://bittrex.com/api/v1.1/public/getmarkets');
-        $array=json_decode($homepage, true);
-
-        foreach ($array['result'] as $item) {
-            if($item['MarketCurrency']=="XMR" && $item['BaseCurrency']=="BTC") {
-                $rateXmrInBtc=$item['MinTradeSize'];
-            }
-
-        }
-        */
-    
-        $homepage = file_get_contents('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=XMR,BTC');
-        $array=json_decode($homepage, true);
-    
-        $rateXmrInBtc=$array['BTC']/$array['XMR'];
-    
-        $XMR1InBTC = $rateXmrInBtc;
-
-        $XMR2USD = $XMR1InBTC * $rateBtcInUsd;
-
-
-        $HashesPerXMR = (120000 * 86400);
-
-        $XMRMarket=array("XMR2BTC"=>$rateXmrInBtc, "BTC2USD"=>$rateBtcInUsd, "XMR2USD"=> $XMR2USD, "HashesPerXMR"=>$HashesPerXMR);
-
-
-        if($_SERVER["HTTP_HOST"] != "127.0.0.1") {
-            $memcache->set("SGAXMRMarket", $XMRMarket, 600);
-        }
-
-        return $XMRMarket;
-
-    } else {
-        return $XMRMarketget;
-    }
-
-
-}
-
-function getTops() {
-    global $db;
-    
-    $sql = "select sum(stats_persession_hashes) as hashes, stats_persession_userkey from stats_persession
-            group by stats_persession_userkey order by hashes desc limit 5";
-
-    $result = pg_query($db, $sql);
-    
-    $num3 = pg_numrows($result);
-
-    $counts=array();
-    $market = getMarketData();
-    
-    if ($num3 > 0) {
-        for ($i3 = 0; $i3 < $num3; $i3++) {
-            
-            $r = pg_fetch_array($result);
-    
-    
-            array_push($counts,array(
-                "key"=>substr($r['stats_persession_userkey'],0,10)."...".substr($r['stats_persession_userkey'],54,
-                        10),
-                "hashRatePerSecondSummaryTotal"=>$r['hashes'],
-                "sumXMRTotal"=>sprintf('%.8f', round($r['hashes']/$market['HashesPerXMR'],8)),
-                "sumUSDTotal"=>sprintf('%.2f', round(($r['hashes']/$market['HashesPerXMR'])*$market['XMR2USD'],2))
-            ));
-        }
-    }
-    return $counts;
-    
-}
-
-
-function getSummaries($mykey='') {
-
-    $memcacheobject='SGAScounters';
-    $memcachecachetime=300;
-    if($mykey!='') {
-        $memcacheobject='SGAScounters_'.$mykey;
-        $memcachecachetime=300;
-    }
-    $countscache=false;
-    if($_SERVER["HTTP_HOST"] != "127.0.0.1") {
-
-        $memcache = new Memcached;
-        $memcache->addServers(array(array("127.0.0.1", 11211)));
-        $countscache = $memcache->get($memcacheobject);
-
-    }
-    //$countscache=false;
-    if($countscache===false) {
-        $hashRatePerSecondSummaryTotal = getHashratePerSecondSummary(false, $mykey);
-        $hashRatePerSecondSummaryLast = getHashratePerSecondSummary(true, $mykey);
-
-        $hashRateSummaryTotal=getHashrateSummary(false, $mykey);
-        $hashRateSummaryLast=getHashrateSummary(true, $mykey);
-
-        $uniqueComputersTotal=getUniqueComputersCount(false, $mykey);
-        $uniqueComputersLast=getUniqueComputersCount(true, $mykey);
-
-        $uniqueUsersTotal = getUniqueUsersCount(false, $mykey);
-        $uniqueUsersLast = getUniqueUsersCount(true, $mykey);
-
-        $market = getMarketData();
-
-        //now calculate how long it takes to 1 monero
-        $hashesPer24hTotal = $hashRatePerSecondSummaryTotal * 86400;
-        $hashesPer24hLast = $hashRatePerSecondSummaryLast * 86400;
-        $daysToXMRTotal = $market['HashesPerXMR'] / $hashesPer24hTotal;
-        $daysToXMRLast = $market['HashesPerXMR'] / $hashesPer24hLast;
-        //echo $hashesPer24hTotal." ".$hashesPer24hLast." ".$daysToXMRTotal." ".$daysToXMRLast."<hr>";
-    
-    
-        $countscache=array(
-            "key"=>$mykey,
-            "daysToXMRTotal"=>sprintf('%.1f',round($daysToXMRTotal,1)),
-            "daysToXMRLast"=>sprintf('%.1f',round($daysToXMRLast,1)),
-            "hashRatePerSecondSummaryTotal"=>$hashRatePerSecondSummaryTotal,
-            "hashRatePerSecondSummaryLast"=>$hashRatePerSecondSummaryLast,
-            "hashRateSummaryTotal"=>$hashRateSummaryTotal,
-            "hashRateSummaryLast"=>$hashRateSummaryLast,
-            "uniqueComputersTotal"=>$uniqueComputersTotal,
-            "uniqueComputersLast"=>$uniqueComputersLast,
-            "uniqueUsersTotal"=>$uniqueUsersTotal,
-            "uniqueUsersLast"=>$uniqueUsersLast,
-            "sumXMRTotal"=>sprintf('%.8f', round($hashRateSummaryTotal/$market['HashesPerXMR'],8)),
-            "sumXMRLast"=>sprintf('%.8f', round($hashRateSummaryLast/$market['HashesPerXMR'],8)),
-            "sumUSDTotal"=>sprintf('%.2f', round(($hashRateSummaryTotal/$market['HashesPerXMR'])*$market['XMR2USD'],2)),
-            "sumUSDLast"=>sprintf('%.2f', round(($hashRateSummaryLast/$market['HashesPerXMR'])*$market['XMR2USD'],2))
-        );
-        if($_SERVER["HTTP_HOST"] != "127.0.0.1") {
-            $memcache->set($memcacheobject, $countscache, $memcachecachetime);
-        }
- 
-    }
-
-    return $countscache;
-
-}
-
 function to_xml(SimpleXMLElement $object, array $data)
 {
     foreach ($data as $key => $value) {
@@ -257,14 +91,20 @@ function to_xml(SimpleXMLElement $object, array $data)
 
 function generateXML($personal=false, $mykey='') {
 
+    $summary = new StatsCollector();
+    
     if($personal==false) {
-        $data=getSummaries();
+    
+        $summary->userkey=$mykey;
+        $data=$summary->getSummary();
         $data['key']='none';
 
     } else {
         if(strlen($mykey)==64) {
+    
+            $summary->userkey=$mykey;
+            $data=$summary->getSummary();
 
-            $data=getSummaries($mykey);
         } else {
 
             $data=array();
@@ -307,7 +147,10 @@ function calc1000UsersSummary($summary) {
 function displayMain() {
     global $smarty;
 
-    $globalSummary=getSummaries();
+    $summary = new StatsCollector();
+    $summary->userkey='';
+    $globalSummary=$summary->getSummary();
+
     $smarty->assign("summaries",$globalSummary);
     
     $estimated100Users = calc1000UsersSummary($globalSummary);
@@ -318,18 +161,17 @@ function displayMain() {
     $smarty->assign("chartdata30d",prepareChart(true));
 
     if(strlen($_SESSION["userkey"])==64) {
-
-        $smarty->assign("personal", getSummaries($_SESSION["userkey"]));
+        $personalsummary = new StatsCollector();
+        $personalsummary->userkey=$_SESSION["userkey"];
+        $smarty->assign("personal", $personalsummary->getSummary());
     } else {
 
         $smarty->assign("personal", array());
     }
 
-    $smarty->assign("tops",getTops());
+    $smarty->assign("tops", StatsCollector::getTops());
     
-    $market = getMarketData();
-    
-    $smarty->assign("market", $market);
+    $smarty->assign("market", StatsCollector::getMarketData());
     
     
 }
@@ -360,100 +202,6 @@ function checkKey($mykey) {
 
 }
 
-function getHashratePerSecondSummary($last24hours = false, $mykey='') {
-    global $db;
-    $sql = "select avg(stats_persession_hashes / (1+((DATE_PART('day', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp) * 24 + 
-                DATE_PART('hour', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp)) * 60 +
-                DATE_PART('minute', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp)) * 60 +
-                DATE_PART('second', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp))) as hashspersecsum 
-from stats_persession where stats_persession_sessionend<>stats_persession_sessionstart and stats_persession_hashes > 0";
-    if($last24hours==true) {
-        $sql = $sql . " and stats_persession_sessionend > now() - INTERVAL '1 days'";
-    }
-    if($mykey!='') {
-        $sql = $sql . " and stats_persession_userkey='" . $mykey . "'";
-    }
-    $result3 = pg_query($db,$sql);
-    $num3 = pg_numrows($result3);
-
-    if($num3>0) {
-        for ($i3 = 0; $i3 < $num3; $i3++)
-        {
-            $r = pg_fetch_array($result3);
-            return round($r['hashspersecsum'],0);
-        }
-    }
-    return 0;
-}
-
-function getHashrateSummary($last24hours = false, $mykey='') {
-    global $db;
-    $sql = "select sum(stats_persession_hashes) as summary  from stats_persession where 1=1 and stats_persession_hashes > 0";
-    if($last24hours==true) {
-        $sql = $sql . " and stats_persession_sessionend > now() - INTERVAL '1 days'";
-    }
-
-    if($mykey!='') {
-        $sql = $sql . " and stats_persession_userkey='" . $mykey . "'";
-    }
-    $result3 = pg_query($db,$sql);
-
-    $num3 = pg_numrows($result3);
-
-    if($num3>0) {
-        for ($i3 = 0; $i3 < $num3; $i3++)
-        {
-            $r = pg_fetch_array($result3);
-            return $r['summary'];
-        }
-    }
-    return 0;
-}
-
-function getUniqueComputersCount($activeonly = false, $mykey='') {
-    global $db;
-    $sql = "select count(distinct stats_persession_computerkey) as counter  from stats_persession where 1=1  and stats_persession_hashes > 0";
-    if($activeonly==true) {
-        $sql = $sql . " and stats_persession_sessionend > now() - INTERVAL '1 days'";
-    }
-    if($mykey!='') {
-        $sql = $sql . " and stats_persession_userkey='" . $mykey . "'";
-    }
-    $result3 = pg_query($db,$sql);
-    $num3 = pg_numrows($result3);
-
-    if($num3>0) {
-        for ($i3 = 0; $i3 < $num3; $i3++)
-        {
-            $r = pg_fetch_array($result3);
-            return $r['counter'];
-        }
-    }
-    return 0;
-}
-
-function getUniqueUsersCount($activeonly = false, $mykey='') {
-    global $db;
-    $sql = "select count(distinct stats_persession_userkey) as counter  from stats_persession where 1=1  and stats_persession_hashes > 0";
-    if($activeonly==true) {
-        $sql = $sql . " and stats_persession_sessionend > now() - INTERVAL '1 days'";
-    }
-    if($mykey!='') {
-        $sql = $sql . " and stats_persession_userkey='" . $mykey . "'";
-    }
-    $result3 = pg_query($db,$sql);
-    $num3 = pg_numrows($result3);
-
-    if($num3>0) {
-        for ($i3 = 0; $i3 < $num3; $i3++)
-        {
-            $r = pg_fetch_array($result3);
-            return $r['counter'];
-        }
-    }
-    return 0;
-}
-
 function getErrorsFromDatabase() {
 
     global $db;
@@ -481,11 +229,12 @@ function cron() {
 
     global $db;
 
-    $uniqueComputersTotal=getUniqueComputersCount(false);
-    $uniqueComputersLast=getUniqueComputersCount(true);
+    
+    $uniqueComputersTotal = StatsCollector::getUniqueComputersCount(false,'');
+    $uniqueComputersLast = StatsCollector::getUniqueComputersCount(true,'');
 
-    $uniqueUsersTotal = getUniqueUsersCount(false);
-    $uniqueUsersLast = getUniqueUsersCount(true);
+    $uniqueUsersTotal = StatsCollector::getUniqueUsersCount(false,'');
+    $uniqueUsersLast = StatsCollector::getUniqueUsersCount(true,'');
 
     $result = pg_prepare($db, "query",
         'insert into stats_daily (stats_daily_totalusers, stats_daily_activeusers, stats_daily_totalcomputers, stats_daily_activecomputers,
