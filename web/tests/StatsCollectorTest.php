@@ -3,14 +3,14 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once ("includes/StatsCollector.php");
+require_once (__DIR__ . "/../includes/StatsCollector.php");
 
 class StatsCollectorTest extends TestCase
 {
 
     public function testGetMarketData()
     {
-        
+
         $market = StatsCollector::getMarketData();
 
         $this->assertNotEmpty($market['XMR2BTC']);
