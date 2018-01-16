@@ -182,7 +182,7 @@ from stats_persession where stats_persession_sessionend<>stats_persession_sessio
     public static function getMarketData() {
     
         $XMRMarketget=false;
-        if($_SERVER["HTTP_HOST"] != "127.0.0.1") {
+        if(isset($_SERVER["HTTP_HOST"]) && $_SERVER["HTTP_HOST"] != "127.0.0.1") {
         
             $memcache = new Memcached;
             $memcache->addServers(array(array("127.0.0.1", 11211)));
@@ -206,11 +206,11 @@ from stats_persession where stats_persession_sessionend<>stats_persession_sessio
             $XMR2USD = $XMR1InBTC * $rateBtcInUsd;
         
             $HashesPerXMR = (120000 * 86400);
-        
+
             $XMRMarket=array("XMR2BTC"=>$rateXmrInBtc, "BTC2USD"=>$rateBtcInUsd, "XMR2USD"=> $XMR2USD, "HashesPerXMR"=>$HashesPerXMR);
         
         
-            if($_SERVER["HTTP_HOST"] != "127.0.0.1") {
+            if(isset($_SERVER["HTTP_HOST"]) && $_SERVER["HTTP_HOST"] != "127.0.0.1") {
                 $memcache->set("SGAXMRMarket", $XMRMarket, 600);
             }
         
