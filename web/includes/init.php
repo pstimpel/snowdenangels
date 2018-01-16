@@ -34,6 +34,8 @@ if($nosmarty != true) {
 //init DB
 include('./includes/db.php');
 
+//
+include('./includes/StatsCollector.php');
 
 //load function
 include('./includes/functions.php');

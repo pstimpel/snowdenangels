@@ -8,3 +8,7 @@ bin
 /web/smarty/cache
 /web/smarty/templates_c
 /Client/SnowdenAngelsSupport/SnowdenAngelsSupport/TestCert.pfx
+/web/vendor
+/web/composer.phar
+/web/composer.json
+/web/composer.lock
