@@ -12,3 +12,4 @@ bin
 /web/composer.phar
 /web/composer.json
 /web/composer.lock
+/release/*.exe
