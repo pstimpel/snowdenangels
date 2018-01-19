@@ -28,6 +28,10 @@ This project relies in parts on xmr-stak, a mining software written by fireice-u
 
 This project has a homepage where users can find support, statistics and so on: https://redzoneaction.org/sgasupport/
 
+# Signed executables
+
+All executables we provide are signed using a code-signing certificate, issued by an oublic Certificate Authority.
+
 # Checksums
 
 You could check the checksums of the provided files, just to make sure they are the ones we provide to you. The hashes are generated using sha256sum, and the files are signed by using gpg/pgp with the key belonging to pstimpel@googlemail.com. You can find the keys at https://pgp.mit.edu/pks/lookup?search=pstimpel%40googlemail.com&op=index, just make sure using the latest one!

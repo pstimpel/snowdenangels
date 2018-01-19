@@ -1,6 +1,6 @@
 # Download
 
-https://github.com/pstimpel/snowdenangels/raw/master/release/sassetup-0.9.6.6.exe
+https://github.com/pstimpel/snowdenangels/raw/master/release/sassetup-1.0.0.0.exe
 
 # System requirements
 
@@ -23,7 +23,7 @@ To update your installation, just download the latest setup-package, and run it 
 
 # Is it safe to ignore the security warnings during installation?
 
-We cannot answer this for you, and we are as foreign from your point of view as anybody else when it comes to installations of software. However, all included components were checked with the latest AV scanners, and from our point of view it is no risk for you or your computer. Since this whole thing is about creating funds for Snowden's Guardian Angels, we saved the money to purchase expensive certificates just to sign our little piece of software. Sorry, if this is invconvinient for you! But, you could at least make some basic checks. Please refer to 
+We cannot answer this for you, and we are as foreign from your point of view as anybody else when it comes to installations of software. However, all included components were checked with the latest AV scanners, and from our point of view it is no risk for you or your computer. The setup executable is signed by using a code-signing certificate issued by an public Certificate Authority, and the copied written to your computer are signed as well. On top, we provide hashes of all files, and you could make some basic checks at least. Please refer to 
 
 [Checksums](../README.md#Checksums)
 
