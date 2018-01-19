@@ -10,9 +10,10 @@ md temp
 cd temp
 
 @rem copy the files in question temp directory
-copy ..\..\SnowdenAngelsSupport\SnowdenAngelsSupport\bin\Release\*.exe *  
-copy ..\..\SnowdenAngelsSupport\SnowdenAngelsSupport\bin\Release\*.lib * 
-copy ..\..\SnowdenAngelsSupport\SnowdenAngelsSupport\bin\Release\*.dll * 
+copy ..\..\SnowdenAngelsSupport\SnowdenAngelsSupport\bin\Release\SnowdenAngelsSupport.exe *  
+copy ..\..\xmr-stak\xmr-stak.exe *  
+copy ..\..\xmr-stak\*.lib * 
+copy ..\..\xmr-stak\*.dll * 
 
 @rem create sha256 hashes of these files and store it outside this temp directory
 c:\cygwin64\bin\sha256sum.exe *.* > ..\list.txt
