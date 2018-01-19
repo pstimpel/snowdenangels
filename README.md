@@ -46,7 +46,7 @@ The file containing the hashes of the files installed on your computer by the se
 
 You could verify the signature using your gpg/pgp installation, or by using online services such as https://keybase.io/verify. Once you verified the "list of hashes"-file itself is valid and signed by the key belonging to pstimpel@googlemail.com, you could check the installed files against the table of hashes using sha256sum.  
 
-# Current status: **release candidate**
+# Current status: **release**
 
 
 
