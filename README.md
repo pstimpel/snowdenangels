@@ -28,6 +28,10 @@ This project relies in parts on xmr-stak, a mining software written by fireice-u
 
 This project has a homepage where users can find support, statistics and so on: https://redzoneaction.org/sgasupport/
 
+# Download
+
+https://github.com/pstimpel/snowdenangels/releases
+
 # Signed executables
 
 All executables we provide are signed using a code-signing certificate, issued by an public Certificate Authority.
