@@ -662,7 +662,7 @@ Public Class Form1
         nf.ContextMenuStrip = nfContextmenu
 
 
-        If Updates.QueryUpdate = True Then
+        If Updates.QueryUpdate(Assembly.GetExecutingAssembly().GetName().Version.ToString) = True Then
 
             Me.pct_update.Visible = True
 
