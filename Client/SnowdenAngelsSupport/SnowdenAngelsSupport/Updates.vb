@@ -1,8 +1,8 @@
 ﻿Imports System.Reflection
 
-Module Updates
+Public Class Updates
 
-    Public Function QueryUpdate() As Boolean
+    Public Shared Function QueryUpdate(installedVersion As String) As Boolean
 
         Try
 
@@ -29,7 +29,7 @@ Module Updates
 
                     Dim versionstring As String = content_foot(0)
 
-                    If versionstring.Equals("version=sassetup-" & Assembly.GetExecutingAssembly().GetName().Version.ToString & ".exe") Then
+                    If versionstring.Equals("version=sassetup-" & installedVersion & ".exe") Then
                         Return False
                     Else
                         Return True
@@ -60,4 +60,4 @@ Module Updates
 
     End Function
 
-End Module
+End Class

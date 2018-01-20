@@ -5,7 +5,7 @@ Imports SnowdenAngelsSupport
 
 <TestClass()> Public Class UnitTest_Crypto
 
-    <TestMethod()> Public Sub TestCryptoGenerateHash()
+    <TestMethod()> Public Sub Test_CryptoGenerateHash()
 
 
 
