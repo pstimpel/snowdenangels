@@ -1,5 +1,13 @@
 <?php
+/**
+ * functions.php contains all function outside classes
+ */
 
+/**
+ * @param string $postdata is a json strong containing the stats data from remote clients
+ *
+ * @return bool indicates if the postdata were stored or not
+ */
 function insertStats($postdata) {
     global $db;
 
@@ -48,6 +56,13 @@ function insertStats($postdata) {
     return false;
 }
 
+/**
+ * receives crash reports from remote clients and stores it
+ *
+ * @param string $postdata is a json containing the error message and stacktrace plus some more
+ *
+ * @return bool indicates of the operation was successful
+ */
 function insertError($postdata) {
     global $db;
     
@@ -72,6 +87,12 @@ function insertError($postdata) {
     return false;
 }
 
+/**
+ * turns an array into XML
+ *
+ * @param \SimpleXMLElement $object
+ * @param array             $data
+ */
 function to_xml(SimpleXMLElement $object, array $data)
 {
     foreach ($data as $key => $value) {
@@ -89,6 +110,12 @@ function to_xml(SimpleXMLElement $object, array $data)
     }
 }
 
+/**
+ * collects stats and turns it into XML to be presented in the remote application
+ *
+ * @param bool   $personal if set to true and mykey is not empty, personal stats are collected, otherwise global stats
+ * @param string $mykey the key if personal is set to true
+ */
 function generateXML($personal=false, $mykey='') {
 
     $summary = new StatsCollector();
@@ -119,6 +146,13 @@ function generateXML($personal=false, $mykey='') {
     exit;
 }
 
+/**
+ * creates fake stats "what happens if we have 1000 users instead of curreent users"
+ *
+ * @param array $summary is the regular global stats summary
+ *
+ * @return array contains the stats calculated for 1000 users
+ */
 function calc1000UsersSummary($summary) {
     
     $factorTotal=1000/$summary['uniqueUsersTotal'];
@@ -144,6 +178,9 @@ function calc1000UsersSummary($summary) {
     return $returnvalue;
 }
 
+/**
+ * renders main view by putting stats and more into smarty variables
+ */
 function displayMain() {
     global $smarty;
 
@@ -176,6 +213,13 @@ function displayMain() {
     
 }
 
+/**
+ * checks if a given key is valid and existing in the database
+ *
+ * @param string $mykey is the key to be checked
+ *
+ * @return bool is true if the key was found
+ */
 function checkKey($mykey) {
     global $db;
     if(strlen($mykey)==64) {
@@ -202,6 +246,9 @@ function checkKey($mykey) {
 
 }
 
+/**
+ * not useful at all
+ */
 function getErrorsFromDatabase() {
 
     global $db;
@@ -221,6 +268,10 @@ function getErrorsFromDatabase() {
     
 }
 
+
+/**
+ * executes the jobs for the nightly stats calculation
+ */
 function cron() {
     if (php_sapi_name() != 'cli') {
         echo "abort";
@@ -246,6 +297,13 @@ function cron() {
     exit;
 }
 
+/**
+ * prepare the arrays to be shown in charts on the stats page
+ *
+ * @param bool $last30days if set to true, the data are for the last 30 days, otherwise overall
+ *
+ * @return array contains the numbers
+ */
 function prepareChart($last30days=false) {
 
     global $db;

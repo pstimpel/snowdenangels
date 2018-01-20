@@ -1,4 +1,8 @@
 <?php
+/**
+ * the processor of all user inputs, renders the webpage
+ */
+
 $nosmarty=false;
 include('includes/init.php');
 
