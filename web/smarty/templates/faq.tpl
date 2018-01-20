@@ -25,7 +25,7 @@
                             href="https://github.com/fireice-uk/xmr-stak" target="_blank" class="marklink">XMR-Stak</a>.
                     This little program is calculating so called Hashes, and helps to maintain the network behind <a
                             href="https://getmonero.org/" target="_blank" class="marklink">Monero</a>. We changed the
-                    original funding software in a way it does not contribute to anyone else than the funding goal, and
+                    original funding software in a way it does not contribute to anything else than the funding goal, and
                     disabled all the stuff supporting GPU mining. We wrote some
                     support stuff around it, created a graphical user interface, and some statistics, so the user who
                     would like to join this little project doesn't face all the hassle of setting up a miner. And, we
@@ -167,7 +167,7 @@
                 <p>
                     The setup will install the whole thing inside a folder called something like <i>C:\Program Files
                         (X86)\SnowdenAngelsSupport\</i>. Inside this folder there are a few files and libraries. Once the
-                    software starts, it will copy sime files into a folder called something like
+                    software starts, it will copy some files into a folder called something like
                     <i>C:\Users\YOURNAME\AppData\Roaming\Peters Webcorner\Snowdens Guardian Angels Support\VERSION\</i>, we
                     will store settings and libraries of the miner inside this folder. If you enabled error reports, the
                     reports are stored in this folder as well, but temporarily only. Some settings will be stored in the
