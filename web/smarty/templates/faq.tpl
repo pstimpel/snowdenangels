@@ -167,7 +167,7 @@
                 <p>
                     The setup will install the whole thing inside a folder called something like <i>C:\Program Files
                         (X86)\SnowdenAngelsSupport\</i>. Inside this folder there are a few files and libraries. Once the
-                    software starts, it will copy sime files into a folder called something like
+                    software starts, it will copy some files into a folder called something like
                     <i>C:\Users\YOURNAME\AppData\Roaming\Peters Webcorner\Snowdens Guardian Angels Support\VERSION\</i>, we
                     will store settings and libraries of the miner inside this folder. If you enabled error reports, the
                     reports are stored in this folder as well, but temporarily only. Some settings will be stored in the
