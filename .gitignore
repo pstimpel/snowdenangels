@@ -13,3 +13,5 @@ bin
 /web/composer.json
 /web/composer.lock
 /release/*.exe
+/Client/SnowdenAngelsSupport/packages/MSTest.TestAdapter.1.2.0
+/Client/SnowdenAngelsSupport/packages/MSTest.TestFramework.1.2.0
