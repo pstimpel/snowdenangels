@@ -1,9 +1,9 @@
 ﻿Imports System.Security.Cryptography
 Imports System.Text
 
-Module Crypto
+Public Class Crypto
 
-    Public Function GenerateSHA256String(ByVal inputString) As String
+    Public Shared Function GenerateSHA256String(ByVal inputString) As String
         Dim sha256 As SHA256 = SHA256Managed.Create()
         Dim bytes As Byte() = Encoding.UTF8.GetBytes(inputString)
         Dim hash As Byte() = sha256.ComputeHash(bytes)
@@ -16,4 +16,4 @@ Module Crypto
         Return stringBuilder.ToString()
     End Function
 
-End Module
+End Class

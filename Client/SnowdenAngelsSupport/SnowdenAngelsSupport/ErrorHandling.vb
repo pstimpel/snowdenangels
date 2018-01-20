@@ -64,6 +64,7 @@ Public Class ErrorHandling
 
             Randomize()
             Dim rand As Integer = Math.Round(Rnd(1) * 1000000000, 0)
+
             Dim fileName As String = Crypto.GenerateSHA256String((rand).ToString & " - " & errordirectory & (rand * 2).ToString).ToLower & ".txt"
 
             '   [
