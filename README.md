@@ -30,7 +30,7 @@ This project has a homepage where users can find support, statistics and so on: 
 
 # Download
 
-https://github.com/pstimpel/snowdenangels/releases
+https://github.com/pstimpel/snowdenangels/releases/latest
 
 # Signed executables
 

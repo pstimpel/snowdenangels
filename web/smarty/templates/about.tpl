@@ -1,3 +1,7 @@
+
+<div class="alert alert-success" role="alert">
+    We are <b>{$summaries.uniqueUsersTotal} Supporters</b> right now! Help us growing! Spread the word!
+</div>
 <div class="flex-row row">
     <div class="col-lg-6 col-sm-12">
         <h3>What is this good for, and who are "Snowden's Guardian Angels"?</h3>

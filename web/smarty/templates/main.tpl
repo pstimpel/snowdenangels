@@ -1,3 +1,6 @@
+<div class="alert alert-success" role="alert">
+    We are <b>{$summaries.uniqueUsersTotal} Supporters</b> right now! Help us growing! Spread the word!
+</div>
 <div class="row flex-row" >
     <div class="col-lg-12 col-sm-12">
         <h2>Snowden's Guardian Angels - Support</h2>
@@ -5,12 +8,6 @@
     </div>
 </div>
 
-<div class="row flex-row" >
-    <div class="col-lg-12 col-sm-12">
-        <h5>Beta, but you could join!</h5>
-        <p>Dear visitor, at the moment this is all beta, it is in development, it is a test. But if you would like to join, please do so. We are generating funds already, even this is a test. Joining us is easy: just download the support client, install it...that's it! Thanks for considering!</p>
-    </div>
-</div>
 
 <div class="row flex-row" >
     <div class="col-lg-12 col-sm-12">

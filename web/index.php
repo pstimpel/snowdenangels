@@ -56,6 +56,7 @@ switch($_GET['page']) {
     
     case "about":
         $display="about";
+        displayMain();
         break;
     case "faq":
         $display="faq";
