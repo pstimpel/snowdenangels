@@ -179,6 +179,18 @@ function calc1000UsersSummary($summary) {
 }
 
 /**
+ * renders the about page
+ */
+function displayAbout() {
+    global $smarty;
+    $summary = new StatsCollector();
+    $summary->userkey='';
+    $globalSummary=$summary->getSummary();
+    $smarty->assign("summaries",$globalSummary);
+    
+}
+
+/**
  * renders main view by putting stats and more into smarty variables
  */
 function displayMain() {
