@@ -1,3 +1,6 @@
+a {
+    word-wrap: break-word !important;
+}
 .marklink {
     text-decoration: underline;
 }

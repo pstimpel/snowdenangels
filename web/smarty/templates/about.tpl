@@ -58,11 +58,13 @@
 
         <div style="margin-bottom: 25px; ">
             <a href="https://www.youtube.com/watch?v=Cu7WDbUk9Qs" target="_blank">
-                <img src="images/snowdenvideo.png" border="0" alt="Watch Ed Snowden on Youtube" title="Watch Ed Snowden on Youtube">
+                <img src="images/snowdenvideo.png" border="0" alt="Watch Ed Snowden on Youtube"
+                     title="Watch Ed Snowden on Youtube" class="img-fluid">
             </a>
         </div>
         <div style="margin-bottom: 25px;">
-            <img src="images/ForTheRefugees_851_315.jpg" title="For the Refugees" alt="For the Refugees" ALIGN=”right”>
+            <img src="images/ForTheRefugees_851_315.jpg" title="For the Refugees"
+                 alt="For the Refugees" ALIGN=”right” class="img-fluid">
         </div>
 
     </div>
