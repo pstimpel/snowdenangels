@@ -1,11 +1,13 @@
-﻿Module Registry
+﻿Public Class Registry
 
-    Private Const regPath As String = "HKEY_CURRENT_USER\Software\SnowdenAngelsSupport"
+    Private Const regPath_CURRENTUSER As String = "Software\SnowdenAngelsSupport"
+    Private Const regPath As String = "HKEY_CURRENT_USER\" & regPath_CURRENTUSER
     Private Const regPathUAC As String = "HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"
 
+    'TODO: check, if we need the anti elevation warning things in UAC, since the miner is not elevated anymore
     'TODO: make this more nice, by determining regPath dynamic instead of having different sets of similar functions
 
-    Public Function SetAutostart(enabled As Boolean) As Boolean
+    Public Shared Function SetAutostart(enabled As Boolean) As Boolean
 
         Try
 
@@ -21,7 +23,7 @@
 
                 Catch exa As Exception
 
-                    ' we are interested in errors telling the object does not exist, since we want to delete it anyways..
+                    ' we are not interested in errors telling the object does not exist, since we want to delete it anyways..
                 End Try
 
             End If
@@ -40,7 +42,10 @@
 
     End Function
 
-    Public Function KeyExistsUAC(key As String) As Boolean
+
+
+
+    Public Shared Function KeyExistsUAC(key As String) As Boolean
 
         Try
 
@@ -66,7 +71,7 @@
 
     End Function
 
-    Public Function GetValueUAC(key As String) As String
+    Public Shared Function GetValueUAC(key As String) As String
 
         Try
 
@@ -85,7 +90,7 @@
 
     End Function
 
-    Public Function SetValueUAC(key As String, value As String) As Boolean
+    Public Shared Function SetValueUAC(key As String, value As String) As Boolean
 
         Try
 
@@ -112,7 +117,7 @@
 
     End Function
 
-    Public Function CreateKeyUAC(key As String) As Boolean
+    Public Shared Function CreateKeyUAC(key As String) As Boolean
 
         Try
 
@@ -138,10 +143,47 @@
 
 
 
-
-    Public Function KeyExists(key As String) As Boolean
+    Public Shared Function DeleteKey(key As String) As Boolean
 
         Try
+
+            If key.Length = 0 Then
+
+                Return False
+
+            End If
+
+
+            If KeyExists(key) = True Then
+
+                My.Computer.Registry.CurrentUser.OpenSubKey(regPath_CURRENTUSER, True).DeleteValue(key)
+
+            End If
+
+            Return True
+
+        Catch exa As Exception
+
+            'MsgBox(exa.Message)
+            ' we are not interested in errors telling the object does not exist, since we want to delete it anyways..
+
+            Return True
+
+        End Try
+
+
+    End Function
+
+    Public Shared Function KeyExists(key As String) As Boolean
+
+        Try
+
+            If key.Length = 0 Then
+
+                Return False
+
+            End If
+
 
             If My.Computer.Registry.GetValue(regPath, key, Nothing) Is Nothing Then
 
@@ -165,9 +207,15 @@
 
     End Function
 
-    Public Function GetValue(key As String) As String
+    Public Shared Function GetValue(key As String) As String
 
         Try
+
+            If key.Length = 0 Then
+
+                Return ""
+
+            End If
 
             Return My.Computer.Registry.GetValue(regPath, key, Nothing)
 
@@ -184,9 +232,16 @@
 
     End Function
 
-    Public Function SetValue(key As String, value As String) As Boolean
+    Public Shared Function SetValue(key As String, value As String) As Boolean
 
         Try
+
+            If key.Length = 0 Then
+
+                Return False
+
+            End If
+
 
             If Not Registry.KeyExists(key) Then
 
@@ -211,9 +266,15 @@
 
     End Function
 
-    Public Function CreateKey(key As String) As Boolean
+    Public Shared Function CreateKey(key As String) As Boolean
 
         Try
+
+            If key.Length = 0 Then
+
+                Return False
+
+            End If
 
             If Not Registry.KeyExists(key) Then
 
@@ -236,4 +297,4 @@
     End Function
 
 
-End Module
+End Class

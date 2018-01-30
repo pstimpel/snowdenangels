@@ -1,4 +1,8 @@
 <?php
+/**
+ * crash report collector
+ */
+
 $nosmarty=true;
 require 'includes/init.php';
 

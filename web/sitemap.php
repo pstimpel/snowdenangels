@@ -1,4 +1,7 @@
 <?php
+/**
+ * the sitemap for search engines
+ */
 header("Content-type: application/xhtml+xml");
 echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";?>
 <urlset xmlns="http://www.google.com/schemas/sitemap/0.84">

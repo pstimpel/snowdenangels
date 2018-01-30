@@ -1,22 +1,46 @@
 <?php
 
-
+/**
+ * Class StatsCollector
+ *
+ * compiles stats from database, collects marked data from remote, and stores it in the memcache for further use
+ */
 class StatsCollector
 {
+    /**
+     * keeps the userkey the private stats are collected for
+     *
+     * @var string
+     */
     public $userkey;
     
+    /**
+     * StatsCollector constructor.
+     */
     function __construct() {
 
         $this->userkey='';
 
     }
     
+    /**
+     * returns the compiled stats array
+     *
+     * @return array
+     */
     public function getSummary() {
 
         return $this->compileSummary();
 
     }
     
+    /**
+     * creates the stats array
+     *
+     * Checks for stats array in memcachen, and creates/stores a new one once the memcache is not valid anymore
+     *
+     * @return array
+     */
     private function compileSummary() {
         $memcacheobject='SGAScounters';
         $memcachecachetime=300;
@@ -83,6 +107,14 @@ class StatsCollector
     
     }
     
+    /**
+     * returns the hashrate per second
+     *
+     * @param boolean $last24hours if set to true the data coverage is about the last 24 hours
+     * @param string $mykey if not empty the hashrate is for the key only
+     *
+     * @return int represents hashrate per second
+     */
     private function getHashratePerSecondSummary($last24hours, $mykey) {
         global $db;
         $sql = "select avg(stats_persession_hashes / (1+((DATE_PART('day', stats_persession_sessionend::timestamp - stats_persession_sessionstart::timestamp) * 24 +
@@ -109,6 +141,14 @@ from stats_persession where stats_persession_sessionend<>stats_persession_sessio
         return 0;
     }
     
+    /**
+     * returns summary of all hashes
+     *
+     * @param boolean $last24hours if set to true the data coverage is about the last 24 hours
+     * @param string $mykey if not empty the hashrate is for the key only
+     *
+     * @return int represents the total number of hashes
+     */
     private function getHashrateSummary($last24hours, $mykey) {
         global $db;
         $sql = "select sum(stats_persession_hashes) as summary  from stats_persession where 1=1 and stats_persession_hashes > 0";
@@ -133,6 +173,14 @@ from stats_persession where stats_persession_sessionend<>stats_persession_sessio
         return 0;
     }
     
+    /**
+     * returns number of computers total
+     *
+     * @param boolean $activeonly if set to true the data coverage is about the last 24 hours
+     * @param string $mykey if not empty the number of computers is for the key only
+     *
+     * @return int represents the number of computers
+     */
     public static function getUniqueComputersCount($activeonly, $mykey) {
         global $db;
         $sql = "select count(distinct stats_persession_computerkey) as counter  from stats_persession where 1=1  and stats_persession_hashes > 0";
@@ -155,6 +203,14 @@ from stats_persession where stats_persession_sessionend<>stats_persession_sessio
         return 0;
     }
     
+    /**
+     * number of unique users
+     *
+     * @param boolean $activeonly if true, the coverage of data is about the last 24 hours
+     * @param string $mykey if not empty, data coverage is about a certain key, should return 1 if database is clean
+     *
+     * @return int number of unique users
+     */
     public static function getUniqueUsersCount($activeonly, $mykey) {
         global $db;
         $sql = "select count(distinct stats_persession_userkey) as counter  from stats_persession where 1=1  and stats_persession_hashes > 0";
@@ -177,8 +233,14 @@ from stats_persession where stats_persession_sessionend<>stats_persession_sessio
         return 0;
     }
     
-
     
+    /**
+     * collect marketdata
+     *
+     * returns the marketdata from memcache and creates/stores new marketdata once the memcahce is not valid
+     *
+     * @return array contains the market data
+     */
     public static function getMarketData() {
     
         $XMRMarketget=false;
@@ -223,6 +285,11 @@ from stats_persession where stats_persession_sessionend<>stats_persession_sessio
     
     }
     
+    /**
+     * some basic stats of the top 5 users
+     *
+     * @return array contains the stats
+     */
     public static function getTops() {
         global $db;
         

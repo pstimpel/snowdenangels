@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SnowdenAngelsSupport", "SnowdenAngelsSupport\SnowdenAngelsSupport.vbproj", "{E3A14D20-243A-44BC-A8AE-CEC7767D1AD7}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "UnitTests", "UnitTests\UnitTests.vbproj", "{EF4DED25-BEA7-4CD4-879D-8D7DAA2EC043}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{E3A14D20-243A-44BC-A8AE-CEC7767D1AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3A14D20-243A-44BC-A8AE-CEC7767D1AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3A14D20-243A-44BC-A8AE-CEC7767D1AD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF4DED25-BEA7-4CD4-879D-8D7DAA2EC043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF4DED25-BEA7-4CD4-879D-8D7DAA2EC043}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF4DED25-BEA7-4CD4-879D-8D7DAA2EC043}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF4DED25-BEA7-4CD4-879D-8D7DAA2EC043}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

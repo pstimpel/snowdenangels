@@ -1,4 +1,8 @@
 <?php
+/**
+ * the processor of all user inputs, renders the webpage
+ */
+
 $nosmarty=false;
 include('includes/init.php');
 
@@ -52,7 +56,7 @@ switch($_GET['page']) {
     
     case "about":
         $display="about";
-        displayMain();
+        displayAbout();
         break;
     case "faq":
         $display="faq";
@@ -66,6 +70,7 @@ switch($_GET['page']) {
         break;
     default:
         $display="about";
+        displayAbout();
 
 }
 $smarty->assign("display",$display);

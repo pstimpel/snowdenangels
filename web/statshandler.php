@@ -1,4 +1,8 @@
 <?php
+/**
+ * returns stats back to the GUI of the remote clients
+ */
+
 $nosmarty=true;
 require 'includes/init.php';
 
