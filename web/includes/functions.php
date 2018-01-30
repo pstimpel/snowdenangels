@@ -130,7 +130,7 @@ function calc1000UsersSummary($summary) {
         "daysToXMRLast"=>sprintf('%.1f',round($summary['daysToXMRLast'] / $factorLast,1)),
         "hashRatePerSecondSummaryTotal"=>round($summary['hashRatePerSecondSummaryTotal'] * $factorTotal,0),
         "hashRatePerSecondSummaryLast"=>round($summary['hashRatePerSecondSummaryLast'] * $factorLast,0),
-        "hashRateSummaryTotal"=>round($summary['hashRateSummaryTotal'] * $factorTotal, 9),
+        "hashRateSummaryTotal"=>round($summary['hashRateSummaryTotal'] * $factorTotal, 0),
         "hashRateSummaryLast"=>round($summary['hashRateSummaryLast'] * $factorLast, 0),
         "uniqueComputersTotal"=>0,
         "uniqueComputersLast"=>0,
