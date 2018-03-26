@@ -151,21 +151,12 @@ Module MinerConfig
     End Function
 
 
-    Public Sub WriteConfigMiner(pool As String, xmrtcpport As Int32, walletToUse As XMRWalletAddress)
+    Public Sub WriteConfigMiner(xmrtcpport As Int32)
 
         Try
-            ' 4TR: 47gRtvuDS9dNjkNs2nFqiSVHk3tqdT239j9Tj1KxAWNPRogHnGUdMdvQBwevobeAxQHqjBu8WcZzfNrdbReYNAU1KBidTzc
-            ' PST: 421MbN95eXzJkoJbgLTvkkDGbNjpZWdcd9KzVKnXMHexUBAPrFbfQ33EAEjA7GLEeB9evt5AjkD6KgdNN4tfZ5VgM4LjC6V
-
-            Dim myXMRWalletAddress As String = GetMonerWalletAddress(walletToUse)
 
 
-
-            Dim config As String = """pool_list"" :
-[
-	{""pool_address"" : """ & pool & """, ""wallet_address"" : """ & myXMRWalletAddress & """, ""pool_password"" : ""x"", ""use_nicehash"" : false, ""use_tls"" : false, ""tls_fingerprint"" : """", ""pool_weight"" : 1 },
-],
-""currency"" : ""monero"",
+            Dim config As String = "
 ""call_timeout"" : 10,
 ""retry_time"" : 30,
 ""giveup_limit"" : 0,
@@ -186,6 +177,36 @@ Module MinerConfig
 "
             Dim file As System.IO.StreamWriter
             file = My.Computer.FileSystem.OpenTextFileWriter(Form1.xmrpath & "\config.txt", False)
+            file.Write(config)
+            file.Close()
+
+        Catch ex As Exception
+
+            Dim ErrorHandler As New ErrorHandling With {
+                .ErrorMessage = ex
+            }
+
+        End Try
+
+
+    End Sub
+    Public Sub WriteConfigPool(pool As String, walletToUse As XMRWalletAddress)
+
+        Try
+            ' 4TR: 47gRtvuDS9dNjkNs2nFqiSVHk3tqdT239j9Tj1KxAWNPRogHnGUdMdvQBwevobeAxQHqjBu8WcZzfNrdbReYNAU1KBidTzc
+            ' PST: 421MbN95eXzJkoJbgLTvkkDGbNjpZWdcd9KzVKnXMHexUBAPrFbfQ33EAEjA7GLEeB9evt5AjkD6KgdNN4tfZ5VgM4LjC6V
+
+            Dim myXMRWalletAddress As String = GetMonerWalletAddress(walletToUse)
+
+            Dim config As String = """pool_list"" :
+[
+	{""pool_address"" : """ & pool & """, ""wallet_address"" : """ & myXMRWalletAddress & """,""rig_id"" : """", ""pool_password"" : ""x"", ""use_nicehash"" : false, ""use_tls"" : false, ""tls_fingerprint"" : """", ""pool_weight"" : 1 },
+],
+""currency"" : ""monero7"",
+
+"
+            Dim file As System.IO.StreamWriter
+            file = My.Computer.FileSystem.OpenTextFileWriter(Form1.xmrpath & "\pools.txt", False)
             file.Write(config)
             file.Close()
 

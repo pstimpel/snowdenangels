@@ -799,9 +799,9 @@ Public Class Form1
             Me.lnk_minerport.Links.Add(0, ("http://127.0.0.1:" & Me.xmrtcpport.ToString & "/").Length, "http://127.0.0.1:" & Me.xmrtcpport.ToString & "/")
 
 
-            MinerConfig.WriteConfigMiner(MinerConfig.TranslatePoolNameToURL(Me.cmb_pool.Text.ToString), Me.xmrtcpport, WalletAddressInUse)
+            MinerConfig.WriteConfigMiner(Me.xmrtcpport)
             MinerConfig.WriteConfigCpu(Convert.ToInt16(Me.cmb_cores.Text.ToString))
-
+            MinerConfig.WriteConfigPool(MinerConfig.TranslatePoolNameToURL(Me.cmb_pool.Text.ToString), WalletAddressInUse)
 
             Return True
 
