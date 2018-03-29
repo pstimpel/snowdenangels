@@ -11,6 +11,8 @@ D-01458 Ottendorf-Okrilla
 Mail: pstimpel@googlemail.com
 </pre>
 
+<p><a href="https://redzoneaction.org/centrallegal/?key=jdasjd789as">DSGVO / GDPR: https://redzoneaction.org/centrallegal/?key=jdasjd789as</a></p>
+
         <p><b>We have written this software to support <a class="marklink" href="https://fortherefugees.com/"
                                                           target="_blank">https://fortherefugees.com/</a>. We do not
                 keep any hashes or donations for us, we provide both the software and the webpage for free. </b></p>
@@ -19,29 +21,6 @@ Mail: pstimpel@googlemail.com
                 hashrate for them to run their infrastructure. For more details please visit their webpages. </b>
         </p>
 
-
-        <h4>Cookies</h4>
-        <p>This webpage is using so called cookies, small data files storing kind of an identifier to recognize you
-            during your visit. Read more about <a class="marklink" href="https://www.aboutcookies.org/" target="_blank">Cookies</a>.
-        </p>
-
-        <h4>Privacy</h4>
-        <p>This webpage does not collect any personal information except the ip address of its visitors. There are no
-            services like Google Adwords, Google Adsense, Google Analytics active, not from Google or any other
-            suppliers. If users enable "crash reporting" inside the software, we collect information about the crash,
-            why it happens, the version of the software in use, and the ip address the crash report was sent from. If
-            the user enabled sending stats to remote, we are collecting the hashrate, the period of time the software is active, an automatic generated machine
-            key, and a user key. Both keys are random generated SHA-256 hashes.
-            There is no chance for us the reverse these keys into something useful. The keys are only used to provide
-            personal stats of the user, and are not displayed anywhere on our pages, except in the personal stats of the
-            user.
-        </p>
-        <p>The buttons to share information in Twitter, Facebook or Google+ are passive, they do not transfer any
-            information to these networks, except the user is using these buttons.</p>
-        <p>The miner software sends data to the mining pool that was chosen by the user. Please refer to the pages of
-            the
-            mining pool in question to learn more about their privacy rules.
-        </p>
 
         <h4>License</h4>
         <p>The software is licensed under the term of the <a class="marklink"
@@ -65,6 +44,7 @@ Mail: pstimpel@googlemail.com
         <p>Apache, <a class="marklink" href="https://httpd.apache.org/" target="_blank">https://httpd.apache.org/</a>
         </p>
         <p>Ubuntu, <a class="marklink" href="https://www.ubuntu.com/" target="_blank">https://www.ubuntu.com/</a></p>
-
+		
+		
     </div>
 </div>
