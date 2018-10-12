@@ -109,7 +109,11 @@ Module XMLStats
                         Case "key_hashRateSummaryTotal"
                             returndata.key_hashRateSummaryTotal = Convert.ToInt64(root.ChildNodes(i).InnerText)
                         Case "key_hashRateSummaryLast"
-                            returndata.key_hashRateSummaryLast = Convert.ToInt64(root.ChildNodes(i).InnerText)
+                            If IsNumeric(root.ChildNodes(i).InnerText) Then
+                                returndata.key_hashRateSummaryLast = Convert.ToInt64(root.ChildNodes(i).InnerText)
+                            Else
+                                returndata.key_hashRateSummaryLast = 0
+                            End If
                         Case "key_uniqueComputersTotal"
                             returndata.key_uniqueComputersTotal = Convert.ToInt32(root.ChildNodes(i).InnerText)
                         Case "key_uniqueComputersLast"
