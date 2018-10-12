@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Snowdens Guardian Angels Support")>
 <Assembly: AssemblyCompany("Peters Webcorner")>
 <Assembly: AssemblyProduct("Snowdens Guardian Angels Support")>
-<Assembly: AssemblyCopyright("Copyright ©  2017")>
+<Assembly: AssemblyCopyright("Copyright ©  2017,ff")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' übernehmen, indem Sie "*" eingeben:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.0.0.5")>
-<Assembly: AssemblyFileVersion("1.0.0.5")>
+<Assembly: AssemblyVersion("1.0.0.6")>
+<Assembly: AssemblyFileVersion("1.0.0.6")>

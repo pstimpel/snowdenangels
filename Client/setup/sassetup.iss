@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Snowden's Guardian Angels Support"
-#define MyAppVersion "1.0.0.5"
+#define MyAppVersion "1.0.0.6"
 #define MyAppPublisher "https://github.com/pstimpel/snowdenangels"
 #define MyAppURL "https://github.com/pstimpel/snowdenangels"
 #define MyAppExeName "SnowdenAngelsSupport.exe"
@@ -43,6 +43,7 @@ Source: "..\xmr-stak\ssleay32.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\xmr-stak\xmr-stak.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\xmr-stak\xmr-stak-backend.lib"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\xmr-stak\xmr-stak-c.lib"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\xmr-stak\xmr-stak-asm.lib"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\SnowdenAngelsSupport\SnowdenAngelsSupport\SnowdenAngelsSupport.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "list.txt.asc"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
