@@ -110,6 +110,9 @@ Module MinerConfig
             MinerConfig.CopyFile("xmr-stak.exe")
             MinerConfig.CopyFile("libeay32.dll")
             MinerConfig.CopyFile("ssleay32.dll")
+            MinerConfig.CopyFile("xmr-stak-asm.lib")
+            MinerConfig.CopyFile("xmr-stak-backend.lib")
+            MinerConfig.CopyFile("xmr-stak-c.lib")
 
             Return True
 
@@ -167,7 +170,6 @@ Module MinerConfig
 ""use_slow_memory"" : ""warn"",
 ""tls_secure_algo"" : true,
 ""daemon_mode"" : false,
-""flush_stdout"" : false,
 ""output_file"" : """",
 ""httpd_port"" : " & xmrtcpport.ToString & ",
 ""http_login"" : """",
@@ -202,7 +204,7 @@ Module MinerConfig
 [
 	{""pool_address"" : """ & pool & """, ""wallet_address"" : """ & myXMRWalletAddress & """,""rig_id"" : """", ""pool_password"" : ""x"", ""use_nicehash"" : false, ""use_tls"" : false, ""tls_fingerprint"" : """", ""pool_weight"" : 1 },
 ],
-""currency"" : ""monero7"",
+""currency"" : ""monero"",
 
 "
             Dim file As System.IO.StreamWriter
@@ -230,7 +232,7 @@ Module MinerConfig
 "
             Dim i As Integer
             For i = 1 To (cores * 2) Step 2
-                config = config & "   { ""low_power_mode"" : false, ""no_prefetch"" : true, ""affine_to_cpu"" : " & (i - 1).ToString & " },
+                config = config & "   { ""low_power_mode"" : false, ""no_prefetch"" : true, ""asm"" : ""auto"", ""affine_to_cpu"" : " & (i - 1).ToString & " },
 "
             Next i
 
