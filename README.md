@@ -1,3 +1,6 @@
+# OUTDATED, stalled
+
+
 # Snowden's Guardian Angels
 An attempt to raise some funds and awareness at the same time
 
@@ -20,9 +23,6 @@ The idea is to provide ForTheRefugees with some funds, and awareness.
 How about having a community of computer users, each of them providing a little bit of the cpu power of his/her PC? Imagine, each of these users would provide only 10 Hashes per second, and would help mining Monero. This would sum up to a huge Hash-power, if only enoungh users are joining. Right now, 130,000 Hashes/second result in around 1 Monero per day. One Monero is about 300 USD at the moment...so 300 USD per day to help Snowden's Guardian Angels, and many enthusiastic users willing to share about their participation in Snowden's Guardian Angels-Support...
 
 This is what I would like to start...now!
-
-In case you would like to support this, please reach out to me, and find me at Twitter, https://twitter.com/PjotrS72.
-You can find me by email as well: pstimpel@googlemail.com, PGP available on key-servers.
 
 This project relies in parts on xmr-stak, a mining software written by fireice-uk, https://github.com/fireice-uk/xmr-stak, GNU General Public License v3.0. Changes documented in fork located at https://github.com/pstimpel/xmr-stak, GNU Public License v3.0.
 
